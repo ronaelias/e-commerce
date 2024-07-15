@@ -1,0 +1,83 @@
+$font-family: 'Inter', sans-serif;
+$icon-size: 50px;
+$background-color: #F3EDF7; // pink
+$border-color: #7C6BA7;
+$text-color: #1E1E1E; // black
+$text-color-sub: #45414A; // grey
+$font-size: 16px;
+$border-radius: 5px;
+$margin: 10px;
+$margin-top: 16px;
+$padding: 4px;
+$width: 250px;
+$height: 350px;
+$img-size: 190px;
+
+body {
+  font-family: $font-family;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.icons {
+  height: 50px;
+  width: 50px;
+}
+
+p {
+  font-size: $font-size;
+  color: $text-color-sub;
+  text-align: center;
+}
+
+h2 {
+  font-size: $font-size;
+  color: $text-color;
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: $width;
+  height: $height;
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  background-color: $background-color;
+  margin: $margin;
+  padding: $padding;
+}
+
+.product-container {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.product-img {
+  border-radius: $border-radius;
+  width: $img-size;
+  height: $img-size;
+  display: block;
+  margin-top: $margin-top;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.product-info {
+  margin-top: auto;
+  text-align: center;
+}
+
+.product-card p {
+  font-size: $font-size;
+  color: $text-color-sub;
+}
+
+.product-card h2 {
+  font-size: $font-size;
+  color: $text-color;
+}

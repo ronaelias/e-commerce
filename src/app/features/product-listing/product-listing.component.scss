@@ -1,0 +1,90 @@
+$background-color: #F3EDF7; //pink
+$border-color: #7C6BA7;
+$text-color: #1E1E1E; //black
+$text-color-sub: #45414A; //grey
+$font-size: 16px;
+$border-radius: 5px;
+$margin: 32px;
+$padding: 4px;
+$width: 200px;
+$height: 350px;
+$img-size: 190px;
+
+p {
+    font-size: $font-size;
+    color: $text-color-sub;
+    text-align: center;
+  }
+
+h2 {
+    font-size: $font-size;
+    color: $text-color;
+}
+
+
+// .product-card {
+//   width: $width;
+//   height: $height;
+//   border: 1px solid $border-color;
+//   border-radius: $border-radius;
+//   background-color: $background-color;
+//   margin: $margin;
+//   padding: $padding;
+  
+// }
+
+// .product-container {
+//     display: flex;
+//     flex: 1;
+//     flex-wrap: wrap;
+// }
+
+// .product-img {
+//     border-radius: $border-radius;
+//     width: $img-size;
+//     height: $img-size;
+//     display: block;
+//     margin-left: auto;
+//     margin-right: auto;
+//   }
+
+
+
+/* product-listing.component.css */
+// .heart {
+//   position: relative;
+//   width: 8px;
+//   height: 10px;
+//   background-color: transparent;
+//   border: none;
+//   cursor: pointer;
+//   outline: none;
+// }
+
+// .heart:before,
+// .heart:after {
+//   content: "";
+//   position: absolute;
+//   top: 0;
+//   width: 8px;
+//   height: 12px; /* Adjust this to maintain proportions */
+//   border-radius: 50% 50% 0 0;
+//   background: gray;
+// }
+
+// .heart:before {
+//   left: 4px; /* Adjust to ensure no gap */
+//   transform: rotate(-45deg);
+//   transform-origin: 0 100%;
+// }
+
+// .heart:after {
+//   left: -4px; /* Adjust to ensure no gap */
+//   transform: rotate(45deg);
+//   transform-origin: 100% 100%;
+// }
+
+// .heart.red:before,
+// .heart.red:after {
+//   background: red;
+// }

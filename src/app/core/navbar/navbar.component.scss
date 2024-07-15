@@ -1,0 +1,82 @@
+$primary-color: #45414A;
+$secondary-color: #7C6BA7;
+$background-color: #F3EDF7;
+$link-hover-color: #7C6BA7;
+$link-hover-offset: 1rem;
+$nav-height: 17vh;
+$logo-width: 300px;
+$font-size: 1rem;
+$gap: 2rem;
+$padding: 4px;
+$large-padding: 50px;
+$border-radius: 5px;
+$text-color-sub: #45414A; //grey
+
+
+nav, .nav-links {
+  display: flex;
+  background-color: $background-color;
+ 
+}
+
+nav {
+  justify-content: space-between;
+  align-items: center;
+  height: $nav-height;
+  // position: fixed;
+  // top: 0;
+  // width: 100%;
+  // z-index: 1000;
+
+  .logo {
+    font-size: $font-size;
+    &:hover {
+      cursor: default;
+    }
+  }
+}
+
+.nav-links {
+  gap: $gap;
+  font-size: $font-size;
+
+  li {
+    display: inline;
+  }
+
+  a {
+    color: $primary-color;
+    text-decoration: none;
+    text-decoration-color: $secondary-color;
+
+    &:hover {
+      color: $secondary-color;
+      text-decoration: underline;
+      text-underline-offset: $link-hover-offset;
+      text-decoration-color: $link-hover-color;
+    }
+  }
+
+  .search-form {
+    display: flex;
+    align-items: center;
+    padding: 0 $large-padding 0 $padding;
+
+  }
+  
+  .search-form input {
+    padding: $padding;
+    font-size: $font-size;
+    border: 1px solid $secondary-color;
+    border-radius: $border-radius;
+  }
+
+  #account {
+    padding: 0 $padding 0 $large-padding;
+  }
+}
+
+.logo {
+  height: $nav-height;
+  width: $logo-width;
+}

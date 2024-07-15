@@ -1,0 +1,58 @@
+$background-color: #f1edf7; //pink
+$background-color-sub: #7C6BA7;
+$background-color-bold: #7f67bb;
+$text-color: #1E1E1E; //black
+$text-color-sub: #45414A; //grey
+$font-family: 'Inter', sans-serif;
+$font-size: 16px;
+$border-radius: 5px;
+$margin: 8px;
+$padding: 4px;
+$width: 400px;
+$height: 300px;
+$img-size: 190px;
+
+
+.all {
+    display:flex;
+    justify-content: center;
+}
+
+
+
+.title{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.sign-in-container {
+    color: $text-color-sub;
+    width: $width;
+    height: $height;
+    border: 1px solid $text-color-sub;
+    border-radius: $border-radius;
+    background-color: $background-color;
+    margin: $margin;
+    padding: $padding;
+}
+
+.button-container {
+    color: $background-color;
+    background-color: $background-color-sub;
+    border-radius: $border-radius;
+    border-color: $background-color-sub;
+    width: 93%;
+    text-align: center;
+    margin: $margin;
+    padding: $padding;
+
+    &:hover {
+        background-color: $background-color-bold;
+        cursor: pointer;
+    }
+}
+.items-container {
+    margin: $margin;
+    padding: $padding;
+    width: 90%;
+}

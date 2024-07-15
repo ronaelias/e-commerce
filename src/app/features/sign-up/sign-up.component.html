@@ -1,0 +1,56 @@
+<div class="title">
+    <img src="assets/profile.png" alt="Profile" class="icons">
+    <h1>Sign Up</h1>
+  </div>
+  <div class="all">
+    <div class="sign-up-container">
+      <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+        <div class="name-container">
+            <div>
+                <label for="name" class="items-container">Name</label>
+                <input id="name" class="items-container" type="text" formControlName="name">
+            </div>
+            <div>
+                <label for="surname" class="items-container">Surname</label>
+                <input id="surname" class="items-container" type="text" formControlName="surname">
+            </div>
+        </div>
+
+        <label for="dob" class="items-container">Date Of Birth</label>
+        <input id="dob" class="items-container" type="text" placeholder="mm/dd/yyyy" formControlName="dob">
+
+        <label for="email" class="items-container">Email</label>
+        <input id="email" class="items-container" type="text" formControlName="email">
+  
+        <label for="password" class="items-container">Password</label>
+        <input id="password" class="items-container" type="password" formControlName="password">
+
+        <label for="paymentMethod" class="items-container">Payment Method</label>
+        <input id="paymentMethod" class="items-container" type="text" formControlName="paymentMethod">
+
+        <label for="country" class="items-container">Country</label>
+        <input id="country" class="items-container" type="text" placeholder="+" formControlName="country">
+
+        <label for="telephone" class="items-container">Telephone</label>
+        <input id="telephone" class="items-container" type="text" formControlName="telephone">
+
+        <label for="region" class="items-container">Region</label>
+        <input id="region" class="items-container" type="text" formControlName="region">
+
+        <label for="city" class="items-container">City</label>
+        <input id="city" class="items-container" type="text" formControlName="city">
+
+        <label for="streetAndNumber" class="items-container">Street And Number</label>
+        <input id="streetAndNumber" class="items-container" type="text" formControlName="streetAndNumber">
+
+        <label for="stairwayAndFloor" class="items-container">Stairway, Floor (Optional)</label>
+        <input id="stairwayAndFloor" class="items-container" type="text" formControlName="stairwayAndFloor">
+
+        <div class="btn-container">
+            <button type="button" class="button-container btn1">Cancel</button>
+            <button type="submit" class="button-container">Save</button> <!--[disabled]="!signUpForm.valid"-->
+        </div>
+      </form>
+    </div>
+  </div>
+  
