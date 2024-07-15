@@ -17,11 +17,11 @@ export class ProductListingComponent implements OnInit {
       this.products = products;
     });
   }
-  toggleHeart(): void {
-    const heartButton = document.getElementById('heart-button');
-    if (heartButton) {
-      heartButton.classList.toggle('red');
-    }
-  }
+  // toggleHeart(): void {
+  //   const heartButton = document.getElementById('heart-button');
+  //   if (heartButton) {
+  //     heartButton.classList.toggle('red');
+  //   }
+  // }
 
 }

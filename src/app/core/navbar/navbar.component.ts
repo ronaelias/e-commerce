@@ -25,8 +25,4 @@ export class NavbarComponent implements OnInit {
       error => console.error(error)  // Handle potential errors
     );
   }
-  // onSearch(event: Event): void {
-  //   const searchTerm = (event.target as HTMLInputElement).value;
-  //   this.searchSubject.next(searchTerm);
-  // }
 }
