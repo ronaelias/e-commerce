@@ -1,45 +1,51 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable, combineLatest } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Subject } from 'rxjs';
-import { map } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Product } from './product.model';
-import { Observable } from 'rxjs';
-
 
 @Injectable({
   providedIn: 'root'
 })
 export class SearchService {
-  // res$ = new Subject<Product[]>();
+  private searchQuerySubject = new BehaviorSubject<string>('');
+  searchQuery$ = this.searchQuerySubject.asObservable();
 
-  // constructor(private $http: HttpClient) { }
+  private productsSubject = new BehaviorSubject<Product[]>([]);
+  products$ = this.productsSubject.asObservable();
 
-  // doSearch(q: string) {
-  //   return this.$http
-  //   .get<Product[]>('https://fakestoreapi.com/products')
-  //   .pipe(
-  //     map(items =>
-  //       items.filter(
-  //       item => item.title.toLowerCase().indexOf
-  //       (q.toLowerCase()) !== -1
-  //     )
-  //   )
-  // );
-  // }
-
+  private apiUrl = 'https://fakestoreapi.com/products';
 
   constructor(private http: HttpClient) {}
 
-  fetchProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>('https://fakestoreapi.com/products');
+  setSearchQuery(query: string) {
+    this.searchQuerySubject.next(query);
+  }
+
+  setProducts(products: Product[]) {
+    this.productsSubject.next(products);
+  }
+
+  fetchAllProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>(this.apiUrl).pipe(
+      map(products => {
+        this.productsSubject.next(products);
+        return products;
+      })
+    );
   }
 
   searchProducts(query: string): Observable<Product[]> {
-    return this.fetchProducts().pipe(
-      map(products => products.filter(product => 
-        product.title.toLowerCase().includes(query.toLowerCase())))
+    return combineLatest([this.searchQuery$, this.products$]).pipe(
+      map(([searchQuery, products]) => {
+        if (searchQuery) {
+          return products.filter(product => 
+            product.title.toLowerCase().includes(searchQuery.toLowerCase()));
+        } else {
+          return products;
+        }
+      })
     );
   }
- 
-
 }
+

@@ -6,12 +6,13 @@ $text-color: #1E1E1E; // black
 $text-color-sub: #45414A; // grey
 $font-size: 16px;
 $border-radius: 5px;
-$margin: 10px;
+$margin: 15px;
 $margin-top: 16px;
-$padding: 4px;
+$padding: 10px;
 $width: 250px;
 $height: 350px;
 $img-size: 190px;
+$link-hover-color: #7C6BA7;
 
 body {
   font-family: $font-family;
@@ -43,11 +44,16 @@ h2 {
   justify-content: space-between;
   width: $width;
   height: $height;
-  border: 1px solid $border-color;
+  box-shadow: 0 4px 8px $border-color;
+  transition: box-shadow 0.3s ease-in-out;
   border-radius: $border-radius;
-  background-color: $background-color;
   margin: $margin;
   padding: $padding;
+}
+
+.product-card:hover {
+  outline: none;
+  box-shadow: 0 4px 8px $link-hover-color;
 }
 
 .product-container {

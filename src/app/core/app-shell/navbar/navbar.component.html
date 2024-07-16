@@ -1,0 +1,18 @@
+<nav id="desktop-nav">
+  <div class="logo">
+      <img src="assets/logo.png" alt="Logo" class="logo">
+  </div>
+  <div>
+      <ul class="nav-links">
+          <li>
+              <input placeholder="Search products..." [formControl]="searchInput" class="search-bar">
+          </li>
+          <li><a routerLink="/product-listing">Home</a></li>
+          <li><a routerLink="/categories">Categories</a></li>
+          <li><a routerLink="/favorites">Favorites</a></li>
+          <li><a routerLink="/filter-sort">Filter and Sort</a></li>
+          <li><a routerLink="/cart">Cart</a></li>
+          <li id="account"><a routerLink="/sign-in">My Account</a></li>
+      </ul>
+  </div>
+</nav>

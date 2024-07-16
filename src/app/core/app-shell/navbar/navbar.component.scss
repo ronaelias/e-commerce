@@ -11,6 +11,7 @@ $padding: 4px;
 $large-padding: 50px;
 $border-radius: 5px;
 $text-color-sub: #45414A; //grey
+$margin-inline-end: 16px;
 
 
 nav, .nav-links {
@@ -57,20 +58,6 @@ nav {
     }
   }
 
-  .search-form {
-    display: flex;
-    align-items: center;
-    padding: 0 $large-padding 0 $padding;
-
-  }
-  
-  .search-form input {
-    padding: $padding;
-    font-size: $font-size;
-    border: 1px solid $secondary-color;
-    border-radius: $border-radius;
-  }
-
   #account {
     padding: 0 $padding 0 $large-padding;
   }
@@ -79,4 +66,17 @@ nav {
 .logo {
   height: $nav-height;
   width: $logo-width;
+}
+
+.search-bar {
+  border: none;
+  margin-inline-end: $margin-inline-end;
+  padding: 8px;
+  box-shadow: 0 2px 4px $secondary-color;
+  transition: box-shadow 0.3s ease;
+}
+
+.search-bar:focus {
+  outline: none;
+  box-shadow: 0 4px 8px $link-hover-color;
 }
