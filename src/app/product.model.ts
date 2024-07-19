@@ -5,7 +5,7 @@ export interface Product {
     title: string;
     color: string;
     size: number;
-    qantity: number;
+    quantity: number;
     rating: number;
     description: string;
 }
