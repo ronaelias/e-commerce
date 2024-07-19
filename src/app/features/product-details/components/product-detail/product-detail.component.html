@@ -1,1 +1,19 @@
-<h2>hello</h2>>
+<div *ngIf="filteredProducts.length" class="product-container">
+  <div *ngFor="let product of filteredProducts" class="product-card">
+    <div>
+      <img [src]="product.image" alt="{{ product.title }}" class="product-img">
+    </div>
+    <div class="product-info">
+      
+      
+      <p>Item: {{ product.title }}</p>
+      <p>Price: ${{ product.price }}</p>
+      <p>Color: {{ product.color }}</p>
+      <p>Size: {{ product.size }}</p>
+      <p>Quantity: {{ product.qantity }}</p>
+      <p>Rating: {{ product.rating }}</p>
+      <hr class="product-divider">
+      <p>{{ product.description }}</p>
+    </div>
+  </div>
+</div>

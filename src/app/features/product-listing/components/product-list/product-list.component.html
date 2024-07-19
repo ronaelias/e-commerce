@@ -1,11 +1,11 @@
 <div *ngIf="filteredProducts.length" class="product-container">
   <div *ngFor="let product of filteredProducts" class="product-card">
     <img [src]="product.image" alt="{{ product.title }}" class="product-img">
-     <div class="product-info">
-       <p>{{ product.title }}</p>
-       <h2>${{ product.price }}</h2>
-     </div>
-   </div>
- </div>
-  
+    <div class="product-info">
+      <p>{{ product.title }}</p>
+      <h2>${{ product.price }}</h2>
+    </div>
+  </div>
+</div>
+
   

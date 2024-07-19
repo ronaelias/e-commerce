@@ -1,4 +1,4 @@
-export interface ISignUpRequest{
+export interface iSignUpRequest{
     Firstname: string,
     Lastname: string,
     Email: string,

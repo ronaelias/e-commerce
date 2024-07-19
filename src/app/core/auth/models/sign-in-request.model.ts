@@ -1,4 +1,4 @@
-export interface ISignInRequest{
-    Username: string,
-    Password: string
+export interface iSignInRequest{
+    email: string,
+    password: string
 }

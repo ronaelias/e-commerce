@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SearchService } from '../../../../search.service';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../../../product.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
@@ -12,7 +13,7 @@ export class ProductListComponent implements OnInit {
   products: Product[] = [];
   filteredProducts: Product[] = [];
 
-  constructor(private productService: ProductService, private searchService: SearchService) {}
+  constructor(private productService: ProductService, private searchService: SearchService, private router: Router) {}
 
   ngOnInit() {
     this.productService.getAllProducts().subscribe((products: Product[]) => {
@@ -30,4 +31,5 @@ export class ProductListComponent implements OnInit {
       });
     });
   }
+  
 }

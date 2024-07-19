@@ -3,7 +3,7 @@ $border-color: #7C6BA7;
 $text-color: #1E1E1E; //black
 $text-color-sub: #45414A; //grey
 $font-size: 16px;
-$border-radius: 5px;
+$border-radius: 8px;
 $margin: 32px;
 $padding: 4px;
 $width: 200px;
@@ -33,9 +33,9 @@ h2 {
   
 // }
 
-.product-container {
-  background-color: $background-color;
-}
+// .product-container {
+//   background-color: $background-color;
+// }
 
 // .product-img {
 //     border-radius: $border-radius;

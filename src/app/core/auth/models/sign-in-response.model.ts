@@ -1,4 +1,4 @@
-export interface ISignInResponse{
+export interface iSignInResponse{
     Login:{
       AccessToken: string,
       ExpiresIn: number,

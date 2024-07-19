@@ -6,11 +6,10 @@ $text-color: #1E1E1E; //black
 $text-color-sub: #45414A; //grey
 $font-family: 'Inter', sans-serif;
 $font-size: 16px;
-$border-radius: 5px;
+$border-radius: 8px;
 $margin: 8px;
 $padding: 4px;
 $width: 400px;
-$height: 720px;
 $img-size: 190px;
 
 
@@ -19,17 +18,10 @@ $img-size: 190px;
     justify-content: center;
 }
 
-
-
-.title{
-    display: flex;
-    flex-wrap: wrap;
-}
-
 .sign-up-container {
     color: $text-color-sub;
     width: $width;
-    height: $height;
+    height: auto;
     border: 1px solid $text-color-sub;
     border-radius: $border-radius;
     background-color: $background-color;
@@ -78,4 +70,9 @@ $img-size: 190px;
     width: 97%;
 
     
+}
+
+h2{
+    color: $background-color-sub;
+    text-align: center;
 }

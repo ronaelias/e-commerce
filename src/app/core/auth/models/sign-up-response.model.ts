@@ -1,4 +1,4 @@
-export interface SignUpResponse {
+export interface iSignUpResponse {
     id: string,
     createdTimestamp: 1721034399725,
     username: string,
