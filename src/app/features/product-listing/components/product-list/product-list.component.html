@@ -1,11 +1,20 @@
+<h1>SHOP YOUR FAVORITE ITEMS</h1>
 <div *ngIf="filteredProducts.length" class="product-container">
-  <div *ngFor="let product of filteredProducts" class="product-card">
+  <!-- <div *ngFor="let product of filteredProducts" class="product-card" (click)="viewProductDetail(product.id)"> -->
+    <div *ngFor="let product of filteredProducts" class="product-card">  
     <img [src]="product.image" alt="{{ product.title }}" class="product-img">
-    <div class="product-info">
+    
       <p>{{ product.title }}</p>
+      <div class="product-info">
       <h2>${{ product.price }}</h2>
+      <div class="icons">
+        <button mat-icon-button (click)="toggleFavorite(product.id)">
+          <mat-icon [ngClass]="{'mat-icon-heart': true, 'pressed': isFavorite(product.id)}" aria-label="Favorite icon">favorite</mat-icon>
+        </button>
+        <button mat-icon-button (click)="toggleCart(product.id)">
+          <mat-icon [ngClass]="{'mat-icon-cart': true, 'pressed': isInCart(product.id)}" aria-label="Cart icon">shopping_cart</mat-icon>
+        </button>
+      </div>
     </div>
   </div>
 </div>
-
-  

@@ -9,6 +9,8 @@ $padding: 4px;
 $width: 200px;
 $height: 350px;
 $img-size: 190px;
+$heart-color: red;
+$cart-color: rgb(0, 85, 255);
 
 p {
     font-size: $font-size;
@@ -16,32 +18,69 @@ p {
     text-align: center;
   }
 
+h1 {
+  font-size: larger;
+  color: $border-color;
+  text-align: center;
+}  
+
 h2 {
     font-size: $font-size;
     color: $text-color;
 }
 
 
-// .product-card {
-//   width: $width;
-//   height: $height;
-//   border: 1px solid $border-color;
-//   border-radius: $border-radius;
-//   background-color: $background-color;
-//   margin: $margin;
-//   padding: $padding;
-  
-// }
+.product-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
 
-// .product-container {
-//   background-color: $background-color;
-// }
+.product-info {
+  display: flex;
+  align-items: center;
+  justify-content:space-around;
+  width: 100%;
+}
 
-// .product-img {
-//     border-radius: $border-radius;
-//     width: $img-size;
-//     height: $img-size;
-//     display: block;
-//     margin-left: auto;
-//     margin-right: auto;
-//   }
+.product-info p, .product-info h2 {
+  margin: 0;
+  padding: 0;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+}
+
+.icons button {
+  margin: 0;
+}
+
+.mat-icon {
+  transition: color 0.3s ease;
+}
+
+.mat-icon-heart {
+  color: $text-color-sub;
+}
+
+.mat-icon-heart.pressed {
+  color: $heart-color;
+}
+
+.mat-icon-cart {
+  color: $text-color-sub;
+}
+
+.mat-icon-cart.pressed {
+  color: $cart-color;
+}
+
+.mat-icon-button {
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+}
