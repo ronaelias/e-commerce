@@ -9,6 +9,7 @@ $padding: 4px;
 $width: 200px;
 $height: 350px;
 $img-size: 190px;
+$icon-color: rgba(128, 128, 128, 0.495);
 $heart-color: red;
 $cart-color: rgb(0, 85, 255);
 
@@ -63,7 +64,7 @@ h2 {
 }
 
 .mat-icon-heart {
-  color: $text-color-sub;
+  color: $icon-color;
 }
 
 .mat-icon-heart.pressed {
@@ -71,7 +72,7 @@ h2 {
 }
 
 .mat-icon-cart {
-  color: $text-color-sub;
+  color: $icon-color;
 }
 
 .mat-icon-cart.pressed {

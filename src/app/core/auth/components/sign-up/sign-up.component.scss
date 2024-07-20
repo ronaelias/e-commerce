@@ -30,6 +30,7 @@ $img-size: 190px;
 }
 
 .button-container {
+    font-size:larger;
     color: $background-color;
     background-color: $background-color-sub;
     border-radius: $border-radius;
@@ -75,4 +76,5 @@ $img-size: 190px;
 h2{
     color: $background-color-sub;
     text-align: center;
+    font-size:larger;
 }
