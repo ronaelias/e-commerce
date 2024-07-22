@@ -11,11 +11,13 @@ $margin: 8px;
 $padding: 4px;
 $width: 400px;
 $img-size: 190px;
+$page-margin: 120px;
 
 
 .all {
     display:flex;
     justify-content: center;
+    margin-top: $page-margin;
 }
 
 .sign-up-container {

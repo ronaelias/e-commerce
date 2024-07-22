@@ -1,7 +1,7 @@
 export interface iSignUpRequest{
     Firstname: string,
     Lastname: string,
-    Email: string,
-    Password: string,
+    email: string,
+    password: string,
     RoleName: string
 }

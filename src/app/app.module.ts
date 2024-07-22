@@ -21,6 +21,8 @@ import { ErrorInterceptor } from './core/auth/interceptors/error.interceptor';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { NgxPermissionsModule } from 'ngx-permissions';
+import { AdminComponent } from './features/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { MatIconModule } from '@angular/material/icon';
     ProductDetailComponent,
     SignInComponent,
     SignUpComponent,
-    ProductListComponent
+    ProductListComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +45,7 @@ import { MatIconModule } from '@angular/material/icon';
     BrowserAnimationsModule,
     MatButtonModule,
     MatIconModule,
+    NgxPermissionsModule.forRoot()
   ],
   providers: [
     AuthService,

@@ -1,19 +1,23 @@
-$primary-color: #45414A;
-$secondary-color: #7C6BA7;
-$background-color: #F3EDF7;
-$link-hover-color: #7C6BA7;
-$link-hover-offset: 1rem;
-$nav-height: 17vh;
+$primary-color: #45414A; //grey
+$secondary-color: #7C6BA7; //purple
+$background-color: #F3EDF7; //pink
+$link-hover-offset: 16px;
+$nav-height: 100px;
 $logo-width: 300px;
-$font-size: 1rem;
-$gap: 2rem;
+$font-size: 16px;
+$gap: 32px;
 $padding: 4px;
 $large-padding: 50px;
-$border-radius: 5px;
-$text-color-sub: #45414A; //grey
+$border-radius: 8px;
 $margin-inline-end: 16px;
 
-
+#desktop-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
 nav, .nav-links {
   display: flex;
   background-color: $background-color;
@@ -24,10 +28,6 @@ nav {
   justify-content: space-between;
   align-items: center;
   height: $nav-height;
-  // position: fixed;
-  // top: 0;
-  // width: 100%;
-  // z-index: 1000;
 
   .logo {
     font-size: $font-size;
@@ -54,7 +54,7 @@ nav {
       color: $secondary-color;
       text-decoration: underline;
       text-underline-offset: $link-hover-offset;
-      text-decoration-color: $link-hover-color;
+      text-decoration-color: $secondary-color;
     }
   }
 
@@ -78,5 +78,5 @@ nav {
 
 .search-bar:focus {
   outline: none;
-  box-shadow: 0 4px 8px $link-hover-color;
+  box-shadow: 0 4px 8px $secondary-color;
 }

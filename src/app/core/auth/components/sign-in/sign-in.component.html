@@ -11,7 +11,7 @@
     <div *ngIf="f['password'].errors?.['required']">Password is required</div>
     <div *ngIf="f['password'].errors?.['minlength']">Password must be at least 8 characters</div>
 
-    <button button class="button-container">Sign In</button>
+    <button type='submit' class="button-container">Sign In</button>
     <div *ngIf="error">{{error}}</div>
     <a href="#" class="forgot-password">Forgot password?</a>
     <br><br>

@@ -26,7 +26,7 @@ export class SignInComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(8)]]
     });
 
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.returnUrl = this.route.snapshot.queryParams['/product-listing'] || '/';
   }
 
   get f() { return this.signInForm.controls; }
@@ -38,27 +38,52 @@ export class SignInComponent implements OnInit {
 
     const email = this.signInForm.get('email')?.value;
     const password = this.signInForm.get('password')?.value;
-
-    // Retrieve email and password from localStorage
+    
     const savedEmail = localStorage.getItem('email');
     const savedPassword = localStorage.getItem('password');
 
+    // for debugging
     console.log('Saved Email:', savedEmail);
     console.log('Saved Password:', savedPassword);
 
-    this.authService.signIn({ email, password })
-      .subscribe(
-        data => {
-          console.log('Sign In successful');
-          alert('Sign In successful');
-          this.router.navigate([this.returnUrl]);
-        },
-        error => {
-          console.error(error);
-          this.error = 'Sign In failed';
-        }
-      );
-  }
+    // const user = {
+    //   email: this.signInForm.value.email,
+    //   role: this.signInForm.value.email === 'admin@example.com' ? 'ADMIN' : 'USER'
+    // };
+
+    // this.authService.setPermissions();
+    // this.authService.setRole(user.role);
+    // this.router.navigate(['/product-listing']);
+
+    
+
+  //   if (email === savedEmail && password === savedPassword) {
+  //     this.authService.signIn({ email, password })
+  //       .subscribe(
+  //         data => {
+  //           console.log('Sign In successful');
+  //           alert('Sign In successful');
+  //           this.router.navigate([this.returnUrl]);
+  //         },
+  //         error => {
+  //           console.error(error);
+  //           this.error = 'Sign In failed';
+  //         }
+  //       );
+  //   } else {
+  //     this.error = 'Invalid email or password';
+  //   }
+  // }
+
+        this.authService.signIn({email, password}).subscribe(response => {
+          if (response && response.SignIn && response.SignIn.AccessToken) {
+            console.log('Login successful');
+            alert('Login successful');
+            localStorage.setItem('token', response.SignIn.AccessToken);
+            this.router.navigate(['/']);
+          }
+        })
+      }
 }
 
 // export class SignInComponent {

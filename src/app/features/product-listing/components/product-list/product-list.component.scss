@@ -5,6 +5,7 @@ $text-color-sub: #45414A; //grey
 $font-size: 16px;
 $border-radius: 8px;
 $margin: 32px;
+$page-margin: 120px;
 $padding: 4px;
 $width: 200px;
 $height: 350px;
@@ -20,6 +21,7 @@ p {
   }
 
 h1 {
+  margin-top: $page-margin;
   font-size: larger;
   color: $border-color;
   text-align: center;
@@ -76,7 +78,7 @@ h2 {
 }
 
 .mat-icon-cart.pressed {
-  color: $cart-color;
+  color: $border-color;
 }
 
 .mat-icon-button {
