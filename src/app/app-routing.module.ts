@@ -7,6 +7,7 @@ import { SignUpComponent } from './core/auth/components/sign-up/sign-up.componen
 import { AuthGuard } from './core/auth/guards/auth.guard';
 import { AdminComponent } from './features/admin/admin.component';
 import { NgxPermissionsGuard } from 'ngx-permissions';
+import { ProductListingModule } from './features/product-listing/product-listing.module';
 
 const routes: Routes = [
   {path: 'product', component: ProductListComponent},
@@ -25,7 +26,10 @@ const routes: Routes = [
         redirectTo: '/product-listing'
       }
     }
-  }
+  },
+  { path: '', redirectTo: '/product-listing', pathMatch: 'full' },
+  { path: 'product-listing', loadChildren: () => import('./features/product-listing/product-listing.module').then(m => m.ProductListingModule) },
+  { path: 'product-details', loadChildren: () => import('./features/product-details/product-details.module').then(m => m.ProductDetailsModule) }
 ];
 
 @NgModule({

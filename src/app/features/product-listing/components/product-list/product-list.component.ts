@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../../../product.model';
 import { Router } from '@angular/router';
@@ -9,32 +11,33 @@ import { SearchService } from '../../../../search.service';
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss']
 })
+
 export class ProductListComponent implements OnInit {
-  products: Product[] = [];
-  filteredProducts: Product[] = [];
+  products$!: Observable<Product[]>;
+  filteredProducts$!: Observable<Product[]>;
+  searchQuery$: BehaviorSubject<string> = new BehaviorSubject<string>('');
   favoriteProducts: Set<number> = new Set<number>();
   cartProducts: Set<number> = new Set<number>();
+  userName: string | null = '';
 
   constructor(private productService: ProductService, private searchService: SearchService, private router: Router) {}
 
   ngOnInit() {
-    this.productService.getAllProducts().subscribe((products: Product[]) => {
-      this.products = products;
+    this.products$ = this.productService.getAllProducts();
+    this.filteredProducts$ = this.searchQuery$.pipe(
+      switchMap(query => this.searchService.searchProducts(query))
+    );
+
+    this.products$.subscribe(products => {
       this.searchService.setProducts(products);
     });
 
-    this.searchService.searchProducts('').subscribe((products: Product[]) => {
-      this.filteredProducts = products;
-    });
-
     this.searchService.searchQuery$.subscribe(query => {
-      this.searchService.searchProducts(query).subscribe((products: Product[]) => {
-        this.filteredProducts = products;
-      });
+      this.searchQuery$.next(query);
     });
-  }
-  
 
+    this.userName = localStorage.getItem('name');
+  }
 
   viewProductDetail(productId: number) {
     this.router.navigate(['/product-detail', productId]);
@@ -62,5 +65,9 @@ export class ProductListComponent implements OnInit {
 
   isInCart(productId: number): boolean {
     return this.cartProducts.has(productId);
+  }
+
+  trackByProductId(index: number, product: Product): number {
+    return product.id;
   }
 }

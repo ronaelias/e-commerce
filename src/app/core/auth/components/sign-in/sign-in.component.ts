@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
@@ -12,6 +12,9 @@ export class SignInComponent implements OnInit {
   signInForm!: FormGroup;
   returnUrl!: string;
   error = '';
+
+  @ViewChild('passwordInput') passwordInput!: ElementRef;
+  @ViewChild('signInButton') signInButton!: ElementRef;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -83,6 +86,20 @@ export class SignInComponent implements OnInit {
             this.router.navigate(['/']);
           }
         })
+      }
+
+      onEmailKeydown(event: KeyboardEvent) {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          this.passwordInput.nativeElement.focus();
+        }
+      }
+    
+      onPasswordKeydown(event: KeyboardEvent) {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          this.signInButton.nativeElement.click();
+        }
       }
 }
 

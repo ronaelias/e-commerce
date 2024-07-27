@@ -7,11 +7,11 @@
             <li>
                 <input placeholder="Search products..." [formControl]="searchInput" class="search-bar">
             </li>
-            <li><a routerLink="/product-listing">Home</a></li>
-            <li><a routerLink="/categories">Categories</a></li>
-            <li><a routerLink="/favorites">Favorites</a></li>
-            <li><a routerLink="/filter-sort">Filter and Sort</a></li>
-            <li><a routerLink="/product-detail">Cart</a></li>
+            <li><a routerLink="/product-listing" [routerLinkActive]="['active']">Home</a></li>
+            <li><a routerLink="/categories" [routerLinkActive]="['active']">Categories</a></li>
+            <li><a routerLink="/favorites" [routerLinkActive]="['active']">Favorites</a></li>
+            <li><a routerLink="/filter-sort" [routerLinkActive]="['active']">Filter and Sort</a></li>
+            <li><a routerLink="/product-detail" [routerLinkActive]="['active']">Cart</a></li>
             <li id="account"><a routerLink="/sign-in">My Account</a></li>
             <!-- <li *ngxPermissionsOnly="'ADMIN'"><a routerLink="/admin" routerLinkActive="active-link">Admin</a></li> -->
         </ul>

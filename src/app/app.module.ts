@@ -23,6 +23,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { AdminComponent } from './features/admin/admin.component';
+import { WelcomeMessagePipe } from './welcome-message.pipe';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { AdminComponent } from './features/admin/admin.component';
     SignInComponent,
     SignUpComponent,
     ProductListComponent,
-    AdminComponent
+    AdminComponent,
+    WelcomeMessagePipe
   ],
   imports: [
     BrowserModule,

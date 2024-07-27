@@ -19,9 +19,8 @@ p {
     text-align: center;
   }
 
-h1 {
-  margin-top: $page-margin;
-  font-size: larger;
+h1, h3 {
+ // margin-top: $page-margin;
   color: $border-color;
   text-align: center;
 }  

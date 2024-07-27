@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -8,6 +8,19 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class SignUpComponent {
   signUpForm: FormGroup;
+
+  @ViewChild('surnameInput') surnameInput!: ElementRef;
+  @ViewChild('dobInput') dobInput!: ElementRef;
+  @ViewChild('emailInput') emailInput!: ElementRef;
+  @ViewChild('passwordInput') passwordInput!: ElementRef;
+  @ViewChild('paymentMethodInput') paymentMethodInput!: ElementRef;
+  @ViewChild('countryInput') countryInput!: ElementRef;
+  @ViewChild('telephoneInput') telephoneInput!: ElementRef;
+  @ViewChild('regionInput') regionInput!: ElementRef;
+  @ViewChild('cityInput') cityInput!: ElementRef;
+  @ViewChild('streetAndNumberInput') streetAndNumberInput!: ElementRef;
+  @ViewChild('stairwayAndFloorInput') stairwayAndFloorInput!: ElementRef;
+  @ViewChild('signUpButton') signUpButton!: ElementRef;
 
   constructor(private fb: FormBuilder) {
     this.signUpForm = this.fb.group({
@@ -31,14 +44,30 @@ export class SignUpComponent {
       return;
     }
 
+    const name = this.signUpForm.get('name')?.value;
     const email = this.signUpForm.get('email')?.value;
     const password = this.signUpForm.get('password')?.value;
 
-    // Save email and password in localStorage
+    // Save name, email and password in localStorage
+    localStorage.setItem('name', name);
     localStorage.setItem('email', email);
     localStorage.setItem('password', password);
 
     console.warn(this.signUpForm.value);
     alert('Sign Up successful');
+  }
+
+  onKeydown(event: KeyboardEvent, nextInput: HTMLInputElement) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      nextInput.focus();
+    }
+  }
+
+  onLastKeydown(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      this.signUpButton.nativeElement.click();
+    }
   }
 }

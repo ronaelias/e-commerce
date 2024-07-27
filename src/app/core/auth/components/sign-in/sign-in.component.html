@@ -2,20 +2,26 @@
   <div class="sign-in-container">
     <h2>SIGN IN TO YOUR ACCOUNT</h2>
     <label for="email" class="items-container">Email</label>
-    <input type="email" formControlName="email" id="email" [ngClass]="{'is-invalid': f['email'].invalid && (f['email'].dirty || f['email'].touched)}" class="items-container">
+    <input type="email" formControlName="email" id="email" 
+           [ngClass]="{'is-invalid': f['email'].invalid && (f['email'].dirty || f['email'].touched)}" 
+           class="items-container" 
+           (keydown)="onEmailKeydown($event)">
     <div *ngIf="f['email'].errors?.['required']">Email is required</div>
     <div *ngIf="f['email'].errors?.['email']">Invalid email</div>
 
     <label for="password" class="items-container">Password</label>
-    <input type="password" formControlName="password" id="password" [ngClass]="{'is-invalid': f['password'].invalid && (f['password'].dirty || f['password'].touched)}" class="items-container">
+    <input type="password" formControlName="password" id="password" 
+           [ngClass]="{'is-invalid': f['password'].invalid && (f['password'].dirty || f['password'].touched)}" 
+           class="items-container" 
+           (keydown)="onPasswordKeydown($event)" #passwordInput>
     <div *ngIf="f['password'].errors?.['required']">Password is required</div>
     <div *ngIf="f['password'].errors?.['minlength']">Password must be at least 8 characters</div>
 
-    <button type='submit' class="button-container">Sign In</button>
+    <button type='submit' class="button-container" #signInButton>Sign In</button>
     <div *ngIf="error">{{error}}</div>
     <a href="#" class="forgot-password">Forgot password?</a>
     <br><br>
     <p>Don't have an account?</p>
-    <button button [routerLink]="['/sign-up']" class="button-container">Sign Up</button>
+    <button [routerLink]="['/sign-up']" class="button-container">Sign Up</button>
   </div>
 </form>
