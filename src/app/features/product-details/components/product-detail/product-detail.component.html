@@ -1,15 +1,30 @@
-<div *ngIf="product != undefined" class="product-container">
-  <div>
-    <img [src]="product.image" alt="{{ product.title }}" class="product-img">
-  </div>
-  <div class="product-info">
-    <p>Item: {{ product.title }}</p>
-    <p>Price: ${{ product.price }}</p>
-    <p>Color: {{ product.color }}</p>
-    <p>Size: {{ product.size }}</p>
-    <p>Quantity: {{ product.quantity }}</p>
-    <p>Rating: {{ product.rating }}</p>
-    <hr class="product-divider">
-    <p>{{ product.description }}</p>
+<div *ngIf="filteredProducts.length" class="product-container">
+  <div *ngFor="let product of filteredProducts" class="product-card">
+    <div class="product-top">
+      <div class="product-img-container">
+        <img [src]="product.image" alt="{{ product.title }}" class="product-img">
+      </div>
+      <div class="product-info">
+        <p data-label="Item:"><span>{{ product.title }}</span></p>
+        <p data-label="Price:"><span>${{ product.price }}</span></p>
+        <p data-label="Color:"><span>{{ product.color }}</span></p>
+        <p data-label="Size:"><span>{{ product.size }}</span></p>
+        <p data-label="Quantity:"><span>{{ product.quantity }}</span></p>
+        <p data-label="Rating:"><span>{{ product.rating }}</span></p>
+      </div>
+      <div class="actions-container"></div>
+      <div class="product-actions">
+        <button mat-icon-button (click)="toggleFavorite(product.id)">
+          <mat-icon [ngClass]="{'mat-icon-heart': true, 'pressed': isFavorite(product.id)}" aria-label="Favorite icon">favorite</mat-icon>
+        </button>
+        <button mat-icon-button (click)="toggleCart(product.id)">
+          <mat-icon [ngClass]="{'mat-icon-cart': true, 'pressed': isInCart(product.id)}" aria-label="Cart icon">shopping_cart</mat-icon>
+        </button>
+      </div>
+    </div>
+    <div class="product-description">
+      <hr>
+      <p data-label="Description:"><span>{{ product.description }}</span></p>
+    </div>
   </div>
 </div>

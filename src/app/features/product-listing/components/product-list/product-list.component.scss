@@ -12,7 +12,6 @@ $height: 350px;
 $img-size: 190px;
 $icon-color: rgba(128, 128, 128, 0.495);
 $heart-color: red;
-$cart-color: rgb(0, 85, 255);
 
 p {
     font-size: $font-size;
@@ -52,38 +51,38 @@ h2 {
   padding: 0;
 }
 
-.icons {
-  display: flex;
-  align-items: center;
-}
+// .icons {
+//   display: flex;
+//   align-items: center;
+// }
 
-.icons button {
-  margin: 0;
-}
+// .icons button {
+//   margin: 0;
+// }
 
-.mat-icon {
-  transition: color 0.3s ease;
-}
+// .mat-icon {
+//   transition: color 0.3s ease;
+// }
 
-.mat-icon-heart {
-  color: $icon-color;
-}
+// .mat-icon-heart {
+//   color: $icon-color;
+// }
 
-.mat-icon-heart.pressed {
-  color: $heart-color;
-}
+// .mat-icon-heart.pressed {
+//   color: $heart-color;
+// }
 
-.mat-icon-cart {
-  color: $icon-color;
-}
+// .mat-icon-cart {
+//   color: $icon-color;
+// }
 
-.mat-icon-cart.pressed {
-  color: $border-color;
-}
+// .mat-icon-cart.pressed {
+//   color: $border-color;
+// }
 
-.mat-icon-button {
-  border: none;
-  background: none;
-  padding: 0;
-  cursor: pointer;
-}
+// .mat-icon-button {
+//   border: none;
+//   background: none;
+//   padding: 0;
+//   cursor: pointer;
+// }

@@ -30,8 +30,9 @@ $margin-top: 16px;
 $padding: 10px;
 $width: 250px;
 $height: 350px;
-$img-size: 190px;
-$link-hover-color: #7C6BA7;
+$img-size: 200px;
+$icon-color: rgba(128, 128, 128, 0.495);
+$heart-color: red;
 
 body {
   font-family: $font-family;
@@ -63,16 +64,18 @@ h2 {
   justify-content: space-between;
   width: $width;
   height: $height;
-  box-shadow: 0 4px 8px $border-color;
-  transition: box-shadow 0.3s ease-in-out;
+  
   border-radius: $border-radius;
   margin: $margin;
   padding: $padding;
+  box-shadow: 0 1px 2px $border-color;
 }
 
 .product-card:hover {
-  outline: none;
-  box-shadow: 0 4px 8px $link-hover-color;
+  
+  
+  box-shadow: 0 4px 8px $border-color;
+  transition: box-shadow 0.3s ease-in-out;
 }
 
 .product-container {
@@ -112,3 +115,39 @@ h2 {
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.icons {
+  display: flex;
+  align-items: center;
+}
+
+.icons button {
+  margin: 0;
+}
+
+.mat-icon {
+  transition: color 0.3s ease;
+}
+
+.mat-icon-heart {
+  color: $icon-color;
+}
+
+.mat-icon-heart.pressed {
+  color: $heart-color;
+}
+
+.mat-icon-cart {
+  color: $icon-color;
+}
+
+.mat-icon-cart.pressed {
+  color: $border-color;
+}
+
+.mat-icon-button {
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+}
