@@ -14,3 +14,30 @@
 //       })
 //     );
 //   }
+
+import { Injectable } from '@angular/core';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { of } from 'rxjs';
+import { catchError, map, mergeMap } from 'rxjs/operators';
+import { AuthService } from '../services/auth.service';
+import { signIn, signInSuccess, signInFailure } from './sign-in.action';
+
+@Injectable()
+export class SignInEffects {
+  constructor(
+    private actions$: Actions,
+    private authService: AuthService
+  ) {}
+
+  signIn$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(signIn),
+      mergeMap(action =>
+        this.authService.signIn(action.request).pipe(
+          map(response => signInSuccess({ response })),
+          catchError(error => of(signInFailure({ error })))
+        )
+      )
+    )
+  );
+}
