@@ -1,7 +1,6 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -19,8 +18,7 @@ export class SignInComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router,
-    private authService: AuthService
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -29,7 +27,7 @@ export class SignInComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(8)]]
     });
 
-    this.returnUrl = this.route.snapshot.queryParams['/product-listing'] || '/';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   get f() { return this.signInForm.controls; }
@@ -41,95 +39,31 @@ export class SignInComponent implements OnInit {
 
     const email = this.signInForm.get('email')?.value;
     const password = this.signInForm.get('password')?.value;
-    
-    const savedEmail = localStorage.getItem('email');
-    const savedPassword = localStorage.getItem('password');
 
-    // for debugging
-    console.log('Saved Email:', savedEmail);
-    console.log('Saved Password:', savedPassword);
+    const users = JSON.parse(localStorage.getItem('users') || '[]');
+    const user = users.find((user: { email: string, password: string }) => user.email === email && user.password === password);
 
-    // const user = {
-    //   email: this.signInForm.value.email,
-    //   role: this.signInForm.value.email === 'admin@example.com' ? 'ADMIN' : 'USER'
-    // };
+    if (user) {
+      console.log('Sign-in successful');
+      alert('Sign-in successful');
+      localStorage.setItem('token', ''); 
+      this.router.navigate([this.returnUrl]);
+    } else {
+      this.error = 'Invalid email or password';
+    }
+  }
 
-    // this.authService.setPermissions();
-    // this.authService.setRole(user.role);
-    // this.router.navigate(['/product-listing']);
+  onEmailKeydown(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      this.passwordInput.nativeElement.focus();
+    }
+  }
 
-    
-
-  //   if (email === savedEmail && password === savedPassword) {
-  //     this.authService.signIn({ email, password })
-  //       .subscribe(
-  //         data => {
-  //           console.log('Sign In successful');
-  //           alert('Sign In successful');
-  //           this.router.navigate([this.returnUrl]);
-  //         },
-  //         error => {
-  //           console.error(error);
-  //           this.error = 'Sign In failed';
-  //         }
-  //       );
-  //   } else {
-  //     this.error = 'Invalid email or password';
-  //   }
-  // }
-
-        this.authService.signIn({email, password}).subscribe(response => {
-          if (response && response.SignIn && response.SignIn.AccessToken) {
-            console.log('Login successful');
-            alert('Login successful');
-            localStorage.setItem('token', response.SignIn.AccessToken);
-            this.router.navigate(['/']);
-          }
-        })
-      }
-
-      onEmailKeydown(event: KeyboardEvent) {
-        if (event.key === 'Enter') {
-          event.preventDefault();
-          this.passwordInput.nativeElement.focus();
-        }
-      }
-    
-      onPasswordKeydown(event: KeyboardEvent) {
-        if (event.key === 'Enter') {
-          event.preventDefault();
-          this.signInButton.nativeElement.click();
-        }
-      }
+  onPasswordKeydown(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      this.signInButton.nativeElement.click();
+    }
+  }
 }
-
-// export class SignInComponent {
-//   signInForm = this.fb.group( {
-//     email: ['', Validators.required],
-//     password: ['', Validators.required]
-//   })
-  
-//   constructor(private fb: FormBuilder){}
-  
-//   onSubmit() {
-//     console.warn(this.signInForm.value);
-//   }
-// }
-
-// export class SignInComponent {
-//     email: string = '';
-//     password: string = ''
-//   }
-  
-//   constructor(private AuthService: SignInService, private router: Router){}
-  
-//   onSubmit(): void {
-//     this.signInService.signIn(this.email, this.password).subscribe(response => {
-//       if (response && response.SignIn && response.SignIn.AccessToken) {
-//         console.log('Login successful');
-//         alert('Login successful');
-//         localStorage.setItem('token', response.SignIn.AccessToken);
-//         this.router.navigate(['/']);
-//       }
-//     })
-//   }

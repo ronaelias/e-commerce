@@ -19,8 +19,8 @@ $e-commerce-theme: mat.define-theme((
 
 $font-family: 'Inter', sans-serif;
 $icon-size: 50px;
-$background-color: #F3EDF7; // pink
-$border-color: #7C6BA7;
+$background-color: #F3EDE5; // pink
+$border-color: rgba(0, 0, 0, 0.692);
 $text-color: #1E1E1E; // black
 $text-color-sub: #45414A; // grey
 $font-size: 16px;
@@ -64,7 +64,7 @@ h2 {
   justify-content: space-between;
   width: $width;
   height: $height;
-  
+  background-color: #ffffff;
   border-radius: $border-radius;
   margin: $margin;
   padding: $padding;
@@ -110,9 +110,6 @@ h2 {
   color: $text-color;
 }
 
-.product-container {
-  background-color: $background-color;
-}
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
@@ -150,4 +147,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   background: none;
   padding: 0;
   cursor: pointer;
+}
+
+#background{
+  background-color: $background-color;
 }

@@ -1,6 +1,6 @@
-$background-color: #F3EDF7; // pink
-$border-color: #7C6BA7;
-$icon-background: #7c6ba72d;
+$border-color: rgba(0, 0, 0, 0.692);
+$icon-background: #F3EDE5;
+$hover-color: #F0E8DE;
 $text-color: #1E1E1E; // black
 $text-color-sub: #45414A; // grey
 $font-size: 16px;
@@ -12,8 +12,8 @@ $margin-inline-end: 32px;
 $margin-text: 8px;
 $padding: 10px;
 $width: 1000px;
+$border-width: 1.5px;
 $img-size: 190px;
-$link-hover-color: #7C6BA7;
 $gap: 5px;
 
 p {
@@ -35,7 +35,7 @@ p {
 
 .product-card:hover {
   outline: none;
-  box-shadow: 0 4px 8px $link-hover-color;
+  box-shadow: 0 4px 8px $border-color;
 }
 
 .product-top {
@@ -70,7 +70,7 @@ p {
   align-items: center;
   gap: $gap;
   margin-inline-end: $margin-inline-end;
-  border-radius: 16px;
+  border-radius: $border-radius;
   background-color: $icon-background;
 }
 
@@ -105,5 +105,18 @@ p {
     span {
       text-align: start;
     }
+  }
+}
+.dec-inc-btn {
+  margin-left: $margin-text;
+  margin-right: $margin-text;
+  border-width: $border-width;
+  border-radius: $border-radius;
+  box-shadow: 0 1px 2px $text-color-sub;
+  background-color: $icon-background;
+
+  &:hover {
+    box-shadow: 0 1px 4px $text-color-sub;
+    background-color: $hover-color;
   }
 }

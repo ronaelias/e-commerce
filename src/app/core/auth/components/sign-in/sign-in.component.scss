@@ -1,6 +1,6 @@
-$background-color: #f1edf7; //pink
-$background-color-sub: #7C6BA7;
-$background-color-bold: #7f67bb;
+$background-color: #F3EDE5;
+$background-color-sub: #45414A;
+$background-color-bold: #504a58;
 $text-color: #1E1E1E; //black
 $text-color-sub: #45414A; //grey
 $font-family: 'Inter', sans-serif;
@@ -56,4 +56,7 @@ h2{
     margin: $margin;
     padding: $padding;
     width: 90%;
+}
+.forgot-password {
+    color: $text-color;
 }

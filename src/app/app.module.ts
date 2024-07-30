@@ -24,6 +24,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { AdminComponent } from './features/admin/admin.component';
 import { WelcomeMessagePipe } from './welcome-message.pipe';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { WelcomeMessagePipe } from './welcome-message.pipe';
     MatButtonModule,
     MatIconModule,
     NgxPermissionsModule.forRoot(),
+    MatInputModule
 
   ],
   providers: [

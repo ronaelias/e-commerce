@@ -1,6 +1,6 @@
 $primary-color: #45414A; //grey
-$secondary-color: #7C6BA7; //purple
-$background-color: #F3EDF7; //pink
+$secondary-color: rgba(0, 0, 0, 0.692);
+$background-color: #F3EDE5;
 $link-hover-offset: 16px;
 $nav-height: 100px;
 $logo-width: 300px;
@@ -51,6 +51,13 @@ nav {
     text-decoration-color: $secondary-color;
 
     &:hover {
+      color: $secondary-color;
+      text-decoration: underline;
+      text-underline-offset: $link-hover-offset;
+      text-decoration-color: $secondary-color;
+    }
+
+    &:active {
       color: $secondary-color;
       text-decoration: underline;
       text-underline-offset: $link-hover-offset;

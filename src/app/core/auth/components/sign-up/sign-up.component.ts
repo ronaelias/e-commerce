@@ -1,5 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -22,7 +23,7 @@ export class SignUpComponent {
   @ViewChild('stairwayAndFloorInput') stairwayAndFloorInput!: ElementRef;
   @ViewChild('signUpButton') signUpButton!: ElementRef;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private router: Router) {
     this.signUpForm = this.fb.group({
       name: ['', Validators.required],
       surname: ['', Validators.required],
@@ -43,6 +44,14 @@ export class SignUpComponent {
     if (this.signUpForm.invalid) {
       return;
     }
+    const user = this.signUpForm.value;
+
+    // Retrieve users from localStorage
+    const users = JSON.parse(localStorage.getItem('users') || '[]');
+    users.push(user);
+
+    // Save users array in localStorage
+    localStorage.setItem('users', JSON.stringify(users));
 
     const name = this.signUpForm.get('name')?.value;
     const email = this.signUpForm.get('email')?.value;
@@ -55,6 +64,7 @@ export class SignUpComponent {
 
     console.warn(this.signUpForm.value);
     alert('Sign Up successful');
+    this.router.navigate(['/product-listing']);
   }
 
   onKeydown(event: KeyboardEvent, nextInput: HTMLInputElement) {

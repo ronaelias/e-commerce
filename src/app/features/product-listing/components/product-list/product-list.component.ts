@@ -43,6 +43,8 @@ export class ProductListComponent implements OnInit {
     this.router.navigate(['/product-detail', productId]);
   }
 
+
+
   toggleFavorite(productId: number) {
     if (this.favoriteProducts.has(productId)) {
       this.favoriteProducts.delete(productId);

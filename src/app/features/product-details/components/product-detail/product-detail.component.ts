@@ -4,7 +4,7 @@ import { ProductService } from '../../../product-listing/services/product.servic
 import { Product } from '../../../../product.model';
 import { Router } from '@angular/router';
 import { SearchService } from '../../../../search.service';
-
+import { signal } from '@angular/core';
 
 @Component({
   selector: 'app-product-detail',
@@ -34,7 +34,19 @@ export class ProductDetailComponent implements OnInit {
   favoriteProducts: Set<number> = new Set<number>();
   cartProducts: Set<number> = new Set<number>();
 
+  quantity = signal(0);
+
   constructor(private productService: ProductService, private searchService: SearchService, private router: Router) {}
+
+  decrement() {
+    if(this.quantity() > 0){
+      this.quantity.set(this.quantity() - 1);
+    }
+    
+  }
+  increment() {
+    this.quantity.set(this.quantity() + 1);
+  }
 
   ngOnInit() {
     this.productService.getAllProducts().subscribe((products: Product[]) => {
@@ -82,5 +94,7 @@ export class ProductDetailComponent implements OnInit {
   isInCart(productId: number): boolean {
     return this.cartProducts.has(productId);
   }
+
+  
 }
 
