@@ -6,6 +6,9 @@ export interface Product {
     color: string;
     size: number;
     quantity: number;
+    category: string;
     rating: number;
     description: string;
+    material: string;
+    gender: string;
 }

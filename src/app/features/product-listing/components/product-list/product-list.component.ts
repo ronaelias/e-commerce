@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { ProductService } from '../../services/product.service';
@@ -72,4 +72,5 @@ export class ProductListComponent implements OnInit {
   trackByProductId(index: number, product: Product): number {
     return product.id;
   }
+  
 }

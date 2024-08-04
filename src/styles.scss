@@ -1,6 +1,7 @@
 @use '@angular/material' as mat;
 @include mat.core();
-
+@import 'ag-grid-community/styles/ag-grid.css';
+@import 'ag-grid-community/styles/ag-theme-quartz.css';
 
 $e-commerce-theme: mat.define-theme((
   color: (
@@ -33,6 +34,7 @@ $height: 350px;
 $img-size: 200px;
 $icon-color: rgba(128, 128, 128, 0.495);
 $heart-color: red;
+$cart-color: blue;
 
 body {
   font-family: $font-family;
@@ -139,7 +141,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .mat-icon-cart.pressed {
-  color: $border-color;
+  color: $cart-color;
 }
 
 .mat-icon-button {

@@ -25,6 +25,23 @@ import { NgxPermissionsModule } from 'ngx-permissions';
 import { AdminComponent } from './features/admin/admin.component';
 import { WelcomeMessagePipe } from './welcome-message.pipe';
 import {MatInputModule} from '@angular/material/input';
+import { FilterAndSortComponent } from './features/filter-and-sort/filter-and-sort.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { AgGridModule } from 'ag-grid-angular';
+import { DeleteButtonRendererComponent } from './shared/delete-button-renderer/delete-button-renderer.component';
+import { GridModule, PagerModule, FilterService } from '@syncfusion/ej2-angular-grids';
+import { ModuleRegistry } from "@ag-grid-community/core";
+import { MenuModule } from "@ag-grid-enterprise/menu";
+import { SetFilterModule } from "@ag-grid-enterprise/set-filter";
+import { FiltersToolPanelModule } from "@ag-grid-enterprise/filter-tool-panel";
+import { CategoryComponent } from './features/category/category.component';
+//import { SimpleCellRendererComponent } from './simple-cell-renderer/simple-cell-renderer.component';
+
+ModuleRegistry.registerModules([
+  MenuModule,
+  SetFilterModule,
+  FiltersToolPanelModule
+]);
 
 @NgModule({
   declarations: [
@@ -32,11 +49,14 @@ import {MatInputModule} from '@angular/material/input';
     NavbarComponent,
     FooterComponent,
     ProductDetailComponent,
-    SignInComponent,
+    
     SignUpComponent,
     ProductListComponent,
     AdminComponent,
-    WelcomeMessagePipe
+    WelcomeMessagePipe,
+    FilterAndSortComponent,
+    DeleteButtonRendererComponent,
+    CategoryComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,10 +69,17 @@ import {MatInputModule} from '@angular/material/input';
     MatButtonModule,
     MatIconModule,
     NgxPermissionsModule.forRoot(),
-    MatInputModule
+    MatInputModule,
+    SignInComponent,
+    BrowserModule,
+    AppRoutingModule,
+    AgGridModule,
+    GridModule,
+    PagerModule,
 
   ],
   providers: [
+    FilterService,
     AuthService,
     AuthGuard,
     {
@@ -67,6 +94,9 @@ import {MatInputModule} from '@angular/material/input';
     },
     provideAnimationsAsync()
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule { }
+
+
