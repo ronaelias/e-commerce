@@ -1,18 +1,18 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
-import { ProductService } from '../../services/product.service';
-import { Product } from '../../../../product.model';
+import { Component, Input, OnInit } from '@angular/core';
+import { BehaviorSubject, Observable, switchMap } from 'rxjs';
+import { Product } from '../../product.model';
 import { Router } from '@angular/router';
-import { SearchService } from '../../../../search.service';
+import { ProductService } from '../../features/product-listing/services/product.service';
+import { SearchService } from '../../search.service';
+import { FilterAndSortComponent } from '../../features/filter-and-sort/filter-and-sort.component';
 
 @Component({
-  selector: 'app-product-list',
-  templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.scss']
+  selector: 'app-product-card',
+  templateUrl: './product-card.component.html',
+  styleUrls: ['./product-card.component.scss']
 })
-
-export class ProductListComponent implements OnInit {
+export class ProductCardComponent implements OnInit {
+ // @Input() products: Product[] = [];
   products$!: Observable<Product[]>;
   filteredProducts$!: Observable<Product[]>;
   searchQuery$: BehaviorSubject<string> = new BehaviorSubject<string>('');
@@ -20,7 +20,8 @@ export class ProductListComponent implements OnInit {
   cartProducts: Set<number> = new Set<number>();
   userName: string | null = '';
 
-  constructor(private productService: ProductService, private searchService: SearchService, private router: Router) {}
+  constructor(private productService: ProductService, private searchService: SearchService,
+     private router: Router, private filterAndSortComponent: FilterAndSortComponent) {}
 
   ngOnInit() {
     this.products$ = this.productService.getAllProducts();
@@ -37,6 +38,7 @@ export class ProductListComponent implements OnInit {
     });
 
     this.userName = localStorage.getItem('name');
+    this.filteredProducts$ = this.filterAndSortComponent.filterProducts('');
   }
 
   viewProductDetail(productId: number) {

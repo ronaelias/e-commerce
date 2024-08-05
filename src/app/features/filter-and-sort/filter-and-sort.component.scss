@@ -1,6 +1,6 @@
 .container {
     display: flex;
-    height: 120vh; /* Make sure the container takes full viewport height */
+    height: 120vh;
   }
   
   .ag-grid-container {
@@ -9,11 +9,14 @@
     overflow-y: auto; /* Enable vertical scrolling */
     height: 100%; /* Take full height of the container */
   }
-  
+
   .product-listing-container {
     width: 80%;
     padding: 10px;
-    overflow-y: auto; /* Enable vertical scrolling if needed */
-    height: 100%; /* Take full height of the container */
+    overflow-y: auto;
+    height: 100%;
   }
   
+  h3 {
+    text-align: start;
+  }

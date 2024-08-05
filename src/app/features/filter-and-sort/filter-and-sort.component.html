@@ -1,55 +1,61 @@
 <div id="background">
-    <br><br><br><br><br>
-    <div class="container">
-      <div class="ag-grid-container">
-        <ag-grid-angular
-          style="width: 100%; height: 350px;"
-          [class]="themeClass"
-          [rowData]="fabricRowData"
-          [columnDefs]="fabricColDefs"
-          [rowSelection]="rowSelection"
-          (gridReady)="onGridReady($event)"
-        ></ag-grid-angular>
+  <br><br><br><br><br>
+  <div class="container">
+          
+    <div class="ag-grid-container">
+      <h3>Filter</h3>
+      <ag-grid-angular
+        style="width: 100%; height: 350px;"
+        [class]="themeClass"
+        [rowData]="fabricRowData"
+        [columnDefs]="fabricColDefs"
+        [rowSelection]="rowSelection"
+        (gridReady)="onGridReady($event, 'fabric')"
+        (selectionChanged)="onFilterChange('fabric', getSelectedValues('fabric', 'fabric'))"
+      ></ag-grid-angular>
 
-        <ag-grid-angular
-          style="width: 100%; height: 140px;"
-          [class]="themeClass"
-          [rowData]="genderRowData"
-          [columnDefs]="genderColDefs"
-          [rowSelection]="rowSelection"
-          (gridReady)="onGridReady($event)"
-        ></ag-grid-angular>
- 
-        <ag-grid-angular
-          style="width: 100%; height: 180px;"
-          [class]="themeClass"
-          [rowData]="colorRowData"
-          [columnDefs]="colorColDefs"
-          [rowSelection]="rowSelection"
-          (gridReady)="onGridReady($event)"
-        ></ag-grid-angular>
+      <ag-grid-angular
+        style="width: 100%; height: 140px;"
+        [class]="themeClass"
+        [rowData]="genderRowData"
+        [columnDefs]="genderColDefs"
+        [rowSelection]="rowSelection"
+        (gridReady)="onGridReady($event, 'gender')"
+        (selectionChanged)="onFilterChange('gender', getSelectedValues('gender', 'gender'))"
+      ></ag-grid-angular>
 
-        <ag-grid-angular
-          style="width: 100%; height: 180px;"
-          [class]="themeClass"
-          [rowData]="styleRowData"
-          [columnDefs]="styleColDefs"
-          [rowSelection]="rowSelection"
-          (gridReady)="onGridReady($event)"
-        ></ag-grid-angular>
+      <ag-grid-angular
+        style="width: 100%; height: 180px;"
+        [class]="themeClass"
+        [rowData]="colorRowData"
+        [columnDefs]="colorColDefs"
+        [rowSelection]="rowSelection"
+        (gridReady)="onGridReady($event, 'color')"
+        (selectionChanged)="onFilterChange('color', getSelectedValues('color', 'color'))"
+      ></ag-grid-angular>
 
-        <ag-grid-angular
-          style="width: 100%; height: 140px;"
-          [class]="themeClass"
-          [rowData]="typeRowData"
-          [columnDefs]="typeColDefs"
-          [rowSelection]="rowSelection"
-          (gridReady)="onGridReady($event)"
-        ></ag-grid-angular>
-      </div>
-      <div class="product-listing-container">
-        <app-product-list></app-product-list>
-      </div>
+      <ag-grid-angular
+        style="width: 100%; height: 180px;"
+        [class]="themeClass"
+        [rowData]="styleRowData"
+        [columnDefs]="styleColDefs"
+        [rowSelection]="rowSelection"
+        (gridReady)="onGridReady($event, 'style')"
+        (selectionChanged)="onFilterChange('style', getSelectedValues('style', 'style'))"
+      ></ag-grid-angular>
+
+      <ag-grid-angular
+        style="width: 100%; height: 140px;"
+        [class]="themeClass"
+        [rowData]="typeRowData"
+        [columnDefs]="typeColDefs"
+        [rowSelection]="rowSelection"
+        (gridReady)="onGridReady($event, 'type')"
+        (selectionChanged)="onFilterChange('type', getSelectedValues('type', 'type'))"
+      ></ag-grid-angular>
+    </div>
+    <div class="product-listing-container">
+      <app-product-card></app-product-card>
     </div>
   </div>
-  
+</div>

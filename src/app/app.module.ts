@@ -35,6 +35,7 @@ import { MenuModule } from "@ag-grid-enterprise/menu";
 import { SetFilterModule } from "@ag-grid-enterprise/set-filter";
 import { FiltersToolPanelModule } from "@ag-grid-enterprise/filter-tool-panel";
 import { CategoryComponent } from './features/category/category.component';
+import { ProductCardComponent } from './shared/products-card/product-card.component';
 //import { SimpleCellRendererComponent } from './simple-cell-renderer/simple-cell-renderer.component';
 
 ModuleRegistry.registerModules([
@@ -49,7 +50,7 @@ ModuleRegistry.registerModules([
     NavbarComponent,
     FooterComponent,
     ProductDetailComponent,
-    
+    ProductCardComponent,
     SignUpComponent,
     ProductListComponent,
     AdminComponent,
@@ -77,6 +78,9 @@ ModuleRegistry.registerModules([
     GridModule,
     PagerModule,
 
+  ],
+  exports: [
+    ProductCardComponent
   ],
   providers: [
     FilterService,

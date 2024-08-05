@@ -12,7 +12,6 @@
         <p data-label="Price:"><span>${{ product.price }}</span></p>
         <p data-label="Color:"><span>{{ product.color }}</span></p>
         <p data-label="Size:"><span>{{ product.size }}</span></p>
-        <p data-label="Category"><span>{{ product.category }}</span></p>
         <p data-label="Quantity:">
           <span>
             <button (click)="decrement()" class="dec-inc-btn">-</button>
@@ -32,7 +31,6 @@
       </div>
     </div>
     <div class="product-description">
-      <hr>
       <p data-label="Description:"><span>{{ product.description }}</span></p>
     </div>
   </div>

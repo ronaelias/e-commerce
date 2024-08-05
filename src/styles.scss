@@ -20,7 +20,7 @@ $e-commerce-theme: mat.define-theme((
 
 $font-family: 'Inter', sans-serif;
 $icon-size: 50px;
-$background-color: #F3EDE5; // pink
+$background-color: #F3EDE5; // beige
 $border-color: rgba(0, 0, 0, 0.692);
 $text-color: #1E1E1E; // black
 $text-color-sub: #45414A; // grey
@@ -55,9 +55,14 @@ p {
   text-align: center;
 }
 
+h1, h3 {
+  color: $border-color;
+  text-align: center;
+}  
+
 h2 {
-  font-size: $font-size;
-  color: $text-color;
+    font-size: $font-size;
+    color: $text-color;
 }
 
 .product-card {
@@ -74,8 +79,6 @@ h2 {
 }
 
 .product-card:hover {
-  
-  
   box-shadow: 0 4px 8px $border-color;
   transition: box-shadow 0.3s ease-in-out;
 }

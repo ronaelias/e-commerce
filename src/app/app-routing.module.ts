@@ -9,11 +9,13 @@ import { AdminComponent } from './features/admin/admin.component';
 import { NgxPermissionsGuard } from 'ngx-permissions';
 import { FilterAndSortComponent } from './features/filter-and-sort/filter-and-sort.component';
 import { CategoryComponent } from './features/category/category.component';
+import { ProductCardComponent } from './shared/products-card/product-card.component';
 
 const routes: Routes = [
   { path: 'product', component: ProductListComponent },
   { path: 'product-listing', component: ProductListComponent },
   { path: 'product-detail', component: ProductDetailComponent },
+  { path: 'product-card', component: ProductCardComponent },
   { path: 'sign-in', component: SignInComponent },
   { path: 'sign-up', component: SignUpComponent },
   { path: 'filter-and-sort', component: FilterAndSortComponent },

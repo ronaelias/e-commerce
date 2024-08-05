@@ -1,31 +1,31 @@
 <div id="background">
-<br><br><br><br>
-  <div *ngIf="userName">
-  <h1>{{ userName | welcomeMessage }}</h1>
-</div>
-<h3>Discover the Best Deals and Latest Trends Just for You!</h3>
-<div *ngIf="(filteredProducts$ | async) as filteredProducts">
-  <div *ngIf="filteredProducts.length; else loading" class="product-container">
-    <!-- <div *ngFor="let product of filteredProducts" class="product-card" (click)="viewProductDetail(product.id)"> -->
-    <div *ngFor="let product of filteredProducts; trackBy: trackByProductId" class="product-card" (click)="viewProductDetail(product.id)">
-      <img [src]="product.image" alt="{{ product.title }}" class="product-img">
-      <p>{{ product.title }}</p>
-      <div class="product-info">
-        <h2>${{ product.price }}</h2>
-        <div class="icons">
-          <button mat-icon-button (click)="toggleFavorite(product.id)" (click)="$event.stopPropagation()">
-            <mat-icon [ngClass]="{'mat-icon-heart': true, 'pressed': isFavorite(product.id)}" aria-label="Favorite icon">favorite</mat-icon>
-          </button>
-          <button mat-icon-button (click)="toggleCart(product.id)" (click)="$event.stopPropagation()">
-            <mat-icon [ngClass]="{'mat-icon-cart': true, 'pressed': isInCart(product.id)}" aria-label="Cart icon">shopping_cart</mat-icon>
-          </button>
+  <br><br><br><br>
+    <div *ngIf="userName">
+    <h1>{{ userName | welcomeMessage }}</h1>
+  </div>
+  <h3>Discover the Best Deals and Latest Trends Just for You!</h3>
+  <div *ngIf="(filteredProducts$ | async) as filteredProducts">
+    <div *ngIf="filteredProducts.length; else loading" class="product-container">
+      <!-- <div *ngFor="let product of filteredProducts" class="product-card" (click)="viewProductDetail(product.id)"> -->
+      <div *ngFor="let product of filteredProducts; trackBy: trackByProductId" class="product-card" (click)="viewProductDetail(product.id)">
+        <img [src]="product.image" alt="{{ product.title }}" class="product-img">
+        <p>{{ product.title }}</p>
+        <div class="product-info">
+          <h2>${{ product.price }}</h2>
+          <div class="icons">
+            <button mat-icon-button (click)="toggleFavorite(product.id)" (click)="$event.stopPropagation()">
+              <mat-icon [ngClass]="{'mat-icon-heart': true, 'pressed': isFavorite(product.id)}" aria-label="Favorite icon">favorite</mat-icon>
+            </button>
+            <button mat-icon-button (click)="toggleCart(product.id)" (click)="$event.stopPropagation()">
+              <mat-icon [ngClass]="{'mat-icon-cart': true, 'pressed': isInCart(product.id)}" aria-label="Cart icon">shopping_cart</mat-icon>
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<ng-template #loading>
-  <h1>Loading...</h1>
-</ng-template>
-
-</div>
+  <ng-template #loading>
+    <h1>Loading...</h1>
+  </ng-template>
+  </div>
+  
