@@ -217,7 +217,7 @@ export class ProductDetailCardComponent implements OnInit {
     this.selectedColor = color;
   }
 
-  viewProductDetail(productId: number) {
-    this.router.navigate([`/product-detail-card/${productId}`]);
-  }
+  // viewProductDetail(productId: number) {
+  //   this.router.navigate([`/product-detail-card/${productId}`]);
+  // }
 }
