@@ -1,8 +1,8 @@
-<div id="background">
+<!-- <div id="background">
   @if(filteredProducts.length) {
     <div  class="product-container">
-  @for(product of filteredProducts; track product) {
-    <div class="product-card">
+      @for(product of filteredProducts; track product.id) {
+        <div class="product-card">
     <div class="product-top">
       <div class="product-img-container">
         <img [src]="product.image" alt="{{ product.title }}" class="product-img">
@@ -14,9 +14,9 @@
         <p data-label="Size:"><span>{{ product.size }}</span></p>
         <p data-label="Quantity:">
           <span>
-            <button (click)="decrement()" class="dec-inc-btn">-</button>
-            <span> {{quantity()}} </span>
-            <button (click)="increment()" class="dec-inc-btn">+</button>
+            <button (click)="decrement(product)" class="dec-inc-btn">-</button>
+            <span> {{product.quantity}} </span>
+            <button (click)="increment(product)" class="dec-inc-btn">+</button>
           </span>
         <p data-label="Rating:"><span>{{ product.rating }}</span></p>
       </div>
@@ -35,6 +35,8 @@
     </div>
   </div>
 }
-</div>
+    </div>
   }
-</div>
+</div> -->
+
+<app-product-detail-card></app-product-detail-card>

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../product-listing/services/product.service';
-import { Product } from '../../product.model';
+import { iProduct } from '../../shared/models/product.model';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-category',
@@ -10,18 +11,14 @@ import { switchMap } from 'rxjs/operators';
   styleUrls: ['./category.component.scss']
 })
 export class CategoryComponent implements OnInit {
-  categories = [
-    'men\'s clothing',
-    'jewelery',
-    'electronics',
-    'women\'s clothing'
-  ];
+  categories: string[] = [];
 
   selectedCategory$: BehaviorSubject<string> = new BehaviorSubject<string>('');
-  products$!: Observable<Product[]>;
-  products: Product[] = [];
+  products$!: Observable<iProduct[]>;
+  // products: iProduct[] = [];
   favoriteProducts: Set<number> = new Set<number>();
   cartProducts: Set<number> = new Set<number>();
+  selectedCategory: string | null = null;
 
   constructor(private productService: ProductService) { }
 
@@ -31,13 +28,23 @@ export class CategoryComponent implements OnInit {
         category ? this.productService.getProductsByCategory(category) : this.productService.getAllProducts()
       )
     );
+    this.loadCategories();
   }
 
   scrollToCategory(category: string) {
+    this.selectedCategory = category;
     const element = document.getElementById(category);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth'});
     }
+  }
+
+  loadCategories(): void {
+    this.productService.getCategories().subscribe(
+      (categories: string[]) => {
+        this.categories = categories;
+      },
+    );
   }
 
   toggleFavorite(productId: number) {

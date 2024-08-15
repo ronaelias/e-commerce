@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ColDef, GridReadyEvent, GridApi } from 'ag-grid-community';
 import { ProductService } from '../product-listing/services/product.service';
-import { Product } from '../../product.model';
-import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
-import { SearchService } from '../../search.service';
+import { iProduct } from '../../shared/models/product.model';
+import { BehaviorSubject, combineLatest, map, Observable, switchMap } from 'rxjs';
+import { SearchService } from '../services/search.service';
 
 @Component({
   selector: 'app-filter-and-sort',
@@ -12,10 +12,14 @@ import { SearchService } from '../../search.service';
 })
 export class FilterAndSortComponent implements OnInit {
   private searchQuerySubject = new BehaviorSubject<string>('');
-  searchQuery$ = this.searchQuerySubject.asObservable();
+  //searchQuery$ = this.searchQuerySubject.asObservable();
+  searchQuery$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
-  private productsSubject = new BehaviorSubject<Product[]>([]);
+  private productsSubject = new BehaviorSubject<iProduct[]>([]);
   products$ = this.productsSubject.asObservable();
+
+  
+  filteredProducts$!: Observable<iProduct[]>;
 
   fabricRowData = [
     { fabric: 'Cotton' },
@@ -46,31 +50,24 @@ export class FilterAndSortComponent implements OnInit {
   ];
 
   public fabricColDefs: ColDef[] = [
-    { field: 'fabric', headerName: 'Fabric', checkboxSelection: true, headerCheckboxSelection: true }
+    { field: 'fabric', headerName: 'Fabric', checkboxSelection: true, headerCheckboxSelection: true, filter: true }
   ];
 
   public genderColDefs: ColDef[] = [
-    { field: 'gender', headerName: 'Gender', checkboxSelection: true, headerCheckboxSelection: true }
+    { field: 'gender', headerName: 'Gender', checkboxSelection: true, headerCheckboxSelection: true, filter: true }
   ];
 
   public colorColDefs: ColDef[] = [
-    { field: 'color', headerName: 'Color', checkboxSelection: true, headerCheckboxSelection: true }
+    { field: 'color', headerName: 'Color', checkboxSelection: true, headerCheckboxSelection: true, filter: true }
   ];
 
   public styleColDefs: ColDef[] = [
-    { field: 'style', headerName: 'Style', checkboxSelection: true, headerCheckboxSelection: true }
+    { field: 'style', headerName: 'Style', checkboxSelection: true, headerCheckboxSelection: true, filter: true }
   ];
 
   public typeColDefs: ColDef[] = [
-    { field: 'type', headerName: 'Type', checkboxSelection: true, headerCheckboxSelection: true }
+    { field: 'type', headerName: 'Type', checkboxSelection: true, headerCheckboxSelection: true, filter: true }
   ];
-
-  public defaultColDef: ColDef = {
-    flex: 1,
-    minWidth: 150,
-    filter: true,
-    floatingFilter: true
-  };
 
   public themeClass: string = 'ag-theme-quartz';
   public rowSelection: 'multiple' | 'single' = 'multiple';
@@ -79,8 +76,24 @@ export class FilterAndSortComponent implements OnInit {
 
   constructor(private productService: ProductService, private searchService: SearchService) {}
 
+  // ngOnInit() {
+  //   this.products$ = this.productService.getAllProducts();
+  //   this.applyFilters();
+  // }
+
   ngOnInit() {
-    this.applyFilters();
+    this.products$ = this.productService.getAllProducts();
+    this.filteredProducts$ = this.searchQuery$.pipe(
+      switchMap(query => this.searchService.searchProducts(query))
+    );
+
+    this.products$.subscribe(products => {
+      this.searchService.setProducts(products);
+    });
+
+    this.searchService.searchQuery$.subscribe(query => {
+      this.searchQuery$.next(query);
+    });
   }
 
   selectedFilters: { [key: string]: string[] } = {
@@ -105,8 +118,10 @@ export class FilterAndSortComponent implements OnInit {
   }
 
   applyFilters() {
-    this.productService.getAllProducts().subscribe(products => {
-      this.productsSubject.next(products);
+    // this.productService.getAllProducts().subscribe(products => {
+    //   this.productsSubject.next(products);
+    this.filterProducts().subscribe(filteredProducts => {
+      this.productsSubject.next(filteredProducts);
     });
   }
 
@@ -119,8 +134,7 @@ export class FilterAndSortComponent implements OnInit {
     return [];
   }
 
-  filterProducts(query: string): Observable<Product[]> {
-    this.searchQuerySubject.next(query);
+  filterProducts(): Observable<iProduct[]> {
     return combineLatest([this.searchQuery$, this.products$, this.filtersSubject]).pipe(
       map(([searchQuery, products, selectedFilters]) => {
         return products.filter(product => {
@@ -147,6 +161,5 @@ export class FilterAndSortComponent implements OnInit {
     const matchInCategory = regex.test(category);
     return matchInTitle || matchInDescription || matchInCategory;
   }
-  
   
 }

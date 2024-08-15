@@ -25,7 +25,7 @@ $border-color: rgba(0, 0, 0, 0.692);
 $text-color: #1E1E1E; // black
 $text-color-sub: #45414A; // grey
 $font-size: 16px;
-$border-radius: 8px;
+$border-radius: 4px;
 $margin: 15px;
 $margin-top: 16px;
 $padding: 10px;
@@ -55,7 +55,7 @@ p {
   text-align: center;
 }
 
-h1, h3 {
+h1, h3, h4 {
   color: $border-color;
   text-align: center;
 }  
@@ -154,6 +154,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   cursor: pointer;
 }
 
+.error-message {
+  color: $heart-color;
+}
+
 #background{
   background-color: $background-color;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

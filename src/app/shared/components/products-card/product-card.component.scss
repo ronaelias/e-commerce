@@ -12,7 +12,12 @@
   width: 100%;
 }
 
-.product-info p, .product-info h2 {
+.product-info p,
+.product-info h2 {
   margin: 0;
   padding: 0;
+}
+
+.product-container {
+  display: flex;
 }

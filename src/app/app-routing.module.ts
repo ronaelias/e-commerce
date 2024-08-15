@@ -9,19 +9,21 @@ import { AdminComponent } from './features/admin/admin.component';
 import { NgxPermissionsGuard } from 'ngx-permissions';
 import { FilterAndSortComponent } from './features/filter-and-sort/filter-and-sort.component';
 import { CategoryComponent } from './features/category/category.component';
-import { ProductCardComponent } from './shared/products-card/product-card.component';
+import { ProductCardComponent } from './shared/components/products-card/product-card.component';
+import { ProductDetailCardComponent } from './shared/components/product-detail-card/product-detail-card.component';
 
 const routes: Routes = [
+  { path: 'product-listing', component: ProductListComponent, loadChildren: () => import('./features/product-listing/product-listing.module').then(m => m.ProductListingModule) },
+  { path: 'product-detail', component: ProductDetailComponent, canActivate: [AuthGuard], loadChildren: () => import('./features/product-details/product-details.module').then(m => m.ProductDetailsModule) },
+  { path: 'product-detail-card/:id', component: ProductDetailCardComponent },
   { path: 'product', component: ProductListComponent },
-  { path: 'product-listing', component: ProductListComponent },
-  { path: 'product-detail', component: ProductDetailComponent },
+  { path: 'products/:id', component: ProductDetailCardComponent },
   { path: 'product-card', component: ProductCardComponent },
-  { path: 'sign-in', component: SignInComponent },
-  { path: 'sign-up', component: SignUpComponent },
+  { path: 'sign-in', loadChildren: () => import('./core/auth/components/sign-in/sign-in.module').then(m => m.SignInModule) },
+  // { path: 'sign-up', loadChildren: () => import('./core/auth/components/sign-up/sign-up.module').then(m => m.SignUpModule) },
   { path: 'filter-and-sort', component: FilterAndSortComponent },
   { path: 'category', component: CategoryComponent },
-  { path: '', component: ProductListComponent, canActivate: [AuthGuard] },
-  { path: '', redirectTo: '/product-listing', pathMatch: 'full' },
+  { path: '', redirectTo: 'product-listing', pathMatch: 'full' },
   {
     path: 'admin',
     component: AdminComponent,
@@ -33,8 +35,7 @@ const routes: Routes = [
       }
     }
   },
-  { path: 'product-listing', loadChildren: () => import('./features/product-listing/product-listing.module').then(m => m.ProductListingModule) },
-  { path: 'product-details', loadChildren: () => import('./features/product-details/product-details.module').then(m => m.ProductDetailsModule) }
+
 ];
 
 @NgModule({

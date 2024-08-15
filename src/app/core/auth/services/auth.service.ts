@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { environment } from '../environment';
+import { environment } from '../../../../environments/environment';
 
 import { iSignInRequest } from '../models/sign-in-request.model';
 import { iSignInResponse } from '../models/sign-in-response.model';
@@ -17,7 +17,9 @@ import { NgxPermissionsService, NgxRolesService } from 'ngx-permissions';
 })
 export class AuthService {
   private authURL = environment.apiUrl;
+  //hold current user state
   private currentUserSubject: BehaviorSubject<any>;
+  //expose current user state to other parts of application
   public currentUser: Observable<any>;
 
   constructor(private http: HttpClient, private router: Router, 
@@ -70,7 +72,7 @@ export class AuthService {
   }
 
   getAuthToken(): string | null {
-    return localStorage.getItem('res.SignIn.AccessToken');
+    return localStorage.getItem('AccessToken');
   }
 
   // setPermissions() {

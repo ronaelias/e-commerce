@@ -1,0 +1,22 @@
+<div *ngIf="product; else noProducts">
+  <div class="product-container">
+    <div class="product-card" (click)="viewProductDetail(product.id)">
+      <img [src]="product.image" alt="{{ product.title }}" class="product-img">
+      <p class="product-title">{{ product.title }}</p>
+      <div class="product-info">
+        <h2 class="product-price">${{ product.price }}</h2>
+        <div class="icons">
+          <button mat-icon-button (click)="toggleFavorite(product.id); $event.stopPropagation()">
+            <mat-icon [ngClass]="{'mat-icon-heart': true, 'pressed': isFavorite(product.id)}" aria-label="Favorite icon">favorite</mat-icon>
+          </button>
+          <button mat-icon-button (click)="toggleCart(product.id); $event.stopPropagation()">
+            <mat-icon [ngClass]="{'mat-icon-cart': true, 'pressed': isInCart(product.id)}" aria-label="Cart icon">shopping_cart</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #noProducts>
+  <p>No products available.</p>
+</ng-template>

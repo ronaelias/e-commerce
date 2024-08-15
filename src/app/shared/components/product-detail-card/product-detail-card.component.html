@@ -1,0 +1,66 @@
+<div class="product-detail-card">
+  <div class="product-detail-img">
+    <img [src]="product.image" alt="{{ product.title }}" class="product-img">
+  </div>
+  <div class="product-detail-info">
+    <h1 class="product-title">{{ product.title }}</h1>
+    <p class="product-price">${{ product.price }}</p>
+    <p class="product-description">{{ product.description }}</p>
+    <p><strong>Color:</strong></p>
+    <div class="color-options">
+      <button class="color-btn black" [ngClass]="{'active': selectedColor === 'black'}" (click)="selectColor('black')"></button>
+      <button class="color-btn white" [ngClass]="{'active': selectedColor === 'white'}" (click)="selectColor('white')"></button>
+      <button class="color-btn pink" [ngClass]="{'active': selectedColor === 'pink'}" (click)="selectColor('pink')"></button>
+      <button class="color-btn blue" [ngClass]="{'active': selectedColor === 'blue'}" (click)="selectColor('blue')"></button>
+      <button class="color-btn red" [ngClass]="{'active': selectedColor === 'red'}" (click)="selectColor('red')"></button>
+      <button class="color-btn green" [ngClass]="{'active': selectedColor === 'green'}" (click)="selectColor('green')"></button>
+      <button class="color-btn yellow" [ngClass]="{'active': selectedColor === 'yellow'}" (click)="selectColor('yellow')"></button>
+    </div>
+    <p><strong>Size:</strong></p>
+    <div class="size-options">
+      <button class="size-btn" [ngClass]="{'active': selectedSize === 'xs'}" (click)="selectSize('xs')">XS</button>
+      <button class="size-btn" [ngClass]="{'active': selectedSize === 's'}" (click)="selectSize('s')">S</button>
+      <button class="size-btn" [ngClass]="{'active': selectedSize === 'm'}" (click)="selectSize('m')">M</button>
+      <button class="size-btn" [ngClass]="{'active': selectedSize === 'l'}" (click)="selectSize('l')">L</button>
+      <button class="size-btn" [ngClass]="{'active': selectedSize === 'xl'}" (click)="selectSize('xl')">XL</button>
+    </div>
+    <div class="quantity-section">
+  <p><strong>Quantity:</strong></p>
+  <div class="quantity-controls">
+    <button class="quantity-btn decrement" (click)="decrement()">-</button>
+    <span class="quantity">{{ product.quantity }}</span>
+    <button class="quantity-btn increment" (click)="increment()">+</button>
+  </div>
+</div>
+    <div class="product-actions">
+      <button class="add-to-cart">Add to Cart</button>
+      <button mat-icon-button (click)="toggleFavorite(product.id)" (click)="$event.stopPropagation()">
+        <mat-icon [ngClass]="{'mat-icon-heart': true, 'pressed': isFavorite(product.id)}" aria-label="Favorite icon">favorite</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
+
+<h1 class="product-similar">You Might Also Like</h1>
+<div class="product-listing-container">
+  <div *ngIf="(products$ | async) as products; else loading">
+    <div *ngIf="products.length; else noProducts" class="product-grid">
+      <ng-container *ngFor="let product of products">
+        <div *ngIf="product.category === currentCategory">
+          <app-product-card [product]="product"></app-product-card>
+        </div>
+      </ng-container>
+    </div>
+    <ng-template #noProducts>
+      <p>No products available for this category.</p>
+    </ng-template>
+  </div>
+  <ng-template #loading>
+    <p>Loading products...</p>
+  </ng-template>
+  
+
+</div>
+<ng-template #loading>
+  <p>Loading products...</p>
+</ng-template>

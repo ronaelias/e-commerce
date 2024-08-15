@@ -1,0 +1,200 @@
+$border-color: rgba(0, 0, 0, 0.2);
+$background-color: #ffffff;
+$title-color: #1e1e1e;
+$specs-color: #555;
+$text-color: #1e1e1e;
+$button-bg-color: #f0f0f0;
+$button-hover-bg-color: #ddd;
+$btn-text-color: #ffffff;
+$padding-small: 6px;
+$padding-medium: 12px;
+$padding-large: 16px;
+$margin-small: 6px;
+$margin-medium: 12px;
+$margin-large: 20px;
+$gap-small: 6px;
+$gap-medium: 10px;
+$gap-large: 12px;
+$font-size-small: 14px;
+$font-size-medium: 18px;
+$font-size-large: 22px;
+$font-size-xlarge: 26px;
+$border-radius: 8px;
+$image-width: 180px;
+$btn-width: 355px;
+$btn-height: 36px;
+$quantity-btn-size: 36px;
+$nav-height: 60px;
+$padding-navbar: 16px;
+
+.product-detail-card {
+  display: flex;
+  background-color: $background-color;
+  border-radius: $border-radius;
+  border: 1px solid $border-color;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: $margin-medium auto;
+  padding: $padding-small $padding-navbar;
+  max-width: 1100px;
+  margin-top: $nav-height;
+  height: auto;
+
+  .product-detail-img {
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: $padding-small;
+    margin: 0 $margin-large;
+  }
+
+  .product-detail-info {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    .product-title {
+      font-size: $font-size-large;
+      color: $title-color;
+      margin-bottom: $padding-small;
+    }
+
+    .product-price {
+      font-size: $font-size-xlarge;
+      color: $text-color;
+      margin-bottom: $padding-medium;
+    }
+
+    .product-description {
+      font-size: $font-size-small;
+      color: $specs-color;
+      margin-bottom: $padding-medium;
+      text-align: left;
+    }
+
+    .color-options,
+    .size-options {
+      display: flex;
+      gap: $gap-medium;
+      margin-bottom: $padding-medium;
+    }
+
+    .color-btn,
+    .size-btn {
+      width: $quantity-btn-size;
+      height: $quantity-btn-size;
+      border: 1px solid $border-color;
+      border-radius: $border-radius;
+      cursor: pointer;
+    }
+
+    .color-btn.black {
+      background-color: black;
+    }
+
+    .color-btn.pink {
+      background-color: pink;
+    }
+
+    .color-btn.blue {
+      background-color: blue;
+    }
+
+    .color-btn.red {
+      background-color: red;
+    }
+
+    .color-btn.green {
+      background-color: green;
+    }
+
+    .color-btn.yellow {
+      background-color: yellow;
+    }
+
+    .size-btn {
+      width: $quantity-btn-size;
+      text-align: center;
+      background-color: $background-color;
+      color: $title-color;
+    }
+
+    .size-btn.active,
+    .color-btn.active {
+      border: 4px solid $title-color;
+    }
+  }
+}
+
+.product-actions {
+  display: flex;
+  gap: $gap-large;
+  margin-bottom: $padding-medium;
+
+  .add-to-cart {
+    background-color: $text-color;
+    color: $btn-text-color;
+    border: none;
+    padding: $padding-small $btn-width;
+    border-radius: $border-radius;
+    cursor: pointer;
+    font-size: $font-size-small;
+    font-weight: bold;
+
+    &:hover {
+      background-color: darken($text-color, 10%);
+    }
+  }
+}
+
+.quantity-section {
+  margin-bottom: $padding-medium;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  p {
+    margin-bottom: $padding-small;
+  }
+
+  .quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: $gap-small;
+
+    .quantity-btn {
+      width: $quantity-btn-size;
+      height: $quantity-btn-size;
+      background-color: $button-bg-color;
+      border: 1px solid $border-color;
+      border-radius: 5px;
+      font-size: $font-size-medium;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $button-hover-bg-color;
+      }
+    }
+
+    .quantity {
+      font-size: $font-size-medium;
+      font-weight: bold;
+      margin-left: $gap-large;
+      margin-right: $gap-large;
+    }
+  }
+}
+.product-similar {
+  text-align: start;
+}
+
+.product-listing-container {
+  padding: 8px;
+}
+
+.product-grid {
+  display: flex;
+  flex-wrap: wrap; /* Enables wrapping to a new line */
+}

@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
-import { signUp, signUpSuccess, signUpFailure } from './sign-up.action';
+import { SignUpActions } from './sign-up.action';
 
 @Injectable()
 export class SignUpEffects {
@@ -14,11 +14,11 @@ export class SignUpEffects {
 
   signUp$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(signUp),
+      ofType(SignUpActions.signUp),
       mergeMap(action =>
         this.authService.signUp(action.request).pipe(
-          map(response => signUpSuccess({ response })),
-          catchError(error => of(signUpFailure({ error })))
+          map(response => SignUpActions.signUpSuccess({ response })),
+          catchError(error => of(SignUpActions.signUpFailure({ error })))
         )
       )
     )

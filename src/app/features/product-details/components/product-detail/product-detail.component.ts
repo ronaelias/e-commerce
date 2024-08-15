@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../../product-listing/services/product.service';
-import { Product } from '../../../../product.model';
+import { iProduct } from '../../../../shared/models/product.model';
 import { Router } from '@angular/router';
-import { SearchService } from '../../../../search.service';
-import { signal } from '@angular/core';
+import { SearchService } from '../../../services/search.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -29,44 +28,40 @@ import { signal } from '@angular/core';
 // }
 
 export class ProductDetailComponent implements OnInit {
-  products: Product[] = [];
-  filteredProducts: Product[] = [];
+  products: iProduct[] = [];
+  filteredProducts: iProduct[] = [];
   favoriteProducts: Set<number> = new Set<number>();
   cartProducts: Set<number> = new Set<number>();
 
-  quantity = signal(0);
-
   constructor(private productService: ProductService, private searchService: SearchService, private router: Router) {}
 
-  decrement() {
-    if(this.quantity() > 0){
-      this.quantity.set(this.quantity() - 1);
-    }
-    
+  decrement(product: iProduct) {
+    if(product.quantity > 0){
+      product.quantity -= 1;
+    } 
   }
-  increment() {
-    this.quantity.set(this.quantity() + 1);
+
+  increment(product: iProduct) {
+    product.quantity += 1;
   }
 
   ngOnInit() {
-    this.productService.getAllProducts().subscribe((products: Product[]) => {
-      this.products = products;
-      this.searchService.setProducts(products);
+    this.productService.getAllProducts().subscribe((products: iProduct[]) => {
+      this.products = products.map(product => ({ ...product, quantity: 0 }));
+      this.searchService.setProducts(this.products);
     });
 
-    this.searchService.searchProducts('').subscribe((products: Product[]) => {
+    this.searchService.searchProducts('').subscribe((products: iProduct[]) => {
       this.filteredProducts = products;
     });
 
     this.searchService.searchQuery$.subscribe(query => {
-      this.searchService.searchProducts(query).subscribe((products: Product[]) => {
+      this.searchService.searchProducts(query).subscribe((products: iProduct[]) => {
         this.filteredProducts = products;
       });
     });
   }
   
-
-
   viewProductDetail(productId: number) {
     this.router.navigate(['/product-detail', productId]);
   }
@@ -93,8 +88,9 @@ export class ProductDetailComponent implements OnInit {
 
   isInCart(productId: number): boolean {
     return this.cartProducts.has(productId);
+  } 
+
+  trackById(index: number, product: iProduct): number {
+    return product.id;
   }
-
-  
 }
-

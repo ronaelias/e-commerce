@@ -7,7 +7,7 @@
 //         this.currentUserRefreInPassword', req.password);
 
 //         localStorage.setItem('AcessToken', res.SignIn.AccessToken);
-//         localStorage.setItem('tshToken', res.SignIn.RefreshToken);
+//         localStorage.setItem('RefreshToken', res.SignIn.RefreshToken);
 
 //         localStorage.setISubject.next(res);
 //         return res;                                                                                                                                                                 
@@ -20,7 +20,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
-import { signIn, signInSuccess, signInFailure } from './sign-in.action';
+import { SignInActions } from './sign-in.action';
 
 @Injectable()
 export class SignInEffects {
@@ -29,13 +29,14 @@ export class SignInEffects {
     private authService: AuthService
   ) {}
 
+  //listens for actions
   signIn$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(signIn),
+      ofType(SignInActions.signIn),
       mergeMap(action =>
         this.authService.signIn(action.request).pipe(
-          map(response => signInSuccess({ response })),
-          catchError(error => of(signInFailure({ error })))
+          map(response => SignInActions.signInSuccess({ response })),
+          catchError(error => of(SignInActions.signInFailure({ error })))
         )
       )
     )

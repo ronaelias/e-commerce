@@ -20,6 +20,7 @@ import { SignInState } from './sign-in.reducer';
 
 export const selectSignInState = createFeatureSelector<SignInState>('auth');
 
+//get user part of state from store
 export const selectSignInUser = createSelector(
   selectSignInState,
   (state: SignInState) => state.user

@@ -2,6 +2,7 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -66,6 +67,8 @@ export class SignUpComponent {
     alert('Sign Up successful');
     this.router.navigate(['/product-listing']);
   }
+
+  get f() { return this.signUpForm.controls; }
 
   onKeydown(event: KeyboardEvent, nextInput: HTMLInputElement) {
     if (event.key === 'Enter') {

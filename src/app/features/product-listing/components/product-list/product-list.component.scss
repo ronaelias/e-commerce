@@ -3,7 +3,7 @@ $border-color: rgba(0, 0, 0, 0.692);
 $text-color: #1E1E1E; //black
 $text-color-sub: #45414A; //grey
 $font-size: 16px;
-$border-radius: 8px;
+$border-radius: 4px;
 $margin: 32px;
 $page-margin: 120px;
 $padding: 4px;
@@ -12,6 +12,11 @@ $height: 350px;
 $img-size: 190px;
 $icon-color: rgba(128, 128, 128, 0.495);
 $heart-color: red;
+$nav-height: 60px;
+$padding-navbar: 20px;
+$search-bar-width: 300px;
+$search-bar-padding: 10px;
+$light-color: rgba(0, 0, 0, 0.1);
 
 p {
     font-size: $font-size;
@@ -27,6 +32,11 @@ h1, h3 {
 h2 {
     font-size: $font-size;
     color: $text-color;
+}
+
+h3.welcome-message {
+  text-align: start;
+  font-size: $font-size * 1.5;
 }
 
 
@@ -48,39 +58,39 @@ h2 {
   margin: 0;
   padding: 0;
 }
+.main-content {
+  margin-top: $nav-height; /* Adjust this value to ensure it's below the navbar */
+  padding: 0 $padding-navbar; /* Align content with the navbar */
+}
 
-// .icons {
-//   display: flex;
-//   align-items: center;
-// }
+.welcome-message {
+  margin-bottom: 20px; /* Adjust spacing as needed */
+}
 
-// .icons button {
-//   margin: 0;
-// }
+.sort-container {
+  position: fixed;
+  top: $nav-height; /* Position it below the navbar */
+  right: 0;
+  width: 150px; /* Adjust width as needed */
+  padding: 10px;
+  background: $background-color;
+  box-shadow: 0 2px 4px $light-color;
+  z-index: 1000; /* Ensure it's above other content */
+}
 
-// .mat-icon {
-//   transition: color 0.3s ease;
-// }
+.sort-container button {
+  display: flex;
+  align-items: center;
+  background: $background-color;
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  padding: $padding;
+  font-size: $font-size;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+}
 
-// .mat-icon-heart {
-//   color: $icon-color;
-// }
-
-// .mat-icon-heart.pressed {
-//   color: $heart-color;
-// }
-
-// .mat-icon-cart {
-//   color: $icon-color;
-// }
-
-// .mat-icon-cart.pressed {
-//   color: $border-color;
-// }
-
-// .mat-icon-button {
-//   border: none;
-//   background: none;
-//   padding: 0;
-//   cursor: pointer;
-// }
+.arrow-down {
+  margin-left: auto;
+}

@@ -1,8 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { SearchService } from '../../../search.service';
+import { SearchService } from '../../../features/services/search.service';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { iProduct } from '../../../shared/models/product.model';
 
 @Component({
   selector: 'app-navbar',
@@ -12,16 +13,22 @@ import { Subscription } from 'rxjs';
 export class NavbarComponent implements OnInit, OnDestroy {
   searchInput = new FormControl();
   private searchSubscription!: Subscription;
+  userName: string | null = '';
+
+
 
   constructor(private searchService: SearchService) {}
 
   ngOnInit() {
     this.searchSubscription = this.searchInput.valueChanges.pipe(
-      debounceTime(300),
+      debounceTime(400),
       distinctUntilChanged()
     ).subscribe(query => {
       this.searchService.setSearchQuery(query);
     });
+
+    this.userName = localStorage.getItem('name');
+
   }
 
   ngOnDestroy() {

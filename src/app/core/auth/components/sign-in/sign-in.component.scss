@@ -1,50 +1,47 @@
-$background-color: #F3EDE5;
-$background-color-sub: #45414A;
-$background-color-bold: #504a58;
-$text-color: #1E1E1E; //black
-$text-color-sub: #45414A; //grey
-$font-family: 'Inter', sans-serif;
-$font-size: 16px;
+$text-color: hsl(267, 6%, 27%); // Grey
+$background-color: #F5F5F5; // Beige
+$background-color-bold: #504a58; // Darker Beige
+$forgot-password-color: #1E1E1E; // Black
+$padding: 8px;
 $border-radius: 8px;
 $margin: 8px;
-$padding: 4px;
 $width: 400px;
-$img-size: 190px;
 $page-margin: 120px;
-
+$font-size-large: 18px;
+$font-size-medium: 16px;
 
 .all {
-    display:flex;
+    display: flex;
     justify-content: center;
     margin-top: $page-margin;
 }
 
-h2{
-    color: $background-color-sub;
+h2 {
+    color: $text-color;
     text-align: center;
-    font-size:larger;
+    font-size: $font-size-large;
+    margin-bottom: $margin;
 }
 
 .sign-in-container {
-    color: $text-color-sub;
+    color: $text-color;
     width: $width;
-    height: auto;
-    border: 1px solid $text-color-sub;
+    border: 1px solid $text-color;
     border-radius: $border-radius;
     background-color: $background-color;
     margin: $margin;
-    padding: $padding;
+    padding: $padding * 2;
 }
 
 .button-container {
-    font-size:larger;
+    font-size: $font-size-large;
     color: $background-color;
-    background-color: $background-color-sub;
+    background-color: $text-color;
     border-radius: $border-radius;
-    border-color: $background-color-sub;
-    width: 93%;
+    border-color: $text-color;
+    width: 100%;
     text-align: center;
-    margin: $margin;
+    margin: $margin 0;
     padding: $padding;
 
     &:hover {
@@ -52,11 +49,12 @@ h2{
         cursor: pointer;
     }
 }
+
 .items-container {
     margin: $margin;
     padding: $padding;
     width: 90%;
 }
 .forgot-password {
-    color: $text-color;
+    color: $forgot-password-color;
 }

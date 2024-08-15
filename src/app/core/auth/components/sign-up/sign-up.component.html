@@ -1,65 +1,82 @@
 <div class="all">
-       <div class="sign-up-container">
-         <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
-           <h2>PERSONAL DETAILS</h2>
-           <div class="name-container">
-             <div>
-               <label for="name" class="items-container">Name</label>
-               <input id="name" class="items-container" type="text" formControlName="name"
-                      (keydown)="onKeydown($event, surnameInput)">
-             </div>
-             <div>
-               <label for="surname" class="items-container">Surname</label>
-               <input id="surname" class="items-container" type="text" formControlName="surname" #surnameInput
-                      (keydown)="onKeydown($event, dobInput)">
-             </div>
-           </div>
+  <div class="sign-up-container">
+    <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+      <h2>PERSONAL DETAILS</h2>
+      <div class="name-container">
+        <div>
+          <label for="name" class="items-container">Name</label>
+          <input id="name" class="items-container" type="text" formControlName="name"
+            (keydown)="onKeydown($event, surnameInput)">
+            <div *ngIf="f['name'].errors?.['required']" class="error-message">This field is required!</div>
+        </div>
+        <div>
+          <label for="surname" class="items-container">Surname</label>
+          <input id="surname" class="items-container" type="text" formControlName="surname" #surnameInput
+            (keydown)="onKeydown($event, dobInput)">
+            <div *ngIf="f['surname'].errors?.['required']" class="error-message">This field is required!</div>       
+        </div>
+      </div>
+      <br>     
+      <label for="dob" class="items-container">Date Of Birth</label>
+      <input id="dob" class="items-container" type="text" placeholder="mm/dd/yyyy" formControlName="dob" #dobInput
+        (keydown)="onKeydown($event, emailInput)">
+        <div *ngIf="f['dob'].errors?.['required']" class="error-message">This field is required!</div>
+        <br>     
+      <label for="email" class="items-container">Email</label>
+      <input type="email" formControlName="email" id="email" #emailInput
+        [ngClass]="{'is-invalid': f['email'].invalid && (f['email'].dirty || f['email'].touched)}" 
+        class="items-container" 
+        (keydown)="onKeydown($event, passwordInput)">
+      <div *ngIf="f['email'].errors?.['required']" class="error-message">This field is required!</div>
+      <div *ngIf="f['email'].errors?.['email']" class="error-message">Invalid email</div>
+      <br>     
+      <label for="password" class="items-container">Password</label>
+      <input type="password" formControlName="password" id="password" 
+        [ngClass]="{'is-invalid': f['password'].invalid && (f['password'].dirty || f['password'].touched)}" 
+        class="items-container" 
+        (keydown)="onKeydown($event, paymentMethodInput)" #passwordInput>
+      <div *ngIf="f['password'].errors?.['required']" class="error-message">This field is required!</div>
+      <div *ngIf="f['password'].errors?.['minlength']" class="error-message">Password must be at least 8 characters</div>
+      <br>     
+      <label for="paymentMethod" class="items-container">Payment Method</label>
+      <input id="paymentMethod" class="items-container" type="text" formControlName="paymentMethod" #paymentMethodInput
+        (keydown)="onKeydown($event, countryInput)">
+      <div *ngIf="f['paymentMethod'].errors?.['required']" class="error-message">This field is required!</div>
+      <br>
+      <label for="country" class="items-container">Country</label>
+      <input id="country" class="items-container" type="text" formControlName="country" #countryInput
+        (keydown)="onKeydown($event, telephoneInput)">
+      <div *ngIf="f['country'].errors?.['required']" class="error-message">This field is required!</div>
+      <br>
+      <label for="telephone" class="items-container">Telephone</label>
+      <input id="telephone" class="items-container" type="text" formControlName="telephone" #telephoneInput
+        (keydown)="onKeydown($event, regionInput)">
+      <div *ngIf="f['telephone'].errors?.['required']" class="error-message">This field is required!</div>
+      <br>
+      <label for="region" class="items-container">Region</label>
+      <input id="region" class="items-container" type="text" formControlName="region" #regionInput
+        (keydown)="onKeydown($event, cityInput)">
+      <div *ngIf="f['region'].errors?.['required']" class="error-message">This field is required!</div>
+      <br>
+      <label for="city" class="items-container">City</label>
+      <input id="city" class="items-container" type="text" formControlName="city" #cityInput
+        (keydown)="onKeydown($event, streetAndNumberInput)">
+      <div *ngIf="f['city'].errors?.['required']" class="error-message">This field is required!</div>
+      <br>
+      <label for="streetAndNumber" class="items-container">Street And Number</label>
+      <input id="streetAndNumber" class="items-container" type="text" formControlName="streetAndNumber" #streetAndNumberInput
+        (keydown)="onKeydown($event, stairwayAndFloorInput)">
+      <div *ngIf="f['streetAndNumber'].errors?.['required']" class="error-message">This field is required!</div>
+      <br>
+      <label for="stairwayAndFloor" class="items-container">Stairway, Floor (Optional)</label>
+      <input id="stairwayAndFloor" class="items-container" type="text" formControlName="stairwayAndFloor" #stairwayAndFloorInput
+        (keydown)="onLastKeydown($event)">
      
-           <label for="dob" class="items-container">Date Of Birth</label>
-           <input id="dob" class="items-container" type="text" placeholder="mm/dd/yyyy" formControlName="dob" #dobInput
-                  (keydown)="onKeydown($event, emailInput)">
-     
-           <label for="email" class="items-container">Email</label>
-           <input id="email" class="items-container" type="text" formControlName="email" #emailInput
-                  (keydown)="onKeydown($event, passwordInput)">
-     
-           <label for="password" class="items-container">Password</label>
-           <input id="password" class="items-container" type="password" formControlName="password" #passwordInput
-                  (keydown)="onKeydown($event, paymentMethodInput)">
-     
-           <label for="paymentMethod" class="items-container">Payment Method</label>
-           <input id="paymentMethod" class="items-container" type="text" formControlName="paymentMethod" #paymentMethodInput
-                  (keydown)="onKeydown($event, countryInput)">
-     
-           <label for="country" class="items-container">Country</label>
-           <input id="country" class="items-container" type="text" formControlName="country" #countryInput
-                  (keydown)="onKeydown($event, telephoneInput)">
-     
-           <label for="telephone" class="items-container">Telephone</label>
-           <input id="telephone" class="items-container" type="text" formControlName="telephone" #telephoneInput
-                  (keydown)="onKeydown($event, regionInput)">
-     
-           <label for="region" class="items-container">Region</label>
-           <input id="region" class="items-container" type="text" formControlName="region" #regionInput
-                  (keydown)="onKeydown($event, cityInput)">
-     
-           <label for="city" class="items-container">City</label>
-           <input id="city" class="items-container" type="text" formControlName="city" #cityInput
-                  (keydown)="onKeydown($event, streetAndNumberInput)">
-     
-           <label for="streetAndNumber" class="items-container">Street And Number</label>
-           <input id="streetAndNumber" class="items-container" type="text" formControlName="streetAndNumber" #streetAndNumberInput
-                  (keydown)="onKeydown($event, stairwayAndFloorInput)">
-     
-           <label for="stairwayAndFloor" class="items-container">Stairway, Floor (Optional)</label>
-           <input id="stairwayAndFloor" class="items-container" type="text" formControlName="stairwayAndFloor" #stairwayAndFloorInput
-                  (keydown)="onLastKeydown($event)">
-     
-           <div class="btn-container">
-             <button type="button" class="button-container btn1" routerLink="/sign-in">Back</button>
-             <button type="submit" class="button-container" #signUpButton>Save</button> <!--[disabled]="!signUpForm.valid"-->
-           </div>
-         </form>
-       </div>
-     </div>
+      <div class="btn-container">
+        <button type="button" class="button-container btn1" routerLink="/sign-in">Back</button>
+        <button type="submit" class="button-container" #signUpButton>Save</button> <!--[disabled]="!signUpForm.valid"-->
+      </div>
+    </form>
+  </div>
+</div>
      

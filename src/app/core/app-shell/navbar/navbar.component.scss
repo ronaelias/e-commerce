@@ -1,15 +1,123 @@
-$primary-color: #45414A; //grey
-$secondary-color: rgba(0, 0, 0, 0.692);
-$background-color: #F3EDE5;
-$link-hover-offset: 16px;
-$nav-height: 100px;
-$logo-width: 300px;
-$font-size: 16px;
-$gap: 32px;
-$padding: 4px;
-$large-padding: 50px;
-$border-radius: 8px;
-$margin-inline-end: 16px;
+// $text-color: #333333;
+// $background-color: #ffffff;
+// $light-color: rgba(0, 0, 0, 0.1);
+// $focus-color: rgba(0, 0, 0, 0.3);
+// $border-color: #ccc;
+// $nav-height: 60px;
+// $logo-width: 150px;
+// $font-size: 14px;
+// $gap: 20px;
+// $padding: 8px;
+// $padding-navbar: 20px;
+// $border-radius: 4px;
+// $margin-inline-end: 16px;
+// $search-bar-width: 300px;
+// $search-bar-padding: 10px;
+
+// #desktop-nav {
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   z-index: 1000;
+//   background-color: $background-color;
+//   box-shadow: 0 2px 4px $light-color;
+// }
+
+// nav {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   height: $nav-height;
+//   padding: 0 $padding-navbar;
+// }
+
+// .logo {
+//   width: $logo-width;
+//   height: auto;
+
+//   img {
+//     height: 100%;
+//   }
+// }
+
+// .nav-links {
+//   display: flex;
+//   align-items: center;
+//   gap: $gap;
+//   font-size: $font-size;
+
+//   li {
+//     display: inline;
+
+//     .active {
+//       color: $background-color;
+//       background-color: $text-color;
+//       border-radius: $border-radius;
+//       padding: $padding;
+//       transition: background-color 0.3s, color 0.3s;
+//     }
+//   }
+
+//   a {
+//     color: $text-color;
+//     text-decoration: none;
+//     padding: $padding;
+
+//     &:hover {
+//       background-color: $light-color;
+//       border-radius: $border-radius;
+//     }
+//   }
+// }
+
+// h3, h4 {
+//   text-align: start;
+// }
+
+// .search-bar {
+//   width: $search-bar-width;
+//   padding: $search-bar-padding;
+//   border: 1px solid $border-color;
+//   border-radius: $border-radius;
+//   transition: box-shadow 0.3s ease;
+
+//   &:focus {
+//     outline: none;
+//     box-shadow: 0 0 10px $focus-color;
+//   }
+// }
+
+// .filter-container {
+//   margin-top: $nav-height; /* Adjust this value to ensure it's below the navbar */
+//   z-index: 1000; /* Ensure it's above other content */
+// }
+
+// .filter-container button {
+//   display: block;
+//   margin: 10px auto;
+//   /* Add additional styling as needed */
+// }
+
+// .filter-sort-container {
+//   //padding: 16px;
+//   border: 1px solid #ddd;
+//   background: #f9f9f9;
+// }
+$text-color: #333333;
+$background-color: #ffffff;
+$light-color: rgba(0, 0, 0, 0.1);
+$focus-color: rgba(0, 0, 0, 0.3);
+$border-color: #ccc;
+$nav-height: 60px;
+$logo-width: 150px;
+$font-size: 14px;
+$gap: 20px;
+$padding: 8px;
+$padding-navbar: 20px;
+$border-radius: 4px;
+$search-bar-width: 300px;
+$search-bar-padding: 10px;
 
 #desktop-nav {
   position: fixed;
@@ -17,73 +125,71 @@ $margin-inline-end: 16px;
   left: 0;
   width: 100%;
   z-index: 1000;
-}
-nav, .nav-links {
-  display: flex;
   background-color: $background-color;
- 
+  box-shadow: 0 2px 4px $light-color;
 }
 
 nav {
+  display: flex;
   justify-content: space-between;
   align-items: center;
   height: $nav-height;
+  padding: 0 $padding-navbar;
+  box-sizing: border-box; /* Include padding in the element's total width and height */
+}
 
-  .logo {
-    font-size: $font-size;
-    &:hover {
-      cursor: default;
-    }
+.logo {
+  width: $logo-width;
+  height: auto;
+
+  img {
+    height: 100%;
   }
 }
 
 .nav-links {
+  display: flex;
+  align-items: center;
   gap: $gap;
   font-size: $font-size;
+  flex-wrap: wrap; /* Allow wrapping to prevent overflow */
 
   li {
     display: inline;
+
+    .active {
+      color: $background-color;
+      background-color: $text-color;
+      border-radius: $border-radius;
+      padding: $padding;
+      transition: background-color 0.3s, color 0.3s;
+    }
   }
 
   a {
-    color: $primary-color;
+    color: $text-color;
     text-decoration: none;
-    text-decoration-color: $secondary-color;
+    padding: $padding;
 
     &:hover {
-      color: $secondary-color;
-      text-decoration: underline;
-      text-underline-offset: $link-hover-offset;
-      text-decoration-color: $secondary-color;
+      background-color: $light-color;
+      border-radius: $border-radius;
     }
-
-    &:active {
-      color: $secondary-color;
-      text-decoration: underline;
-      text-underline-offset: $link-hover-offset;
-      text-decoration-color: $secondary-color;
-    }
-  }
-
-  #account {
-    padding: 0 $padding 0 $large-padding;
   }
 }
 
-.logo {
-  height: $nav-height;
-  width: $logo-width;
-}
+
 
 .search-bar {
-  border: none;
-  margin-inline-end: $margin-inline-end;
-  padding: 8px;
-  box-shadow: 0 2px 4px $secondary-color;
+  width: $search-bar-width;
+  padding: $search-bar-padding;
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
   transition: box-shadow 0.3s ease;
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 10px $focus-color;
+  }
 }
 
-.search-bar:focus {
-  outline: none;
-  box-shadow: 0 4px 8px $secondary-color;
-}

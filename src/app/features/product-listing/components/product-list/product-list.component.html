@@ -1,31 +1,25 @@
-<div id="background">
-  <br><br><br><br>
+<div class="main-content">
+  <div class="welcome-message">
     <div *ngIf="userName">
-    <h1>{{ userName | welcomeMessage }}</h1>
+      <h3 class="welcome-message">{{ userName | welcomeMessage }}</h3>
+    </div>
+    <!-- <h4>Discover the Best Deals and Latest Trends Just for You!</h4> -->
   </div>
-  <h3>Discover the Best Deals and Latest Trends Just for You!</h3>
-  <div *ngIf="(filteredProducts$ | async) as filteredProducts">
-    <div *ngIf="filteredProducts.length; else loading" class="product-container">
-      <!-- <div *ngFor="let product of filteredProducts" class="product-card" (click)="viewProductDetail(product.id)"> -->
-      <div *ngFor="let product of filteredProducts; trackBy: trackByProductId" class="product-card" (click)="viewProductDetail(product.id)">
-        <img [src]="product.image" alt="{{ product.title }}" class="product-img">
-        <p>{{ product.title }}</p>
-        <div class="product-info">
-          <h2>${{ product.price }}</h2>
-          <div class="icons">
-            <button mat-icon-button (click)="toggleFavorite(product.id)" (click)="$event.stopPropagation()">
-              <mat-icon [ngClass]="{'mat-icon-heart': true, 'pressed': isFavorite(product.id)}" aria-label="Favorite icon">favorite</mat-icon>
-            </button>
-            <button mat-icon-button (click)="toggleCart(product.id)" (click)="$event.stopPropagation()">
-              <mat-icon [ngClass]="{'mat-icon-cart': true, 'pressed': isInCart(product.id)}" aria-label="Cart icon">shopping_cart</mat-icon>
-            </button>
-          </div>
-        </div>
-      </div>
+  
+  <div class="sort-container">
+    <button (click)="toggleSort()">Sort <span class="arrow-down">▼</span></button>
+    <div *ngIf="showSort" class="sort-options">
+      <button (click)="sortProducts('asc')">Sort Ascending</button>
+      <button (click)="sortProducts('desc')">Sort Descending</button>
+      <button (click)="sortProducts('price-asc')">Price Low to High</button>
+      <button (click)="sortProducts('price-desc')">Price High to Low</button>
     </div>
   </div>
+  
+  <!-- <app-product-card [products$]="products$ | async"></app-product-card>  -->
+  <!-- <app-product-card [products]="products"></app-product-card> -->
+ <app-filter-and-sort></app-filter-and-sort> 
   <ng-template #loading>
     <h1>Loading...</h1>
   </ng-template>
-  </div>
   
