@@ -2,7 +2,6 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -45,7 +44,9 @@ export class SignUpComponent {
     if (this.signUpForm.invalid) {
       return;
     }
+
     const user = this.signUpForm.value;
+    localStorage.setItem('name', user.name);
 
     // Retrieve users from localStorage
     const users = JSON.parse(localStorage.getItem('users') || '[]');
@@ -54,14 +55,8 @@ export class SignUpComponent {
     // Save users array in localStorage
     localStorage.setItem('users', JSON.stringify(users));
 
-    const name = this.signUpForm.get('name')?.value;
-    const email = this.signUpForm.get('email')?.value;
-    const password = this.signUpForm.get('password')?.value;
-
-    // Save name, email and password in localStorage
-    localStorage.setItem('name', name);
-    localStorage.setItem('email', email);
-    localStorage.setItem('password', password);
+    // Save the last user's data as currentUser
+    localStorage.setItem('currentUser', JSON.stringify(user));
 
     console.warn(this.signUpForm.value);
     alert('Sign Up successful');

@@ -1,3 +1,88 @@
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+
+@Component({
+  selector: 'app-sign-in',
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
+  templateUrl: './sign-in.component.html',
+  styleUrls: ['./sign-in.component.scss']
+})
+export class SignInComponent implements OnInit {
+  signInForm!: FormGroup;
+  returnUrl!: string;
+  error = '';
+  
+  @ViewChild('passwordInput') passwordInput!: ElementRef;
+  @ViewChild('signInButton') signInButton!: ElementRef;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
+
+  ngOnInit() {
+    this.signInForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8)]]
+    });
+
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+  }
+
+  get f() { return this.signInForm.controls; }
+
+  onSubmit() {
+    if (this.signInForm.invalid) {
+      return;
+    }
+
+    const email = this.signInForm.get('email')?.value;
+    const password = this.signInForm.get('password')?.value;
+
+    const users = JSON.parse(localStorage.getItem('users') || '[]');
+    const currentUser = users.find((user: { email: string, password: string }) => user.email === email && user.password === password);
+
+    if (currentUser) {
+      console.log('Sign-in successful');
+      alert('Sign-in successful');
+      //const req: iSignInRequest = { email, password };
+
+      //this.authService.signIn(req);
+
+      // Save the last user's email or any unique identifier to localStorage
+      localStorage.setItem('currentUser', JSON.stringify(currentUser));
+      //localStorage.setItem('lastSignedInUserEmail', currentUser.email);
+      localStorage.setItem('Access Token', 'AccessToken'); 
+      localStorage.setItem('Refresh Token', 'RefreshToken');
+      this.router.navigate([this.returnUrl]);
+    } else {
+      this.error = 'Invalid email or password';
+    } 
+  }
+
+  onEmailKeydown(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      this.passwordInput.nativeElement.focus();
+    }
+  }
+
+  onPasswordKeydown(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      this.signInButton.nativeElement.click();
+    }
+  }
+}
+
+
+
 // export class SignInComponent implements OnInit {
 
 //   onSubmit() {
@@ -22,88 +107,9 @@
 //   }
 // }
 
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
-import { iSignInRequest } from '../../models/sign-in-request.model';
-import { iSignInResponse } from '../../models/sign-in-response.model';
 
-@Component({
-  selector: 'app-sign-in',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule],
-  templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.scss']
-})
-export class SignInComponent implements OnInit {
-  signInForm!: FormGroup;
-  returnUrl!: string;
-  error = '';
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router,
-    private authService: AuthService
-  ) {}
 
-  ngOnInit() {
-    this.signInForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]]
-    });
-
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-  }
-
-  get f() { return this.signInForm.controls; }
-
-  onSubmit() {
-    if (this.signInForm.invalid) {
-      return;
-    }
-
-    const email = this.signInForm.get('email')?.value;
-    const password = this.signInForm.get('password')?.value;
-
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    const user = users.find((user: { email: string, password: string }) => user.email === email && user.password === password);
-
-    if (user) {
-      console.log('Sign-in successful');
-      alert('Sign-in successful');
-      //const req: iSignInRequest = { email, password };
-
-      //this.authService.signIn(req);
-      localStorage.setItem('Access Token', 'AccessToken'); 
-      localStorage.setItem('Refresh Token', 'RefreshToken');
-      this.router.navigate([this.returnUrl]);
-    } else {
-      this.error = 'Invalid email or password';
-    } 
-  }
-
-  @ViewChild('passwordInput') passwordInput!: ElementRef;
-  @ViewChild('signInButton') signInButton!: ElementRef;
-
-  onEmailKeydown(event: KeyboardEvent) {
-    if (event.key === 'Enter') {
-      event.preventDefault();
-      this.passwordInput.nativeElement.focus();
-    }
-  }
-
-  onPasswordKeydown(event: KeyboardEvent) {
-    if (event.key === 'Enter') {
-      event.preventDefault();
-      this.signInButton.nativeElement.click();
-    }
-  }
-}
 
 // import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 // import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -201,6 +207,97 @@ export class SignInComponent implements OnInit {
 //         return res;
 //       })
 //     );
+//   }
+
+//   onEmailKeydown(event: KeyboardEvent) {
+//     if (event.key === 'Enter') {
+//       event.preventDefault();
+//       this.passwordInput.nativeElement.focus();
+//     }
+//   }
+
+//   onPasswordKeydown(event: KeyboardEvent) {
+//     if (event.key === 'Enter') {
+//       event.preventDefault();
+//       this.signInButton.nativeElement.click();
+//     }
+//   }
+// }
+
+
+
+
+
+
+// import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+// import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+// import { ActivatedRoute, Router } from '@angular/router';
+// import { CommonModule } from '@angular/common';
+// import { ReactiveFormsModule } from '@angular/forms';
+// import { AuthService } from '../../services/auth.service';
+// import { iSignInRequest } from '../../models/sign-in-request.model';
+
+// @Component({
+//   selector: 'app-sign-in',
+//   standalone: true,
+//   imports: [CommonModule, ReactiveFormsModule],
+//   templateUrl: './sign-in.component.html',
+//   styleUrls: ['./sign-in.component.scss']
+// })
+// export class SignInComponent implements OnInit {
+//   signInForm!: FormGroup;
+//   returnUrl!: string;
+//   error = '';
+
+//   @ViewChild('passwordInput') passwordInput!: ElementRef<HTMLInputElement>;
+//   @ViewChild('signInButton') signInButton!: ElementRef<HTMLButtonElement>;
+
+//   constructor(
+//     private formBuilder: FormBuilder,
+//     private route: ActivatedRoute,
+//     private router: Router,
+//     private authService: AuthService
+//   ) {}
+
+//   ngOnInit() {
+//     this.signInForm = this.formBuilder.group({
+//       email: ['', [Validators.required, Validators.email]],
+//       password: ['', [Validators.required, Validators.minLength(8)]]
+//     });
+
+//     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+//   }
+
+//   get f() { return this.signInForm.controls; }
+
+//   onSubmit() {
+//     if (this.signInForm.invalid) {
+//       return;
+//     }
+
+//     const email = this.signInForm.get('email')?.value;
+//     const password = this.signInForm.get('password')?.value;
+
+//     const users = JSON.parse(localStorage.getItem('users') || '[]');
+//     const currentUser = users.find((user: { email: string, password: string }) => user.email === email && user.password === password);
+
+//     if (currentUser) {
+//       console.log('Sign-in successful');
+//       alert('Sign-in successful');
+      
+//       // Save the current user's data and tokens to localStorage
+//       localStorage.setItem('currentUser', JSON.stringify(currentUser));
+//       localStorage.setItem('Access Token', 'AccessToken'); 
+//       localStorage.setItem('Refresh Token', 'RefreshToken');
+
+//       // Uncomment to use AuthService for sign-in
+//       // const req: iSignInRequest = { email, password };
+//       // this.authService.signIn(req);
+
+//       this.router.navigate([this.returnUrl]);
+//     } else {
+//       this.error = 'Invalid email or password';
+//     }
 //   }
 
 //   onEmailKeydown(event: KeyboardEvent) {

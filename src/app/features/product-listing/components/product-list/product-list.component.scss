@@ -1,96 +1,157 @@
-$background-color: #F3EDE5; //beige
+$background-color: #F3EDE5; // Beige
 $border-color: rgba(0, 0, 0, 0.692);
-$text-color: #1E1E1E; //black
-$text-color-sub: #45414A; //grey
-$font-size: 16px;
-$border-radius: 4px;
-$margin: 32px;
+$text-color: #1E1E1E; // Black
+$text-color-sub: #45414A; // Grey
+$light-color: #ddd;
+$nav-height: 60px;
+$font-size: 14px;
+$border-radius: 6px;
+$margin: 16px;
 $page-margin: 120px;
 $padding: 4px;
-$width: 200px;
-$height: 350px;
-$img-size: 190px;
-$icon-color: rgba(128, 128, 128, 0.495);
-$heart-color: red;
-$nav-height: 60px;
-$padding-navbar: 20px;
-$search-bar-width: 300px;
-$search-bar-padding: 10px;
-$light-color: rgba(0, 0, 0, 0.1);
-
-p {
-    font-size: $font-size;
-    color: $text-color-sub;
-    text-align: center;
-  }
+$container-margin-top: 60px;
+$container-height: calc(100vh - 60px);
+$category-width: 20%;
+$product-listing-width: 80%;
+$margin-bottom: 10px;
+$product-title-font-size: 16px;
+$product-title-font-weight: 500;
+$product-info-font-size: 18px;
+$icons-gap: 15px;
+$icons-margin-top: 5px;
+$padding-navbar: 10px;
+$sort-option-padding: 8px;
+$sort-text-padding-right: 30px;
+$sort-text-margin-right-hover: 90px;
+$sort-option-width: 160px;
+$arrow-right-position: 10px;
+$sub-bar-padding: 10px;
+$dropdown-bg-color: #ffffff; 
+$dropdown-border-color: #dddddd;
+$dropdown-text-color: #333333;
 
 h1, h3 {
-  color: $border-color;
-  text-align: center;
-}  
-
-h2 {
-    font-size: $font-size;
-    color: $text-color;
+    color: $border-color;
+    text-align: center;
 }
 
 h3.welcome-message {
-  text-align: start;
-  font-size: $font-size * 1.5;
-}
-
-
-.product-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.product-info {
-  display: flex;
-  align-items: center;
-  justify-content:space-around;
-  width: 100%;
-}
-
-.product-info p, .product-info h2 {
-  margin: 0;
-  padding: 0;
-}
-.main-content {
-  margin-top: $nav-height; /* Adjust this value to ensure it's below the navbar */
-  padding: 0 $padding-navbar; /* Align content with the navbar */
+    text-align: start;
+    font-size: $font-size * 1.5;
 }
 
 .welcome-message {
-  margin-bottom: 20px; /* Adjust spacing as needed */
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 .sort-container {
-  position: fixed;
-  top: $nav-height; /* Position it below the navbar */
-  right: 0;
-  width: 150px; /* Adjust width as needed */
-  padding: 10px;
-  background: $background-color;
-  box-shadow: 0 2px 4px $light-color;
-  z-index: 1000; /* Ensure it's above other content */
+    flex-shrink: 0;
+    margin-left: auto;
+    position: relative;
+    background-color: $background-color;
 }
 
-.sort-container button {
-  display: flex;
-  align-items: center;
-  background: $background-color;
-  border: 1px solid $border-color;
-  border-radius: $border-radius;
-  padding: $padding;
-  font-size: $font-size;
-  cursor: pointer;
-  width: 100%;
-  text-align: left;
+.sort-toggle {
+    color: $text-color-sub;
+    display: flex;
+    align-items: center;
+    background: $background-color;
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    padding: $padding;
+    font-size: $font-size;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    position: relative;
+}
+
+.sort-text {
+    padding-right: $sort-text-padding-right;
+    margin-left: $margin-bottom;
+    display: inline-block;
+    transition: margin-right 0.3s;
 }
 
 .arrow-down {
-  margin-left: auto;
+    display: inline-block;
+    position: absolute;
+    right: $arrow-right-position;
+}
+
+.sort-container:hover .sort-text {
+    margin-right: $sort-text-margin-right-hover;
+}
+
+.sort-options {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: $sort-option-width;
+    background: $dropdown-bg-color;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    border: 1px solid $dropdown-border-color;
+    border-radius: $border-radius;
+}
+
+.sort-container:hover .sort-options {
+    display: block;
+}
+
+.sort-option {
+    display: block;
+    padding: $sort-option-padding;
+    font-size: $font-size;
+    cursor: pointer;
+    text-align: left;
+    width: 100%;
+    background-color: $dropdown-bg-color;
+    border: none;
+}
+
+.sort-option:not(:last-child) {
+    border-bottom: 1px solid $light-color;
+}
+
+.sort-option:hover {
+    background-color: $light-color;
+}
+
+.container {
+    display: flex;
+    margin-top: $container-margin-top;
+    height: $container-height;
+}
+
+.ag-grid-container {
+    width: $category-width;
+    padding: $padding-navbar;
+    overflow-y: auto;
+    height: 100%;
+}
+
+.product-listing-container {
+    width: $product-listing-width;
+    padding: $padding-navbar;
+    overflow-y: auto;
+    height: 100%;
+}
+
+.product-grid {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.sub-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $background-color;
+    padding: $sub-bar-padding;
+    position: sticky;
+    top: $nav-height;
+    z-index: 999;
 }

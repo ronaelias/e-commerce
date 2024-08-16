@@ -1,42 +1,26 @@
 import { Injectable } from '@angular/core';
 import { iProduct } from '../../shared/models/product.model';
-import { environment } from '../../../environments/environment';
-import { Observable, from } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SortService {
-  private apiUrl = environment.apiUrl;
-  private productsUrl = `${this.apiUrl}/product`;
-
   constructor() {}
 
-  sortByTitleAsc(): Observable<iProduct[]> {
-    return from(
-      fetch(`${this.productsUrl}?sort=asc`)
-        .then(res => res.json())
-    );
-  }
-
-  sortByTitleDesc(): Observable<iProduct[]> {
-    return from(
-      fetch(`${this.productsUrl}?sort=desc`)
-        .then(res => res.json())
-    );
-  }
-
-  sortByPriceAsc(): Observable<iProduct[]> {
-    return from(
-      fetch(`${this.productsUrl}?sort=price-asc`)
-        .then(res => res.json())
-    );
-  }
-
-  sortByPriceDesc(): Observable<iProduct[]> {
-    return from(
-      fetch(`${this.productsUrl}?sort=price-desc`)
-        .then(res => res.json())
-    );
+  sort(products: iProduct[], option: string): iProduct[] {
+    switch (option) {
+      case 'none':
+        return products;
+      case 'asc':
+        return products.sort((a, b) => a.title.localeCompare(b.title));
+      case 'desc':
+        return products.sort((a, b) => b.title.localeCompare(a.title));
+      case 'price-asc':
+        return products.sort((a, b) => a.price - b.price);
+      case 'price-desc':
+        return products.sort((a, b) => b.price - a.price);
+      default:
+        return products;
+    }
   }
 }

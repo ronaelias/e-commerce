@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { iProduct } from '../../../shared/models/product.model';
-import { environment } from '../../../../environments/environment';
+import { Observable } from 'rxjs';
+import { iProduct } from '../../shared/models/product.model';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +22,7 @@ export class ProductService {
 
   getProductsByCategory(category: string): Observable<iProduct[]> {
     return this.http.get<iProduct[]>(`${this.apiUrl}/products?category=${category}`);
-  }
-  
+  }  
 
   getCategories(): Observable<string[]> {
     return this.http.get<string[]>(`${this.apiUrl}/products/categories`);

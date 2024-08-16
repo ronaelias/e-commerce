@@ -4,13 +4,11 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { environment } from '../../../../environments/environment';
-
 import { iSignInRequest } from '../models/sign-in-request.model';
 import { iSignInResponse } from '../models/sign-in-response.model';
 import { iSignUpRequest } from '../models/sign-up-request.model';
 import { iSignUpResponse } from '../models/sign-up-response.model';
 
-import { NgxPermissionsService, NgxRolesService } from 'ngx-permissions';
 
 @Injectable({
   providedIn: 'root'

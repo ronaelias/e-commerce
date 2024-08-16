@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FilterAndSortComponent } from './filter-and-sort.component';
+import { UserProfileComponent } from './user-profile.component';
 
-describe('FilterAndSortComponent', () => {
-  let component: FilterAndSortComponent;
-  let fixture: ComponentFixture<FilterAndSortComponent>;
+describe('UserProfileComponent', () => {
+  let component: UserProfileComponent;
+  let fixture: ComponentFixture<UserProfileComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [FilterAndSortComponent]
+      declarations: [UserProfileComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(FilterAndSortComponent);
+    fixture = TestBed.createComponent(UserProfileComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -110,7 +110,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { iProduct } from '../../models/product.model';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProductService } from '../../../features/product-listing/services/product.service';
+import { ProductService } from '../../../features/services/product.service';
 import { Observable, of, switchMap } from 'rxjs';
 
 @Component({
@@ -150,17 +150,6 @@ export class ProductDetailCardComponent implements OnInit {
     );
   }
   
-
-  // loadCategories(): void {
-  //   this.productService.getCategories().subscribe(
-  //     (categories: string[]) => {
-  //       this.categories = categories;
-  //     },
-  //   );
-  // }
-  
-
-
   toggleFavorite(productId: number): void {
     if (this.favoriteProducts.has(productId)) {
       this.favoriteProducts.delete(productId);

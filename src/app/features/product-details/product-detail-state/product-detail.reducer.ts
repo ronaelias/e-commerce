@@ -1,9 +1,9 @@
 import { createReducer, on } from '@ngrx/store';
 import { loadProductsSuccess, loadProductsFailure } from './product-detail.action';
-import { Product } from '../../../product.model';
+import { iProduct } from '../../../shared/models/product.model';
 
 export interface ProductDetailState {
-  products: Product[];
+  products: iProduct[];
   error: any;
 }
 

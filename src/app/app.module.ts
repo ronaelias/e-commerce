@@ -25,7 +25,6 @@ import { NgxPermissionsModule } from 'ngx-permissions';
 import { AdminComponent } from './features/admin/admin.component';
 import { WelcomeMessagePipe } from './shared/pipes/welcome-message.pipe';
 import {MatInputModule} from '@angular/material/input';
-import { FilterAndSortComponent } from './features/filter-and-sort/filter-and-sort.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AgGridModule } from 'ag-grid-angular';
 import { DeleteButtonRendererComponent } from './shared/components/delete-button-renderer/delete-button-renderer.component';
@@ -36,9 +35,10 @@ import { SetFilterModule } from "@ag-grid-enterprise/set-filter";
 import { FiltersToolPanelModule } from "@ag-grid-enterprise/filter-tool-panel";
 import { CategoryComponent } from './features/category/category.component';
 import { ProductCardComponent } from './shared/components/products-card/product-card.component';
-//import { SimpleCellRendererComponent } from './simple-cell-renderer/simple-cell-renderer.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { ProductDetailCardComponent } from './shared/components/product-detail-card/product-detail-card.component';
+import { FeaturesModule } from './features/features.module';
+
 
 ModuleRegistry.registerModules([
   MenuModule,
@@ -58,7 +58,6 @@ ModuleRegistry.registerModules([
     ProductListComponent,
     AdminComponent,
     WelcomeMessagePipe,
-    FilterAndSortComponent,
     DeleteButtonRendererComponent,
     CategoryComponent,
 
@@ -81,7 +80,8 @@ ModuleRegistry.registerModules([
     AgGridModule,
     GridModule,
     PagerModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    FeaturesModule
 
   ],
   exports: [

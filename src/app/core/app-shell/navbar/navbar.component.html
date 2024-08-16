@@ -4,7 +4,7 @@
     </div>
     <div>
       <ul class="nav-links">
-        <li>
+        <li *ngIf="searchVisible">
           <input placeholder="Search products..." [formControl]="searchInput" class="search-bar">
         </li>
         <li><a routerLink="/product-listing" routerLinkActive="active">Home</a></li>
@@ -12,7 +12,7 @@
         <li><a routerLink="/favorites" routerLinkActive="active">Favorites</a></li>
         <!-- <li><a routerLink="/filter-and-sort" routerLinkActive="active">Filter and Sort</a></li> -->
         <li><a routerLink="/cart" routerLinkActive="active">Cart</a></li>
-        <li><a routerLink="/sign-in" routerLinkActive="active">My Account</a></li>
+        <li><a routerLink="/profile" routerLinkActive="active">My Account</a></li>
         <!-- <li *ngxPermissionsOnly="'ADMIN'"><a routerLink="/admin" routerLinkActive="active-link">Admin</a></li> -->
       </ul>
     </div>

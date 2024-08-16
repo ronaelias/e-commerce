@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { defaultIfEmpty, switchMap } from 'rxjs/operators';
-import { ProductService } from '../../services/product.service';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
+import { ColDef, GridReadyEvent, GridApi } from 'ag-grid-community';
+import { map } from 'rxjs/operators';
+import { ProductService } from '../../../services/product.service';
 import { iProduct } from '../../../../shared/models/product.model';
 import { Router } from '@angular/router';
 import { SearchService } from '../../../services/search.service';
@@ -10,93 +11,178 @@ import { SortService } from '../../../services/sort.service';
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.scss']
+  styleUrls: ['./product-list.component.scss'],
 })
-
 export class ProductListComponent implements OnInit {
+  userName: string | null = '';
   products$!: Observable<iProduct[]>;
   filteredProducts$!: Observable<iProduct[]>;
   searchQuery$: BehaviorSubject<string> = new BehaviorSubject<string>('');
-  favoriteProducts: Set<number> = new Set<number>();
-  cartProducts: Set<number> = new Set<number>();
-  userName: string | null = '';
-  sortedProducts: iProduct[] = [];
-  products: iProduct[] = [];
-
-  constructor(private productService: ProductService, 
-    private searchService: SearchService, 
-    private sortService: SortService, private router: Router) {}
-
-  ngOnInit() {
-    this.products$ = this.productService.getAllProducts();
-    this.filteredProducts$ = this.searchQuery$.pipe(
-      switchMap(query => this.searchService.searchProducts(query)),
-      defaultIfEmpty([])
-    );
-
-    this.products$.subscribe(products => {
-      this.searchService.setProducts(products);
-    });
-
-    this.searchService.searchQuery$.subscribe(query => {
-      this.searchQuery$.next(query);
-    });
-
-    this.userName = localStorage.getItem('name');
-    this.fetchProducts();
-  }
-
-  trackByProductId(index: number, product: iProduct): number {
-    return product.id;
-  }
- 
-
+  sortOption$: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  selectedFilters: { [key: string]: string[] } = { fabric: [], gender: [], color: [], style: [], type: [] };
+  filtersSubject: BehaviorSubject<{ [key: string]: string[] }> = new BehaviorSubject(this.selectedFilters);
+  @Output() sortOptionChanged = new EventEmitter<string>();
+  private gridApis: { [key: string]: GridApi } = {};
   showSort = false;
+  public themeClass: string = 'ag-theme-quartz';
+  public rowSelection: 'multiple' | 'single' = 'multiple';
+
+  constructor(
+    private productService: ProductService,
+    private searchService: SearchService,
+    private sortService: SortService,
+    private router: Router
+  ) {}
+
+  fabricRowData = [
+    { fabric: 'Cotton' },
+    { fabric: 'Polyester' },
+    { fabric: 'Leather' },
+    { fabric: 'Fleece' },
+    { fabric: 'Polyurethane' },
+    { fabric: 'Rayon' },
+    { fabric: 'Spandex' },
+  ];
+  
+  genderRowData = [
+    { gender: 'Men' },
+    { gender: 'Women' },
+  ];
+  colorRowData = [
+    { color: 'Gold' },
+    { color: 'Silver' },
+    { color: 'Rose Gold' },
+  ];
+  styleRowData = [
+    { style: 'Slim Fit' },
+    { style: 'Casual' },
+    { style: 'V-Neck' },
+  ];
+  typeRowData = [
+    { type: 'Long Sleeve' },
+    { type: 'Short Sleeve' },
+  ];
+
+  public fabricColDefs: ColDef[] = [
+    { field: 'fabric', headerName: 'Fabric', checkboxSelection: true, headerCheckboxSelection: true, filter: true }
+  ];
+
+  public genderColDefs: ColDef[] = [
+    { field: 'gender', headerName: 'Gender', checkboxSelection: true, headerCheckboxSelection: true, filter: true }
+  ];
+
+  public colorColDefs: ColDef[] = [
+    { field: 'color', headerName: 'Color', checkboxSelection: true, headerCheckboxSelection: true, filter: true }
+  ];
+
+  public styleColDefs: ColDef[] = [
+    { field: 'style', headerName: 'Style', checkboxSelection: true, headerCheckboxSelection: true, filter: true }
+  ];
+
+  public typeColDefs: ColDef[] = [
+    { field: 'type', headerName: 'Type', checkboxSelection: true, headerCheckboxSelection: true, filter: true }
+  ];
 
   toggleSort() {
     this.showSort = !this.showSort;
   }
 
-  // fetchProducts() {
-  //   this.products$ = this.productService.getAllProducts();
-  //   this.products$.subscribe(products => {
-  //     this.searchService.setProducts(products);
-  //   });
-  // }
-  fetchProducts() {
-    this.products$.subscribe(products => {
-      this.searchService.setProducts(products);
-    });
-  }
-  @Output() sortOptionChanged = new EventEmitter<string>();
-
   sort(option: string) {
-    this.sortOptionChanged.emit(option);
+    this.sortOption$.next(option);
   }
 
-  sortProducts(option: string) {
-    switch(option) {
-      case 'asc':
-        this.sortService.sortByTitleAsc().subscribe(sortedProducts => {
-          this.filteredProducts$ = new Observable(observer => observer.next(sortedProducts));
+  ngOnInit() {
+    this.userName = localStorage.getItem('name');
+    this.products$ = this.productService.getAllProducts();
+    this.searchService.searchQuery$.subscribe(query => {
+      this.searchQuery$.next(query);
+    });
+    this.filteredProducts$ = combineLatest([
+      this.products$,
+      this.searchQuery$,
+      this.filtersSubject,
+      this.sortOption$,
+    ]).pipe(
+      map(([products, searchQuery, selectedFilters, sortOption]) => {
+        let filtered = products.filter((product) => {
+          const title = product.title.toLowerCase();
+          const description = product.description.toLowerCase();
+          const category = product.category.toLowerCase();
+          const search = searchQuery.toLowerCase();
+
+          const matchesSearch = search
+            ? title.includes(search) || description.includes(search)
+            : true;
+
+          const matchesFabric = selectedFilters['fabric'].length
+            ? selectedFilters['fabric'].some(filter => 
+                this.checkMatch(filter, title, description, category)
+              )
+            : true;
+
+          const matchesGender = selectedFilters['gender'].length
+            ? selectedFilters['gender'].some(filter => 
+                this.checkMatch(filter, title, description, category)
+              )
+            : true;
+
+          const matchesColor = selectedFilters['color'].length
+            ? selectedFilters['color'].some(filter => 
+                this.checkMatch(filter, title, description, category)
+              )
+            : true;
+
+          const matchesStyle = selectedFilters['style'].length
+            ? selectedFilters['style'].some(filter => 
+                this.checkMatch(filter, title, description, category)
+              )
+            : true;
+
+          const matchesType = selectedFilters['type'].length
+            ? selectedFilters['type'].some(filter => 
+                this.checkMatch(filter, title, description, category)
+              )
+            : true;
+
+          return (
+            matchesSearch &&
+            matchesFabric &&
+            matchesGender &&
+            matchesColor &&
+            matchesStyle &&
+            matchesType
+          );
         });
-        break;
-      case 'desc':
-        this.sortService.sortByTitleDesc().subscribe(sortedProducts => {
-          this.filteredProducts$ = new Observable(observer => observer.next(sortedProducts));
-        });
-        break;
-      case 'price-asc':
-        this.sortService.sortByPriceAsc().subscribe(sortedProducts => {
-          this.filteredProducts$ = new Observable(observer => observer.next(sortedProducts));
-        });
-        break;
-      case 'price-desc':
-        this.sortService.sortByPriceDesc().subscribe(sortedProducts => {
-          this.filteredProducts$ = new Observable(observer => observer.next(sortedProducts));
-        });
-        break;
-    }
+        return this.sortService.sort(filtered, sortOption);
+      })
+    );
   }
-  
+
+  onGridReady(params: GridReadyEvent, gridId: string) {
+    this.gridApis[gridId] = params.api;
+    params.api.sizeColumnsToFit();
+  }
+
+  onFilterChange(filterType: string, selectedValues: string[]) {
+    this.selectedFilters[filterType] = selectedValues;
+    this.filtersSubject.next(this.selectedFilters);
+  }
+
+  getSelectedValues(gridId: string, filterType: string): string[] {
+    const gridApi = this.gridApis[gridId];
+    if (gridApi) {
+      const selectedNodes = gridApi.getSelectedNodes();
+      return selectedNodes.map((node) => node.data[filterType]);
+    }
+    return [];
+  }
+
+  private checkMatch(filter: string, title: string, description: string, category: string): boolean {
+    // Use \b to define word boundaries
+    const regex = new RegExp(`\\b${filter.toLowerCase()}\\b`, 'i'); // 'i' flag for case-insensitivity
+    const matchInTitle = regex.test(title.toLowerCase());
+    const matchInDescription = regex.test(description.toLowerCase());
+    const matchInCategory = regex.test(category.toLowerCase());
+    return matchInTitle || matchInDescription || matchInCategory;
+  }
 }

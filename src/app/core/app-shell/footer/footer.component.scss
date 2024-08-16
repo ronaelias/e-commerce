@@ -1,33 +1,38 @@
-$background-color: #F3EDF7; // light pink
+$background-color: #FFFFFF;
 $text-color: #1E1E1E; // dark grey
 $text-color-sub: #45414A; // grey
 $padding: 20px;
+$padding-sub: 15px;
 $margin-bottom-h3: 15px;
 $margin-bottom: 10px;
 $width: 100%;
 $footer-padding: 40px 0;
+$font-size-h3: 16px;
+$font-size-link: 14px;
+$max-width: 1200px;
+$footer-column-min-width: 200px;
 
 .footer {
   background-color: $background-color;
   padding: $footer-padding;
   color: $text-color;
   text-align: center;
-  width: 100%;
+  width: $width;
 
   .footer-container {
     display: flex;
     justify-content: space-between;
-    max-width: 1200px;
+    max-width: $max-width;
     margin: 0 auto;
-    padding: 0 15px;
-    
+    padding: 0 $padding-sub;
+
     .footer-column {
       flex: 1;
       padding: 0 $padding;
-      min-width: 200px;
+      min-width: $footer-column-min-width;
 
       h3 {
-        font-size: 16px;
+        font-size: $font-size-h3;
         font-weight: bold;
         color: $text-color;
         margin-bottom: $margin-bottom-h3;
@@ -39,11 +44,11 @@ $footer-padding: 40px 0;
 
         li {
           margin-bottom: $margin-bottom;
-          
+
           a {
             color: $text-color-sub;
             text-decoration: none;
-            font-size: 14px;
+            font-size: $font-size-link;
 
             &:hover {
               text-decoration: underline;

@@ -1,0 +1,155 @@
+$nav-height: 60px;
+$main-background-color: #fff;
+$box-shadow-light: 0 0 5px rgba(0, 0, 0, 0.1);
+$box-shadow-dark: 0 0 8px rgba(0, 0, 0, 0.1);
+$border-color-light: #ddd;
+$border-radius: 5px;
+$border-radius-small: 5px;
+$primary-text-color: #333;
+$secondary-text-color: #666;
+$error-color: red;
+$highlight-background-color: #ccc;
+$highlight-background-hover: #bbb;
+$danger-background-color: #ff4d4f;
+$danger-background-hover: #ff7875;
+$primary-font-size: 1em;
+$secondary-font-size: 0.875em;
+$error-font-size: 0.75em;
+$gap-small: 5px;
+$gap-medium: 8px;
+$gap-large: 10px;
+$gap-xlarge: 20px;
+$padding-small: 4px;
+$padding-medium: 5px;
+$padding-large: 10px;
+$margin-small: 5px;
+$margin-medium: 10px;
+$margin-large: 16px;
+$container-max-width: 1000px;
+$min-width-left-section: 180px;
+$min-width-right-section: 300px;
+$profile-icon-size: 230px;
+
+.user {
+  margin: $nav-height auto;
+  margin-bottom: $margin-large;
+}
+
+.profile-container {
+  max-width: $container-max-width;
+  padding: $padding-medium;
+  background-color: $main-background-color;
+  box-shadow: $box-shadow-dark;
+  display: flex;
+  gap: $gap-large;
+}
+
+h2 {
+  text-align: center;
+  color: $primary-text-color;
+  margin-bottom: $margin-medium;
+}
+
+.form-container {
+  display: flex;
+  justify-content: space-between;
+  gap: $gap-xlarge;
+}
+
+.left-section {
+  flex: 1;
+  min-width: $min-width-left-section;
+  border: 1px solid $border-color-light;
+  padding: $padding-large;
+  border-radius: $border-radius-small;
+  box-shadow: $box-shadow-light;
+}
+
+.right-section {
+  flex: 2;
+  min-width: $min-width-right-section;
+  box-shadow: $box-shadow-light;
+}
+
+.profile-section {
+  margin-bottom: $margin-medium;
+  border: 1px solid $border-color-light;
+  padding: $padding-large;
+  border-radius: $border-radius-small;
+}
+
+.profile-item {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: $margin-small;
+}
+
+label {
+  font-weight: bold;
+  color: $secondary-text-color;
+  font-size: $secondary-font-size;
+}
+
+input {
+  padding: $padding-small;
+  border: 1px solid $border-color-light;
+  border-radius: $border-radius-small;
+}
+
+.error-message {
+  color: $error-color;
+  font-size: $error-font-size;
+}
+
+.actions {
+  display: flex;
+  gap: $gap-medium;
+  justify-content: flex-end;
+  margin-top: $margin-medium;
+}
+
+button {
+  padding: $padding-small $padding-large;
+  border-radius: $border-radius-small;
+  cursor: pointer;
+  border: none;
+  font-size: $secondary-font-size;
+}
+
+.save-changes {
+  background-color: $highlight-background-color;
+  color: $primary-text-color;
+}
+
+.save-changes:hover {
+  background-color: $highlight-background-hover;
+}
+
+.log-out {
+  background-color: $danger-background-color;
+  color: $main-background-color;
+}
+
+.log-out:hover {
+  background-color: $danger-background-hover;
+}
+
+.delete-account {
+  background-color: $danger-background-color;
+  color: $main-background-color;
+}
+
+.delete-account:hover {
+  background-color: $danger-background-hover;
+}
+
+.icon-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: $margin-medium;
+}
+
+.profile-icon {
+  width: $profile-icon-size;
+  height: $profile-icon-size; 
+}

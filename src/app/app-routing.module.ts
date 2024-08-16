@@ -7,10 +7,10 @@ import { SignUpComponent } from './core/auth/components/sign-up/sign-up.componen
 import { AuthGuard } from './core/auth/guards/auth.guard';
 import { AdminComponent } from './features/admin/admin.component';
 import { NgxPermissionsGuard } from 'ngx-permissions';
-import { FilterAndSortComponent } from './features/filter-and-sort/filter-and-sort.component';
 import { CategoryComponent } from './features/category/category.component';
 import { ProductCardComponent } from './shared/components/products-card/product-card.component';
 import { ProductDetailCardComponent } from './shared/components/product-detail-card/product-detail-card.component';
+import { UserProfileComponent } from './features/user-profile/user-profile.component';
 
 const routes: Routes = [
   { path: 'product-listing', component: ProductListComponent, loadChildren: () => import('./features/product-listing/product-listing.module').then(m => m.ProductListingModule) },
@@ -19,9 +19,9 @@ const routes: Routes = [
   { path: 'product', component: ProductListComponent },
   { path: 'products/:id', component: ProductDetailCardComponent },
   { path: 'product-card', component: ProductCardComponent },
+  { path: 'profile', component: UserProfileComponent },
   { path: 'sign-in', loadChildren: () => import('./core/auth/components/sign-in/sign-in.module').then(m => m.SignInModule) },
   // { path: 'sign-up', loadChildren: () => import('./core/auth/components/sign-up/sign-up.module').then(m => m.SignUpModule) },
-  { path: 'filter-and-sort', component: FilterAndSortComponent },
   { path: 'category', component: CategoryComponent },
   { path: '', redirectTo: 'product-listing', pathMatch: 'full' },
   {

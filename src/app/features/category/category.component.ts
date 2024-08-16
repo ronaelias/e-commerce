@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../product-listing/services/product.service';
+import { ProductService } from '../services/product.service';
 import { iProduct } from '../../shared/models/product.model';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { environment } from '../../../environments/environment';
+import { SearchService } from '../services/search.service';
 
 @Component({
   selector: 'app-category',
@@ -15,14 +15,13 @@ export class CategoryComponent implements OnInit {
 
   selectedCategory$: BehaviorSubject<string> = new BehaviorSubject<string>('');
   products$!: Observable<iProduct[]>;
-  // products: iProduct[] = [];
   favoriteProducts: Set<number> = new Set<number>();
   cartProducts: Set<number> = new Set<number>();
   selectedCategory: string | null = null;
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService, private searchService: SearchService) {}
 
-  ngOnInit() {
+  ngOnInit() { 
     this.products$ = this.selectedCategory$.pipe(
       switchMap(category => 
         category ? this.productService.getProductsByCategory(category) : this.productService.getAllProducts()
