@@ -3,16 +3,18 @@
 @import 'ag-grid-community/styles/ag-grid.css';
 @import 'ag-grid-community/styles/ag-theme-quartz.css';
 
-$e-commerce-theme: mat.define-theme((
-  color: (
-    theme-type: light,
-    primary: mat.$azure-palette,
-    tertiary: mat.$blue-palette,
-  ),
-  density: (
-    scale: 0,
+$e-commerce-theme: mat.define-theme(
+  (
+    color: (
+      theme-type: light,
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+    density: (
+      scale: 0,
+    ),
   )
-));
+);
 
 :root {
   @include mat.all-component-themes($e-commerce-theme);
@@ -20,10 +22,10 @@ $e-commerce-theme: mat.define-theme((
 
 $font-family: 'Inter', sans-serif;
 $icon-size: 50px;
-$background-color: #F3EDE5; // beige
+$background-color: #f3ede5; // beige
 $border-color: rgba(0, 0, 0, 0.692);
-$text-color: #1E1E1E; // black
-$text-color-sub: #45414A; // grey
+$text-color: #1e1e1e; // black
+$text-color-sub: #45414a; // grey
 $font-size: 16px;
 $border-radius: 4px;
 $margin: 15px;
@@ -55,14 +57,16 @@ p {
   text-align: center;
 }
 
-h1, h3, h4 {
+h1,
+h3,
+h4 {
   color: $border-color;
   text-align: center;
-}  
+}
 
 h2 {
-    font-size: $font-size;
-    color: $text-color;
+  font-size: $font-size;
+  color: $text-color;
 }
 
 .product-card {
@@ -115,8 +119,14 @@ h2 {
   color: $text-color;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
 
 .icons {
   display: flex;
@@ -158,9 +168,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   color: $heart-color;
 }
 
-#background{
+#background {
   background-color: $background-color;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}

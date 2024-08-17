@@ -1,29 +1,32 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Component, ViewChild, ElementRef } from '@angular/core'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.scss']
+  styleUrls: ['./sign-up.component.scss'],
 })
 export class SignUpComponent {
-  signUpForm: FormGroup;
+  signUpForm: FormGroup
 
-  @ViewChild('surnameInput') surnameInput!: ElementRef;
-  @ViewChild('dobInput') dobInput!: ElementRef;
-  @ViewChild('emailInput') emailInput!: ElementRef;
-  @ViewChild('passwordInput') passwordInput!: ElementRef;
-  @ViewChild('paymentMethodInput') paymentMethodInput!: ElementRef;
-  @ViewChild('countryInput') countryInput!: ElementRef;
-  @ViewChild('telephoneInput') telephoneInput!: ElementRef;
-  @ViewChild('regionInput') regionInput!: ElementRef;
-  @ViewChild('cityInput') cityInput!: ElementRef;
-  @ViewChild('streetAndNumberInput') streetAndNumberInput!: ElementRef;
-  @ViewChild('stairwayAndFloorInput') stairwayAndFloorInput!: ElementRef;
-  @ViewChild('signUpButton') signUpButton!: ElementRef;
+  @ViewChild('surnameInput') surnameInput!: ElementRef
+  @ViewChild('dobInput') dobInput!: ElementRef
+  @ViewChild('emailInput') emailInput!: ElementRef
+  @ViewChild('passwordInput') passwordInput!: ElementRef
+  @ViewChild('paymentMethodInput') paymentMethodInput!: ElementRef
+  @ViewChild('countryInput') countryInput!: ElementRef
+  @ViewChild('telephoneInput') telephoneInput!: ElementRef
+  @ViewChild('regionInput') regionInput!: ElementRef
+  @ViewChild('cityInput') cityInput!: ElementRef
+  @ViewChild('streetAndNumberInput') streetAndNumberInput!: ElementRef
+  @ViewChild('stairwayAndFloorInput') stairwayAndFloorInput!: ElementRef
+  @ViewChild('signUpButton') signUpButton!: ElementRef
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private router: Router
+  ) {
     this.signUpForm = this.fb.group({
       name: ['', Validators.required],
       surname: ['', Validators.required],
@@ -37,45 +40,47 @@ export class SignUpComponent {
       stairwayAndFloor: [''],
       region: ['', Validators.required],
       city: ['', Validators.required],
-    });
+    })
   }
 
   onSubmit() {
     if (this.signUpForm.invalid) {
-      return;
+      return
     }
 
-    const user = this.signUpForm.value;
-    localStorage.setItem('name', user.name);
+    const user = this.signUpForm.value
+    localStorage.setItem('name', user.name)
 
     // Retrieve users from localStorage
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    users.push(user);
+    const users = JSON.parse(localStorage.getItem('users') || '[]')
+    users.push(user)
 
     // Save users array in localStorage
-    localStorage.setItem('users', JSON.stringify(users));
+    localStorage.setItem('users', JSON.stringify(users))
 
     // Save the last user's data as currentUser
-    localStorage.setItem('currentUser', JSON.stringify(user));
+    localStorage.setItem('currentUser', JSON.stringify(user))
 
-    console.warn(this.signUpForm.value);
-    alert('Sign Up successful');
-    this.router.navigate(['/product-listing']);
+    console.warn(this.signUpForm.value)
+    alert('Sign Up successful')
+    this.router.navigate(['/product-listing'])
   }
 
-  get f() { return this.signUpForm.controls; }
+  get f() {
+    return this.signUpForm.controls
+  }
 
   onKeydown(event: KeyboardEvent, nextInput: HTMLInputElement) {
     if (event.key === 'Enter') {
-      event.preventDefault();
-      nextInput.focus();
+      event.preventDefault()
+      nextInput.focus()
     }
   }
 
   onLastKeydown(event: KeyboardEvent) {
     if (event.key === 'Enter') {
-      event.preventDefault();
-      this.signUpButton.nativeElement.click();
+      event.preventDefault()
+      this.signUpButton.nativeElement.click()
     }
   }
 }

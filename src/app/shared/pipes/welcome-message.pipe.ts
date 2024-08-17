@@ -1,11 +1,10 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core'
 
 @Pipe({
-  name: 'welcomeMessage'
+  name: 'welcomeMessage',
 })
 export class WelcomeMessagePipe implements PipeTransform {
-  
   transform(name: string): string {
-    return `Welcome to ELEVA, ${name}!`;
+    return `Welcome to ELEVA, ${name}!`
   }
 }

@@ -10,17 +10,17 @@
 //         localStorage.setItem('RefreshToken', res.SignIn.RefreshToken);
 
 //         localStorage.setISubject.next(res);
-//         return res;                                                                                                                                                                 
+//         return res;
 //       })
 //     );
 //   }
 
-import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { of } from 'rxjs';
-import { catchError, map, mergeMap } from 'rxjs/operators';
-import { AuthService } from '../services/auth.service';
-import { SignInActions } from './sign-in.action';
+import { Injectable } from '@angular/core'
+import { Actions, createEffect, ofType } from '@ngrx/effects'
+import { of } from 'rxjs'
+import { catchError, map, mergeMap } from 'rxjs/operators'
+import { AuthService } from '../services/auth.service'
+import { SignInActions } from './sign-in.action'
 
 @Injectable()
 export class SignInEffects {
@@ -33,12 +33,12 @@ export class SignInEffects {
   signIn$ = createEffect(() =>
     this.actions$.pipe(
       ofType(SignInActions.signIn),
-      mergeMap(action =>
+      mergeMap((action) =>
         this.authService.signIn(action.request).pipe(
-          map(response => SignInActions.signInSuccess({ response })),
-          catchError(error => of(SignInActions.signInFailure({ error })))
+          map((response) => SignInActions.signInSuccess({ response })),
+          catchError((error) => of(SignInActions.signInFailure({ error })))
         )
       )
     )
-  );
+  )
 }

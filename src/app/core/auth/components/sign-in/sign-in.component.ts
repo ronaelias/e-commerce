@@ -1,40 +1,40 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { select, Store } from '@ngrx/store';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { ActivatedRoute, Router } from '@angular/router'
+import { CommonModule } from '@angular/common'
+import { ReactiveFormsModule } from '@angular/forms'
+import { RouterModule } from '@angular/router'
+import { select, Store } from '@ngrx/store'
 
 @Component({
   selector: 'app-sign-in',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.scss']
+  styleUrls: ['./sign-in.component.scss'],
 })
 export class SignInComponent implements OnInit {
-  signInForm!: FormGroup;
-  returnUrl!: string;
-  error = '';
-  
-  @ViewChild('passwordInput') passwordInput!: ElementRef;
-  @ViewChild('signInButton') signInButton!: ElementRef;
+  signInForm!: FormGroup
+  returnUrl!: string
+  error = ''
+
+  @ViewChild('passwordInput') passwordInput!: ElementRef
+  @ViewChild('signInButton') signInButton!: ElementRef
 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router,
+    private router: Router
     //private store: Store
   ) {}
 
   ngOnInit() {
     this.signInForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]]
-    });
+      password: ['', [Validators.required, Validators.minLength(8)]],
+    })
 
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/'
   }
 
   //   ngOnInit() {
@@ -50,71 +50,75 @@ export class SignInComponent implements OnInit {
   //   });
   // }
 
-  get f() { return this.signInForm.controls; }
+  get f() {
+    return this.signInForm.controls
+  }
 
   onSubmit() {
     if (this.signInForm.invalid) {
-      return;
+      return
     }
 
-    const email = this.signInForm.get('email')?.value;
-    const password = this.signInForm.get('password')?.value;
+    const email = this.signInForm.get('email')?.value
+    const password = this.signInForm.get('password')?.value
 
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    const currentUser = users.find((user: { email: string, password: string }) => user.email === email && user.password === password);
+    const users = JSON.parse(localStorage.getItem('users') || '[]')
+    const currentUser = users.find(
+      (user: { email: string; password: string }) =>
+        user.email === email && user.password === password
+    )
 
     if (currentUser) {
-      console.log('Sign-in successful');
-      alert('Sign-in successful');
+      console.log('Sign-in successful')
+      alert('Sign-in successful')
       //const req: iSignInRequest = { email, password };
 
       //this.authService.signIn(req);
 
       // Save the last user's email or any unique identifier to localStorage
-      localStorage.setItem('currentUser', JSON.stringify(currentUser));
+      localStorage.setItem('currentUser', JSON.stringify(currentUser))
       //localStorage.setItem('lastSignedInUserEmail', currentUser.email);
-      localStorage.setItem('Access Token', 'AccessToken'); 
-      localStorage.setItem('Refresh Token', 'RefreshToken');
-      this.router.navigate([this.returnUrl]);
+      localStorage.setItem('Access Token', 'AccessToken')
+      localStorage.setItem('Refresh Token', 'RefreshToken')
+      this.router.navigate([this.returnUrl])
     } else {
-      this.error = 'Invalid email or password';
-    } 
+      this.error = 'Invalid email or password'
+    }
   }
 
   onEmailKeydown(event: KeyboardEvent) {
     if (event.key === 'Enter') {
-      event.preventDefault();
-      this.passwordInput.nativeElement.focus();
+      event.preventDefault()
+      this.passwordInput.nativeElement.focus()
     }
   }
 
   onPasswordKeydown(event: KeyboardEvent) {
     if (event.key === 'Enter') {
-      event.preventDefault();
-      this.signInButton.nativeElement.click();
+      event.preventDefault()
+      this.signInButton.nativeElement.click()
     }
   }
 }
 
-  // ngOnInit() {
-  //   this.signInForm = this.formBuilder.group({
-  //     email: ['', [Validators.required, Validators.email]],
-  //     password: ['', [Validators.required, Validators.minLength(8)]]
-  //   });
+// ngOnInit() {
+//   this.signInForm = this.formBuilder.group({
+//     email: ['', [Validators.required, Validators.email]],
+//     password: ['', [Validators.required, Validators.minLength(8)]]
+//   });
 
-  //   this.store.pipe(select(selectSignInResponse)).subscribe(iSignInResponse => {
-  //     if (iSignInResponse) {
-  //       this.router.navigate(['/product-listing']);
-  //     }
-  //   });
-  // }
+//   this.store.pipe(select(selectSignInResponse)).subscribe(iSignInResponse => {
+//     if (iSignInResponse) {
+//       this.router.navigate(['/product-listing']);
+//     }
+//   });
+// }
 
-
-  // onSubmit() {
-    // const iSignInRequest: iSignInRequest = {
-    // email: this.signInForm.value.email,
-    // password: this.signInForm.value.password
-    // }
+// onSubmit() {
+// const iSignInRequest: iSignInRequest = {
+// email: this.signInForm.value.email,
+// password: this.signInForm.value.password
+// }
 
 // export class SignInComponent implements OnInit {
 
@@ -132,17 +136,13 @@ export class SignInComponent implements OnInit {
 //     if(user) {
 //       console.log('Sign-in successful');
 //       alert('Sign-in successful');
-//       localStorage.setItem('token', ''); 
+//       localStorage.setItem('token', '');
 //       this.router.navigate([this.returnUrl]);
 //     } else {
 //       this.error = 'Invalid email or password';
 //     }
 //   }
 // }
-
-
-
-
 
 // import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 // import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -178,7 +178,7 @@ export class SignInComponent implements OnInit {
 //     private route: ActivatedRoute,
 //     private router: Router,
 //     private http: HttpClient,
-    
+
 //   ) {}
 
 //   ngOnInit() {
@@ -211,7 +211,7 @@ export class SignInComponent implements OnInit {
 //           // Handle successful sign-in
 //           console.log('Sign-in successful');
 //           alert('Sign-in successful');
-          
+
 //           localStorage.setItem('accessToken', response.SignIn.AccessToken);
 //           localStorage.setItem('refreshToken', response.SignIn.RefreshToken);
 
@@ -256,11 +256,6 @@ export class SignInComponent implements OnInit {
 //     }
 //   }
 // }
-
-
-
-
-
 
 // import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 // import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -317,10 +312,10 @@ export class SignInComponent implements OnInit {
 //     if (currentUser) {
 //       console.log('Sign-in successful');
 //       alert('Sign-in successful');
-      
+
 //       // Save the current user's data and tokens to localStorage
 //       localStorage.setItem('currentUser', JSON.stringify(currentUser));
-//       localStorage.setItem('Access Token', 'AccessToken'); 
+//       localStorage.setItem('Access Token', 'AccessToken');
 //       localStorage.setItem('Refresh Token', 'RefreshToken');
 
 //       // Uncomment to use AuthService for sign-in

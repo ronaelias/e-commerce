@@ -1,7 +1,11 @@
 <div *ngIf="product; else noProducts">
   <div class="product-container">
     <div class="product-card" (click)="viewProductDetail(product.id)">
-      <img [src]="product.image" alt="{{ product.title }}" class="product-img">
+      <img
+        [src]="product.image"
+        alt="{{ product.title }}"
+        class="product-img"
+      />
       <p class="product-title">{{ product.title }}</p>
       <div class="product-info">
         <h2 class="product-price">${{ product.price }}</h2>
@@ -9,10 +13,18 @@
           <app-favorite-button
             [productId]="product.id"
             [isFavorite]="isFavorite(product.id)"
-            (favoriteToggled)="onFavoriteToggled($event)">
+            (favoriteToggled)="onFavoriteToggled($event)"
+          >
           </app-favorite-button>
-          <button mat-icon-button (click)="toggleCart(product.id); $event.stopPropagation()">
-            <mat-icon [ngClass]="{'mat-icon-cart': true, 'pressed': isInCart(product.id)}" aria-label="Cart icon">shopping_cart</mat-icon>
+          <button
+            mat-icon-button
+            (click)="addToCart(); $event.stopPropagation()"
+          >
+            <mat-icon
+              [ngClass]="{ 'mat-icon-cart': true }"
+              aria-label="Add to Cart"
+              >shopping_cart</mat-icon
+            >
           </button>
         </div>
       </div>

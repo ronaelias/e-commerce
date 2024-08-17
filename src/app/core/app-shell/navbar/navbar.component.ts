@@ -1,51 +1,59 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { SearchService } from '../../../features/services/search.service';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { Observable, Subscription } from 'rxjs';
-import { iProduct } from '../../../shared/models/product.model';
-import { NavigationEnd, Router } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core'
+import { FormControl } from '@angular/forms'
+import { SearchService } from '../../../features/services/search.service'
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
+import { Observable, Subscription } from 'rxjs'
+import { iProduct } from '../../../shared/models/product.model'
+import { NavigationEnd, Router } from '@angular/router'
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit, OnDestroy {
-  searchInput = new FormControl();
-  private searchSubscription!: Subscription;
-  userName: string | null = '';
-  searchVisible: boolean = true;
+  searchInput = new FormControl()
+  private searchSubscription!: Subscription
+  userName: string | null = ''
+  searchVisible: boolean = true
 
-
-  constructor(private searchService: SearchService, private router: Router) {
-    this.router.events.subscribe(event => {
+  constructor(
+    private searchService: SearchService,
+    private router: Router
+  ) {
+    this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        const hiddenRoutes = ['/category', '/profile', '/sign-in', '/sign-in/sign-up', '/favorite', '/cart'];
-        
-        const isHiddenRoute = hiddenRoutes.includes(event.url) || event.url.includes('/product-detail');
-  
-        this.searchVisible = !isHiddenRoute;
+        const hiddenRoutes = [
+          '/category',
+          '/profile',
+          '/sign-in',
+          '/sign-in/sign-up',
+          '/favorite',
+          '/cart',
+        ]
+
+        const isHiddenRoute =
+          hiddenRoutes.includes(event.url) ||
+          event.url.includes('/product-detail')
+
+        this.searchVisible = !isHiddenRoute
       }
-    });
+    })
   }
-  
 
   ngOnInit() {
-    this.searchSubscription = this.searchInput.valueChanges.pipe(
-      debounceTime(400),
-      distinctUntilChanged()
-    ).subscribe(query => {
-      this.searchService.setSearchQuery(query);
-    });
+    this.searchSubscription = this.searchInput.valueChanges
+      .pipe(debounceTime(400), distinctUntilChanged())
+      .subscribe((query) => {
+        this.searchService.setSearchQuery(query)
+      })
 
-    this.userName = localStorage.getItem('name');
-
+    this.userName = localStorage.getItem('name')
   }
 
   ngOnDestroy() {
     if (this.searchSubscription) {
-      this.searchSubscription.unsubscribe();
+      this.searchSubscription.unsubscribe()
     }
   }
 }

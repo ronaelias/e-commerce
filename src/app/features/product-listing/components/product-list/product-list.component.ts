@@ -1,12 +1,12 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
-import { ColDef, GridReadyEvent, GridApi } from 'ag-grid-community';
-import { map } from 'rxjs/operators';
-import { ProductService } from '../../../services/product.service';
-import { iProduct } from '../../../../shared/models/product.model';
-import { Router } from '@angular/router';
-import { SearchService } from '../../../services/search.service';
-import { SortService } from '../../../services/sort.service';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core'
+import { Observable, BehaviorSubject, combineLatest } from 'rxjs'
+import { ColDef, GridReadyEvent, GridApi } from 'ag-grid-community'
+import { map } from 'rxjs/operators'
+import { ProductService } from '../../../services/product.service'
+import { iProduct } from '../../../../shared/models/product.model'
+import { Router } from '@angular/router'
+import { SearchService } from '../../../services/search.service'
+import { SortService } from '../../../services/sort.service'
 
 @Component({
   selector: 'app-product-list',
@@ -14,18 +14,25 @@ import { SortService } from '../../../services/sort.service';
   styleUrls: ['./product-list.component.scss'],
 })
 export class ProductListComponent implements OnInit {
-  userName: string | null = '';
-  products$!: Observable<iProduct[]>;
-  filteredProducts$!: Observable<iProduct[]>;
-  searchQuery$: BehaviorSubject<string> = new BehaviorSubject<string>('');
-  sortOption$: BehaviorSubject<string> = new BehaviorSubject<string>('');
-  selectedFilters: { [key: string]: string[] } = { fabric: [], gender: [], color: [], style: [], type: [] };
-  filtersSubject: BehaviorSubject<{ [key: string]: string[] }> = new BehaviorSubject(this.selectedFilters);
-  @Output() sortOptionChanged = new EventEmitter<string>();
-  private gridApis: { [key: string]: GridApi } = {};
-  showSort = false;
-  public themeClass: string = 'ag-theme-quartz';
-  public rowSelection: 'multiple' | 'single' = 'multiple';
+  userName: string | null = ''
+  products$!: Observable<iProduct[]>
+  filteredProducts$!: Observable<iProduct[]>
+  searchQuery$: BehaviorSubject<string> = new BehaviorSubject<string>('')
+  sortOption$: BehaviorSubject<string> = new BehaviorSubject<string>('')
+  selectedFilters: { [key: string]: string[] } = {
+    fabric: [],
+    gender: [],
+    color: [],
+    style: [],
+    type: [],
+  }
+  filtersSubject: BehaviorSubject<{ [key: string]: string[] }> =
+    new BehaviorSubject(this.selectedFilters)
+  @Output() sortOptionChanged = new EventEmitter<string>()
+  private gridApis: { [key: string]: GridApi } = {}
+  showSort = false
+  public themeClass: string = 'ag-theme-quartz'
+  public rowSelection: 'multiple' | 'single' = 'multiple'
 
   constructor(
     private productService: ProductService,
@@ -42,61 +49,85 @@ export class ProductListComponent implements OnInit {
     { fabric: 'Polyurethane' },
     { fabric: 'Rayon' },
     { fabric: 'Spandex' },
-  ];
-  
-  genderRowData = [
-    { gender: 'Men' },
-    { gender: 'Women' },
-  ];
+  ]
+
+  genderRowData = [{ gender: 'Men' }, { gender: 'Women' }]
   colorRowData = [
     { color: 'Gold' },
     { color: 'Silver' },
     { color: 'Rose Gold' },
-  ];
+  ]
   styleRowData = [
     { style: 'Slim Fit' },
     { style: 'Casual' },
     { style: 'V-Neck' },
-  ];
-  typeRowData = [
-    { type: 'Long Sleeve' },
-    { type: 'Short Sleeve' },
-  ];
+  ]
+  typeRowData = [{ type: 'Long Sleeve' }, { type: 'Short Sleeve' }]
 
   public fabricColDefs: ColDef[] = [
-    { field: 'fabric', headerName: 'Fabric', checkboxSelection: true, headerCheckboxSelection: true, filter: true }
-  ];
+    {
+      field: 'fabric',
+      headerName: 'Fabric',
+      checkboxSelection: true,
+      headerCheckboxSelection: true,
+      filter: true,
+    },
+  ]
 
   public genderColDefs: ColDef[] = [
-    { field: 'gender', headerName: 'Gender', checkboxSelection: true, headerCheckboxSelection: true, filter: true }
-  ];
+    {
+      field: 'gender',
+      headerName: 'Gender',
+      checkboxSelection: true,
+      headerCheckboxSelection: true,
+      filter: true,
+    },
+  ]
 
   public colorColDefs: ColDef[] = [
-    { field: 'color', headerName: 'Color', checkboxSelection: true, headerCheckboxSelection: true, filter: true }
-  ];
+    {
+      field: 'color',
+      headerName: 'Color',
+      checkboxSelection: true,
+      headerCheckboxSelection: true,
+      filter: true,
+    },
+  ]
 
   public styleColDefs: ColDef[] = [
-    { field: 'style', headerName: 'Style', checkboxSelection: true, headerCheckboxSelection: true, filter: true }
-  ];
+    {
+      field: 'style',
+      headerName: 'Style',
+      checkboxSelection: true,
+      headerCheckboxSelection: true,
+      filter: true,
+    },
+  ]
 
   public typeColDefs: ColDef[] = [
-    { field: 'type', headerName: 'Type', checkboxSelection: true, headerCheckboxSelection: true, filter: true }
-  ];
+    {
+      field: 'type',
+      headerName: 'Type',
+      checkboxSelection: true,
+      headerCheckboxSelection: true,
+      filter: true,
+    },
+  ]
 
   toggleSort() {
-    this.showSort = !this.showSort;
+    this.showSort = !this.showSort
   }
 
   sort(option: string) {
-    this.sortOption$.next(option);
+    this.sortOption$.next(option)
   }
 
   ngOnInit() {
-    this.userName = localStorage.getItem('name');
-    this.products$ = this.productService.getAllProducts();
-    this.searchService.searchQuery$.subscribe(query => {
-      this.searchQuery$.next(query);
-    });
+    this.userName = localStorage.getItem('name')
+    this.products$ = this.productService.getAllProducts()
+    this.searchService.searchQuery$.subscribe((query) => {
+      this.searchQuery$.next(query)
+    })
     this.filteredProducts$ = combineLatest([
       this.products$,
       this.searchQuery$,
@@ -104,45 +135,45 @@ export class ProductListComponent implements OnInit {
       this.sortOption$,
     ]).pipe(
       map(([products, searchQuery, selectedFilters, sortOption]) => {
-        let filtered = products.filter((product) => {
-          const title = product.title.toLowerCase();
-          const description = product.description.toLowerCase();
-          const category = product.category.toLowerCase();
-          const search = searchQuery.toLowerCase();
+        const filtered = products.filter((product) => {
+          const title = product.title.toLowerCase()
+          const description = product.description.toLowerCase()
+          const category = product.category.toLowerCase()
+          const search = searchQuery.toLowerCase()
 
           const matchesSearch = search
             ? title.includes(search) || description.includes(search)
-            : true;
+            : true
 
           const matchesFabric = selectedFilters['fabric'].length
-            ? selectedFilters['fabric'].some(filter => 
+            ? selectedFilters['fabric'].some((filter) =>
                 this.checkMatch(filter, title, description, category)
               )
-            : true;
+            : true
 
           const matchesGender = selectedFilters['gender'].length
-            ? selectedFilters['gender'].some(filter => 
+            ? selectedFilters['gender'].some((filter) =>
                 this.checkMatch(filter, title, description, category)
               )
-            : true;
+            : true
 
           const matchesColor = selectedFilters['color'].length
-            ? selectedFilters['color'].some(filter => 
+            ? selectedFilters['color'].some((filter) =>
                 this.checkMatch(filter, title, description, category)
               )
-            : true;
+            : true
 
           const matchesStyle = selectedFilters['style'].length
-            ? selectedFilters['style'].some(filter => 
+            ? selectedFilters['style'].some((filter) =>
                 this.checkMatch(filter, title, description, category)
               )
-            : true;
+            : true
 
           const matchesType = selectedFilters['type'].length
-            ? selectedFilters['type'].some(filter => 
+            ? selectedFilters['type'].some((filter) =>
                 this.checkMatch(filter, title, description, category)
               )
-            : true;
+            : true
 
           return (
             matchesSearch &&
@@ -151,38 +182,43 @@ export class ProductListComponent implements OnInit {
             matchesColor &&
             matchesStyle &&
             matchesType
-          );
-        });
-        return this.sortService.sort(filtered, sortOption);
+          )
+        })
+        return this.sortService.sort(filtered, sortOption)
       })
-    );
+    )
   }
 
   onGridReady(params: GridReadyEvent, gridId: string) {
-    this.gridApis[gridId] = params.api;
-    params.api.sizeColumnsToFit();
+    this.gridApis[gridId] = params.api
+    params.api.sizeColumnsToFit()
   }
 
   onFilterChange(filterType: string, selectedValues: string[]) {
-    this.selectedFilters[filterType] = selectedValues;
-    this.filtersSubject.next(this.selectedFilters);
+    this.selectedFilters[filterType] = selectedValues
+    this.filtersSubject.next(this.selectedFilters)
   }
 
   getSelectedValues(gridId: string, filterType: string): string[] {
-    const gridApi = this.gridApis[gridId];
+    const gridApi = this.gridApis[gridId]
     if (gridApi) {
-      const selectedNodes = gridApi.getSelectedNodes();
-      return selectedNodes.map((node) => node.data[filterType]);
+      const selectedNodes = gridApi.getSelectedNodes()
+      return selectedNodes.map((node) => node.data[filterType])
     }
-    return [];
+    return []
   }
 
-  private checkMatch(filter: string, title: string, description: string, category: string): boolean {
+  private checkMatch(
+    filter: string,
+    title: string,
+    description: string,
+    category: string
+  ): boolean {
     // Use \b to define word boundaries
-    const regex = new RegExp(`\\b${filter.toLowerCase()}\\b`, 'i'); // 'i' flag for case-insensitivity
-    const matchInTitle = regex.test(title.toLowerCase());
-    const matchInDescription = regex.test(description.toLowerCase());
-    const matchInCategory = regex.test(category.toLowerCase());
-    return matchInTitle || matchInDescription || matchInCategory;
+    const regex = new RegExp(`\\b${filter.toLowerCase()}\\b`, 'i') // 'i' flag for case-insensitivity
+    const matchInTitle = regex.test(title.toLowerCase())
+    const matchInDescription = regex.test(description.toLowerCase())
+    const matchInCategory = regex.test(category.toLowerCase())
+    return matchInTitle || matchInDescription || matchInCategory
   }
 }

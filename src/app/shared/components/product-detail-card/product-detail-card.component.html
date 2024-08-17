@@ -1,7 +1,11 @@
 <div *ngIf="product; else noProduct">
   <div class="product-detail-card">
     <div class="product-detail-img">
-      <img [src]="product.image" alt="{{ product.title }}" class="product-img">
+      <img
+        [src]="product.image"
+        alt="{{ product.title }}"
+        class="product-img"
+      />
     </div>
     <div class="product-detail-info">
       <h1 class="product-title">{{ product.title }}</h1>
@@ -9,39 +13,102 @@
       <p class="product-description">{{ product.description }}</p>
       <p><strong>Color:</strong></p>
       <div class="color-options">
-        <button class="color-btn black" [ngClass]="{'active': selectedColor === 'black'}" (click)="selectColor('black')"></button>
-        <button class="color-btn white" [ngClass]="{'active': selectedColor === 'white'}" (click)="selectColor('white')"></button>
-        <button class="color-btn pink" [ngClass]="{'active': selectedColor === 'pink'}" (click)="selectColor('pink')"></button>
-        <button class="color-btn blue" [ngClass]="{'active': selectedColor === 'blue'}" (click)="selectColor('blue')"></button>
-        <button class="color-btn red" [ngClass]="{'active': selectedColor === 'red'}" (click)="selectColor('red')"></button>
-        <button class="color-btn green" [ngClass]="{'active': selectedColor === 'green'}" (click)="selectColor('green')"></button>
-        <button class="color-btn yellow" [ngClass]="{'active': selectedColor === 'yellow'}" (click)="selectColor('yellow')"></button>
+        <button
+          class="color-btn black"
+          [ngClass]="{ active: selectedColor === 'black' }"
+          (click)="selectColor('black')"
+        ></button>
+        <button
+          class="color-btn white"
+          [ngClass]="{ active: selectedColor === 'white' }"
+          (click)="selectColor('white')"
+        ></button>
+        <button
+          class="color-btn pink"
+          [ngClass]="{ active: selectedColor === 'pink' }"
+          (click)="selectColor('pink')"
+        ></button>
+        <button
+          class="color-btn blue"
+          [ngClass]="{ active: selectedColor === 'blue' }"
+          (click)="selectColor('blue')"
+        ></button>
+        <button
+          class="color-btn red"
+          [ngClass]="{ active: selectedColor === 'red' }"
+          (click)="selectColor('red')"
+        ></button>
+        <button
+          class="color-btn green"
+          [ngClass]="{ active: selectedColor === 'green' }"
+          (click)="selectColor('green')"
+        ></button>
+        <button
+          class="color-btn yellow"
+          [ngClass]="{ active: selectedColor === 'yellow' }"
+          (click)="selectColor('yellow')"
+        ></button>
       </div>
       <p><strong>Size:</strong></p>
       <div class="size-options">
-        <button class="size-btn" [ngClass]="{'active': selectedSize === 'xs'}" (click)="selectSize('xs')">XS</button>
-        <button class="size-btn" [ngClass]="{'active': selectedSize === 's'}" (click)="selectSize('s')">S</button>
-        <button class="size-btn" [ngClass]="{'active': selectedSize === 'm'}" (click)="selectSize('m')">M</button>
-        <button class="size-btn" [ngClass]="{'active': selectedSize === 'l'}" (click)="selectSize('l')">L</button>
-        <button class="size-btn" [ngClass]="{'active': selectedSize === 'xl'}" (click)="selectSize('xl')">XL</button>
+        <button
+          class="size-btn"
+          [ngClass]="{ active: selectedSize === 'xs' }"
+          (click)="selectSize('xs')"
+        >
+          XS
+        </button>
+        <button
+          class="size-btn"
+          [ngClass]="{ active: selectedSize === 's' }"
+          (click)="selectSize('s')"
+        >
+          S
+        </button>
+        <button
+          class="size-btn"
+          [ngClass]="{ active: selectedSize === 'm' }"
+          (click)="selectSize('m')"
+        >
+          M
+        </button>
+        <button
+          class="size-btn"
+          [ngClass]="{ active: selectedSize === 'l' }"
+          (click)="selectSize('l')"
+        >
+          L
+        </button>
+        <button
+          class="size-btn"
+          [ngClass]="{ active: selectedSize === 'xl' }"
+          (click)="selectSize('xl')"
+        >
+          XL
+        </button>
       </div>
       <div class="quantity-section">
-    <p><strong>Quantity:</strong></p>
-    <div class="quantity-controls">
-      <button class="quantity-btn decrement" (click)="decrement()">-</button>
-      <span class="quantity">{{ product.quantity }}</span>
-      <button class="quantity-btn increment" (click)="increment()">+</button>
-    </div>
-  </div>
+        <p><strong>Quantity:</strong></p>
+        <div class="quantity-controls">
+          <button class="quantity-btn decrement" (click)="decrement()">
+            -
+          </button>
+          <span class="quantity">{{ product.quantity }}</span>
+          <button class="quantity-btn increment" (click)="increment()">
+            +
+          </button>
+        </div>
+      </div>
       <div class="product-actions">
-        <button class="add-to-cart">Add to Cart</button>
+        <button class="add-to-cart" (click)="addToCart()">Add to Cart</button>
         <app-favorite-button
           [productId]="product.id"
           [isFavorite]="isFavorite(product.id)"
-          (favoriteToggled)="onFavoriteToggled($event)">
+          (favoriteToggled)="onFavoriteToggled($event)"
+        >
         </app-favorite-button>
-      </div>   
-    </div>  
+      </div>
+    </div>
   </div>
 </div>
 <ng-template #noProduct>

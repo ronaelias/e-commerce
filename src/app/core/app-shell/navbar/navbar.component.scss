@@ -56,7 +56,9 @@ nav {
       background-color: $text-color;
       border-radius: $border-radius;
       padding: $padding;
-      transition: background-color 0.3s, color 0.3s;
+      transition:
+        background-color 0.3s,
+        color 0.3s;
     }
   }
 
@@ -72,8 +74,6 @@ nav {
   }
 }
 
-
-
 .search-bar {
   width: $search-bar-width;
   padding: $search-bar-padding;
@@ -86,4 +86,3 @@ nav {
     box-shadow: 0 0 10px $focus-color;
   }
 }
-

@@ -1,1 +1,11 @@
-<p>cart works!</p>
+<div *ngIf="cartItems.length > 0; else noItems">
+  <div *ngFor="let item of cartItems">
+    <p>
+      {{ item.product.title }} - {{ item.size }} - {{ item.color }} -
+      {{ item.quantity }}
+    </p>
+  </div>
+</div>
+<ng-template #noItems>
+  <p>Your cart is empty.</p>
+</ng-template>

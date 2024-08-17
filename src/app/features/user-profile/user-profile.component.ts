@@ -83,22 +83,24 @@
 //   }
 // }
 
-
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core'
+import { Router } from '@angular/router'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.scss']
+  styleUrls: ['./user-profile.component.scss'],
 })
 export class UserProfileComponent implements OnInit {
-  userProfileForm: FormGroup;
-  currentUser: any = null;
-  users: any[] = [];
+  userProfileForm: FormGroup
+  currentUser: any = null
+  users: any[] = []
 
-  constructor(private router: Router, private fb: FormBuilder) {
+  constructor(
+    private router: Router,
+    private fb: FormBuilder
+  ) {
     this.userProfileForm = this.fb.group({
       name: ['', Validators.required],
       surname: ['', Validators.required],
@@ -110,71 +112,76 @@ export class UserProfileComponent implements OnInit {
       stairwayAndFloor: [''],
       city: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]]
-    });
+      password: ['', [Validators.required, Validators.minLength(8)]],
+    })
   }
 
   ngOnInit() {
-    this.getCurrentUser();
+    this.getCurrentUser()
     if (!this.currentUser) {
-      this.router.navigate(['/sign-in']);
+      this.router.navigate(['/sign-in'])
     } else {
-      this.userProfileForm.patchValue(this.currentUser);
+      this.userProfileForm.patchValue(this.currentUser)
     }
   }
 
   getCurrentUser() {
     // Retrieve current user from local storage
-    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null')
     if (!this.currentUser) {
-      console.error('No current user found.');
-      this.router.navigate(['/sign-in']);
+      console.error('No current user found.')
+      this.router.navigate(['/sign-in'])
     } else {
       // Retrieve the list of users for saving changes
-      this.users = JSON.parse(localStorage.getItem('users') || '[]');
+      this.users = JSON.parse(localStorage.getItem('users') || '[]')
     }
   }
 
   saveChanges() {
     if (this.userProfileForm.invalid) {
-      return;
+      return
     }
-  
-    const updatedUser = this.userProfileForm.value;
+
+    const updatedUser = this.userProfileForm.value
     // Remove the user with the old email if it exists
-    this.users = this.users.filter(user => user.email !== this.currentUser.email);
-  
+    this.users = this.users.filter(
+      (user) => user.email !== this.currentUser.email
+    )
+
     // Add the updated user to the list
-    this.users.push(updatedUser);
-  
+    this.users.push(updatedUser)
+
     // Save the updated users list and currentUser back to local storage
-    localStorage.setItem('users', JSON.stringify(this.users));
-    localStorage.setItem('currentUser', JSON.stringify(updatedUser));
+    localStorage.setItem('users', JSON.stringify(this.users))
+    localStorage.setItem('currentUser', JSON.stringify(updatedUser))
   }
-  
 
   deleteAccount() {
     if (this.currentUser) {
       // Remove the user from the list
-      this.users = this.users.filter(user => user.email !== this.currentUser.email);
+      this.users = this.users.filter(
+        (user) => user.email !== this.currentUser.email
+      )
       // Save the updated users list to local storage and remove currentUser
-      localStorage.setItem('users', JSON.stringify(this.users));
-      localStorage.removeItem('currentUser');
-      localStorage.removeItem('name');
-      localStorage.removeItem('Access Token');
-      localStorage.removeItem('Refresh Token');
-      alert('Account deleted successfully');
-      this.router.navigate(['/sign-in']);
+      localStorage.setItem('users', JSON.stringify(this.users))
+      localStorage.removeItem('currentUser')
+      localStorage.removeItem('name')
+      localStorage.removeItem('Access Token')
+      localStorage.removeItem('Refresh Token')
+      alert('Account deleted successfully')
+      this.router.navigate(['/sign-in'])
     }
   }
 
   SignOut() {
-    localStorage.removeItem('currentUser');
-    localStorage.removeItem('name');
-    localStorage.removeItem('Access Token');
-    localStorage.removeItem('Refresh Token');
-    this.router.navigate(['/sign-in']);
+    localStorage.removeItem('currentUser')
+    localStorage.removeItem('name')
+    localStorage.removeItem('Access Token')
+    localStorage.removeItem('Refresh Token')
+    this.router.navigate(['/sign-in'])
   }
 
-  get f() { return this.userProfileForm.controls; }
+  get f() {
+    return this.userProfileForm.controls
+  }
 }

@@ -72,7 +72,6 @@
 //   viewProductDetail(productId: number) {
 //     this.router.navigate([`/products/${productId}`]);
 //   }
-  
 
 //   toggleFavorite(productId: number) {
 //     if (this.favoriteProducts.has(productId)) {
@@ -107,80 +106,131 @@
 //   }
 // }
 
-import { Component, Input, OnInit } from '@angular/core';
-import { iProduct } from '../../models/product.model';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ProductService } from '../../../features/services/product.service';
-import { Observable, of, switchMap } from 'rxjs';
-import { FavoriteService } from '../../services/favorite.service';
+import { Component, Input, OnInit } from '@angular/core'
+import { iProduct } from '../../models/product.model'
+import { ActivatedRoute, Router } from '@angular/router'
+import { ProductService } from '../../../features/services/product.service'
+import { Observable, of, switchMap } from 'rxjs'
+import { FavoriteService } from '../../services/favorite.service'
+import { CartService } from '../../services/cart.service'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 
 @Component({
   selector: 'app-product-detail-card',
   templateUrl: './product-detail-card.component.html',
-  styleUrls: ['./product-detail-card.component.scss']
+  styleUrls: ['./product-detail-card.component.scss'],
 })
 export class ProductDetailCardComponent implements OnInit {
-  @Input() product!: iProduct;
-  cartProducts: Set<number> = new Set<number>();  
-  quantity: number = 1;
+  @Input() product!: iProduct
+  //cartProducts: Set<number> = new Set<number>();
+  quantity: number = 1
+  formSubmitted = false
+  productForm: FormGroup
+  selectedSize: string | null = null
+  selectedColor: string | null = null
 
-  constructor(private route: ActivatedRoute, 
-    private router: Router, 
-    private productService: ProductService,
-    private favoriteService: FavoriteService) {}
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private cartService: CartService,
+    private favoriteService: FavoriteService
+  ) {
+    this.productForm = this.fb.group({
+      size: [null, Validators.required],
+      color: [null, Validators.required],
+      quantity: [1, [Validators.min(1)]],
+    })
+  }
 
   ngOnInit(): void {
-    this.quantity = this.product.quantity || 1;
+    this.quantity = this.product.quantity || 1
+    if (this.product) {
+      this.productForm.patchValue({
+        quantity: this.product.quantity || 1,
+      })
+    }
   }
-  
+
   isFavorite(productId: number): boolean {
-    return this.favoriteService.isFavorite(productId);
+    return this.favoriteService.isFavorite(productId)
   }
 
   onFavoriteToggled(productId: number) {
     if (this.isFavorite(productId)) {
-      this.favoriteService.removeFavorite(productId);
+      this.favoriteService.removeFavorite(productId)
     } else {
-      this.favoriteService.addFavorite(this.product);
+      this.favoriteService.addFavorite(this.product)
     }
   }
 
-  toggleCart(productId: number): void {
-    if (this.cartProducts.has(productId)) {
-      this.cartProducts.delete(productId);
-    } else {
-      this.cartProducts.add(productId);
+  // toggleCart(productId: number): void {
+  //   if (this.cartProducts.has(productId)) {
+  //     this.cartProducts.delete(productId);
+  //   } else {
+  //     this.cartProducts.add(productId);
+  //   }
+  // }
+
+  // isInCart(productId: number): boolean {
+  //   return this.cartProducts.has(productId);
+  // }
+
+  addToCart() {
+    this.formSubmitted = true
+    if (this.productForm.valid) {
+      this.cartService.addToCart({
+        product: this.product,
+        color: this.productForm.value.color,
+        size: this.productForm.value.size,
+        quantity: this.productForm.value.quantity,
+      })
+      //this.router.navigate(['/cart']) // Navigate to the cart component
     }
   }
 
-  isInCart(productId: number): boolean {
-    return this.cartProducts.has(productId);
+  get f() {
+    return this.productForm.controls
+  }
+
+  // selectSize(size: string) {
+  //   this.selectedSize = size
+  // }
+
+  // selectColor(color: string) {
+  //   this.selectedColor = color
+  // }
+
+  selectSize(size: string) {
+    this.selectedSize = size
+    this.productForm.controls['size'].setValue(size)
+  }
+
+  selectColor(color: string) {
+    this.selectedColor = color
+    this.productForm.controls['color'].setValue(color)
+  }
+
+  updateQuantity(change: number) {
+    const currentQuantity = this.productForm.controls['quantity'].value
+    const newQuantity = currentQuantity + change
+    this.productForm.controls['quantity'].setValue(newQuantity)
   }
 
   decrement() {
     if (this.product.quantity > 1) {
-      this.product.quantity -= 1;
+      this.product.quantity -= 1
     }
   }
 
   increment() {
-    this.product.quantity += 1;
+    this.product.quantity += 1
   }
 
-  addToCart() {
-    // Implement add to cart logic
-  }
-
-  selectedSize: string | null = null;
-  selectedColor: string | null = null;
-
-  selectSize(size: string) {
-    this.selectedSize = size;
-  }
-
-  selectColor(color: string) {
-    this.selectedColor = color;
-  }
+  // updateQuantity(change: number) {
+  //   const currentQuantity = this.productForm.controls['quantity'].value
+  //   const newQuantity = currentQuantity + change
+  //   this.productForm.controls['quantity'].setValue(newQuantity)
+  // }
 
   // viewProductDetail(productId: number) {
   //   this.router.navigate([`/product-detail-card/${productId}`]);

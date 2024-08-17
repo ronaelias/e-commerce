@@ -1,7 +1,7 @@
-$text-color: #45414A; //grey
-$background-color: #F3EDE5; //beige
+$text-color: #45414a; //grey
+$background-color: #f3ede5; //beige
 $background-color-bold: #504a58;
-$background-color-light: #F0E8DE;
+$background-color-light: #f0e8de;
 $padding: 4px;
 $border-radius: 8px;
 $margin: 8px;
@@ -11,79 +11,79 @@ $font-size-large: 18px;
 $font-size-medium: 16px;
 
 .all {
-    display: flex;
-    justify-content: center;
-    margin-top: $nav-height;
+  display: flex;
+  justify-content: center;
+  margin-top: $nav-height;
 }
 
 .sign-up-container {
+  color: $text-color;
+  width: $width;
+  border: 1px solid $text-color;
+  border-radius: $border-radius;
+  background-color: $background-color;
+  margin: $margin;
+  padding: $padding * 2;
+
+  h2 {
     color: $text-color;
-    width: $width;
-    border: 1px solid $text-color;
-    border-radius: $border-radius;
-    background-color: $background-color;
-    margin: $margin;
-    padding: $padding * 2;
+    text-align: center;
+    font-size: $font-size-large;
+    margin-bottom: $margin;
+  }
 
-    h2 {
-        color: $text-color;
-        text-align: center;
-        font-size: $font-size-large;
-        margin-bottom: $margin;
-    }
+  .section-container {
+    margin-bottom: $margin;
 
-    .section-container {
-        margin-bottom: $margin;
-        
-        h3 {
-            color: $text-color;
-            font-size: $font-size-medium;
-            margin-bottom: $margin;
-            border-bottom: 1px solid $text-color;
-            padding-bottom: $padding;
-        }
+    h3 {
+      color: $text-color;
+      font-size: $font-size-medium;
+      margin-bottom: $margin;
+      border-bottom: 1px solid $text-color;
+      padding-bottom: $padding;
     }
+  }
 }
 
 .button-container {
-    font-size: larger;
-    color: $background-color;
-    background-color: $text-color;
-    border-radius: $border-radius;
-    border-color: $text-color;
-    width: 93%;
-    text-align: center;
-    margin: $margin;
-    padding: $padding;
+  font-size: larger;
+  color: $background-color;
+  background-color: $text-color;
+  border-radius: $border-radius;
+  border-color: $text-color;
+  width: 93%;
+  text-align: center;
+  margin: $margin;
+  padding: $padding;
 
-    &:hover {
-        background-color: $background-color-bold;
-        cursor: pointer;
-    }
+  &:hover {
+    background-color: $background-color-bold;
+    cursor: pointer;
+  }
 
-    &.btn1 {
-        color: $text-color;
-        background-color: $background-color;
-        border-color: $background-color;
-    }
+  &.btn1 {
+    color: $text-color;
+    background-color: $background-color;
+    border-color: $background-color;
+  }
 
-    &.btn1:hover {
-        background-color: $background-color-light;
-    }
+  &.btn1:hover {
+    background-color: $background-color-light;
+  }
 }
 
 .items-container {
-    margin: $margin;
-    padding: $padding;
-    width: 90%;
+  margin: $margin;
+  padding: $padding;
+  width: 90%;
 }
 
 .name-container {
-    display: flex;
-    width: 95%;
+  display: flex;
+  width: 95%;
 }
 
 .btn-container {
-    display: flex;
-    width: 97%; 
+  display: flex;
+  width: 97%;
 }
