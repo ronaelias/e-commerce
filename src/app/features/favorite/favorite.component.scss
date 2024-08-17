@@ -1,0 +1,34 @@
+$nav-height: 60px;
+
+h3 {
+    padding-top: $nav-height;
+}
+
+.favorite-products-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: flex-start;
+    padding-top: $nav-height;
+  }
+  
+  .favorite-products-container.centered {
+    justify-content: center;
+  }
+  
+  .favorite-message {
+    max-width: 300px;
+    margin-right: 40px;
+    //
+    color: #555;
+    font-size: 18px; /* Increased font size */
+    line-height: 1.6; /* Adjust line height for readability */
+  }
+  .no-favorite {
+    margin-top: 200px;
+  }
+
+  .no-favorites {
+    margin-bottom: 200px;
+  }
+  

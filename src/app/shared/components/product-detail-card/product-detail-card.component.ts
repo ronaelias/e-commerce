@@ -112,6 +112,7 @@ import { iProduct } from '../../models/product.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../../../features/services/product.service';
 import { Observable, of, switchMap } from 'rxjs';
+import { FavoriteService } from '../../services/favorite.service';
 
 @Component({
   selector: 'app-product-detail-card',
@@ -120,46 +121,28 @@ import { Observable, of, switchMap } from 'rxjs';
 })
 export class ProductDetailCardComponent implements OnInit {
   @Input() product!: iProduct;
-  favoriteProducts: Set<number> = new Set<number>();
-  cartProducts: Set<number> = new Set<number>();
-  //prod
-  products$!: Observable<iProduct[]>;
-  currentCategory: string | undefined;
-  categories: string[] = [];
+  cartProducts: Set<number> = new Set<number>();  
+  quantity: number = 1;
 
-  constructor(private route: ActivatedRoute, private router: Router, private productService: ProductService) {}
+  constructor(private route: ActivatedRoute, 
+    private router: Router, 
+    private productService: ProductService,
+    private favoriteService: FavoriteService) {}
 
   ngOnInit(): void {
-    const productId = +this.route.snapshot.paramMap.get('id')!;
-    
-    this.productService.getProductById(productId).subscribe(product => {
-      this.product = { ...product, quantity: product.quantity || 1 };
-      this.currentCategory = this.product.category;
-      //this.loadCategories();
-      this.loadProducts();
-    });
+    this.quantity = this.product.quantity || 1;
   }
   
-  loadProducts(): void {
-    const category = this.currentCategory || '';
-    this.products$ = this.productService.getProductsByCategory(category).pipe(
-      switchMap((products: iProduct[]) => {
-        const filteredProducts = products.filter(product => product.id !== this.product.id);
-        return of(filteredProducts);
-      })
-    );
-  }
-  
-  toggleFavorite(productId: number): void {
-    if (this.favoriteProducts.has(productId)) {
-      this.favoriteProducts.delete(productId);
-    } else {
-      this.favoriteProducts.add(productId);
-    }
+  isFavorite(productId: number): boolean {
+    return this.favoriteService.isFavorite(productId);
   }
 
-  isFavorite(productId: number): boolean {
-    return this.favoriteProducts.has(productId);
+  onFavoriteToggled(productId: number) {
+    if (this.isFavorite(productId)) {
+      this.favoriteService.removeFavorite(productId);
+    } else {
+      this.favoriteService.addFavorite(this.product);
+    }
   }
 
   toggleCart(productId: number): void {
@@ -174,9 +157,6 @@ export class ProductDetailCardComponent implements OnInit {
     return this.cartProducts.has(productId);
   }
 
-
-  quantity: number = 1;
-
   decrement() {
     if (this.product.quantity > 1) {
       this.product.quantity -= 1;
@@ -190,10 +170,6 @@ export class ProductDetailCardComponent implements OnInit {
   addToCart() {
     // Implement add to cart logic
   }
-
-  // trackByProductId(index: number, product: iProduct): number {
-  //   return product.id;
-  // }
 
   selectedSize: string | null = null;
   selectedColor: string | null = null;

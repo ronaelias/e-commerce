@@ -11,17 +11,18 @@ import { CategoryComponent } from './features/category/category.component';
 import { ProductCardComponent } from './shared/components/products-card/product-card.component';
 import { ProductDetailCardComponent } from './shared/components/product-detail-card/product-detail-card.component';
 import { UserProfileComponent } from './features/user-profile/user-profile.component';
+import { FavoriteComponent } from './features/favorite/favorite.component';
+import { CartComponent } from './features/cart/cart.component';
 
 const routes: Routes = [
   { path: 'product-listing', component: ProductListComponent, loadChildren: () => import('./features/product-listing/product-listing.module').then(m => m.ProductListingModule) },
-  { path: 'product-detail', component: ProductDetailComponent, canActivate: [AuthGuard], loadChildren: () => import('./features/product-details/product-details.module').then(m => m.ProductDetailsModule) },
-  { path: 'product-detail-card/:id', component: ProductDetailCardComponent },
-  { path: 'product', component: ProductListComponent },
-  { path: 'products/:id', component: ProductDetailCardComponent },
+  { path: 'product-detail/:id', component: ProductDetailComponent, canActivate: [AuthGuard], loadChildren: () => import('./features/product-details/product-details.module').then(m => m.ProductDetailsModule) },
+  //{ path: 'product-detail', component: ProductDetailComponent },
   { path: 'product-card', component: ProductCardComponent },
   { path: 'profile', component: UserProfileComponent },
+  { path: 'favorite', component: FavoriteComponent },
+  { path: 'cart', component: CartComponent },
   { path: 'sign-in', loadChildren: () => import('./core/auth/components/sign-in/sign-in.module').then(m => m.SignInModule) },
-  // { path: 'sign-up', loadChildren: () => import('./core/auth/components/sign-up/sign-up.module').then(m => m.SignUpModule) },
   { path: 'category', component: CategoryComponent },
   { path: '', redirectTo: 'product-listing', pathMatch: 'full' },
   {

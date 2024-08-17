@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-footer',
@@ -6,5 +7,16 @@ import { Component } from '@angular/core';
   styleUrl: './footer.component.scss'
 })
 export class FooterComponent {
+  footerVisible: boolean = true;
+
+
+  constructor(private router: Router) {
+    // this.router.events.subscribe(event => {
+    //   if (event instanceof NavigationEnd) {
+    //     const hiddenRoutes = ['/favorite'];
+    //     this.footerVisible = !hiddenRoutes.includes(event.url);
+    //   }
+    // });
+  }
 
 }

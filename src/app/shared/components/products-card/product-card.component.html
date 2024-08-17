@@ -6,9 +6,11 @@
       <div class="product-info">
         <h2 class="product-price">${{ product.price }}</h2>
         <div class="icons">
-          <button mat-icon-button (click)="toggleFavorite(product.id); $event.stopPropagation()">
-            <mat-icon [ngClass]="{'mat-icon-heart': true, 'pressed': isFavorite(product.id)}" aria-label="Favorite icon">favorite</mat-icon>
-          </button>
+          <app-favorite-button
+            [productId]="product.id"
+            [isFavorite]="isFavorite(product.id)"
+            (favoriteToggled)="onFavoriteToggled($event)">
+          </app-favorite-button>
           <button mat-icon-button (click)="toggleCart(product.id); $event.stopPropagation()">
             <mat-icon [ngClass]="{'mat-icon-cart': true, 'pressed': isInCart(product.id)}" aria-label="Cart icon">shopping_cart</mat-icon>
           </button>

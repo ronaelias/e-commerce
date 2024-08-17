@@ -1,126 +1,14 @@
-$border-color: rgba(0, 0, 0, 0.692);
-$border-color-sub: #ddd;
-$icon-background: #F3EDE5;
-$hover-color: #F0E8DE;
-$text-color: #1E1E1E; // black
-$text-color-sub: #45414A; // grey
-$font-size: 16px;
-$border-radius: 8px;
-$margin: 32px;
-$flex: 120px;
-$margin-inline-start: 20px;
-$margin-inline-end: 32px;
-$margin-text: 8px;
-$padding: 10px;
-$width: 1000px;
-$border-width: 1.5px;
-$img-size: 190px;
-$gap: 5px;
+$padding: 8px;
 
-p {
-  margin: $margin-text;
-  border-bottom: 1px solid $border-color-sub;
+.product-similar {
+  text-align: start;
 }
 
-.product-card {
-  display: flex;
-  flex-direction: column;
-  width: $width;
-  height: auto; 
-  box-shadow: 0 1px 2px $border-color;
-  transition: box-shadow 0.3s ease-in-out;
-  border-radius: $border-radius;
-  margin: $margin;
+.product-listing-container {
   padding: $padding;
-  position: relative;
 }
 
-.product-card:hover {
-  outline: none;
-  box-shadow: 0 4px 8px $border-color;
-}
-
-.product-top {
+.product-grid {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.product-img-container {
-  flex-shrink: 0;
-}
-
-.product-img {
-  border-radius: $border-radius;
-  width: $img-size;
-  height: $img-size;
-  margin: auto;
-  padding-top: auto;
-}
-
-.product-info {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: left;
-  margin-inline-start: $margin-inline-start;
-  flex: 1;  
-}
-
-.product-actions {
-  display: flex;
-  align-items: center;
-  gap: $gap;
-  margin-inline-end: $margin-inline-end;
-  border-radius: $border-radius;
-  background-color: $icon-background;
-}
-
-.product-info p {
-  display: flex;
-  align-items: center;
-  margin: $margin-text 0;
-  
-  &::before {
-    content: attr(data-label);
-    flex: 0 0 $flex; 
-    font-weight: bold; 
-  }
-
-  span {
-    text-align: start;
-  }
-}
-
-.product-description {
-  
-  margin-top: $padding;
-  p {
-    display: flex;
-    align-items: center;
-    border-bottom: none;
-
-    &::before {
-      content: attr(data-label);
-      flex: 0 0 $flex; 
-      font-weight: bold; 
-    }
-
-    span {
-      text-align: start;
-    }
-  }
-}
-.dec-inc-btn {
-  margin-left: $margin-text;
-  margin-right: $margin-text;
-  border-width: $border-width;
-  border-radius: $border-radius;
-  box-shadow: 0 1px 2px $text-color-sub;
-  background-color: $icon-background;
-
-  &:hover {
-    box-shadow: 0 1px 4px $text-color-sub;
-    background-color: $hover-color;
-  }
+  flex-wrap: wrap;
 }

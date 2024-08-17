@@ -38,6 +38,9 @@ import { ProductCardComponent } from './shared/components/products-card/product-
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { ProductDetailCardComponent } from './shared/components/product-detail-card/product-detail-card.component';
 import { FeaturesModule } from './features/features.module';
+import { FavoriteComponent } from './features/favorite/favorite.component';
+import { FavoriteButtonComponent } from './shared/components/favorite-button/favorite-button.component';
+import { CartComponent } from './features/cart/cart.component';
 
 
 ModuleRegistry.registerModules([
@@ -60,6 +63,9 @@ ModuleRegistry.registerModules([
     WelcomeMessagePipe,
     DeleteButtonRendererComponent,
     CategoryComponent,
+    FavoriteComponent,
+    FavoriteButtonComponent,
+    CartComponent
 
   ],
   imports: [

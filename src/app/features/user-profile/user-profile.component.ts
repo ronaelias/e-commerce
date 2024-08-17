@@ -168,7 +168,7 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
-  logOut() {
+  SignOut() {
     localStorage.removeItem('currentUser');
     localStorage.removeItem('name');
     localStorage.removeItem('Access Token');

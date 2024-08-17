@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { select, Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-sign-in',
@@ -23,7 +24,8 @@ export class SignInComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    //private store: Store
   ) {}
 
   ngOnInit() {
@@ -34,6 +36,19 @@ export class SignInComponent implements OnInit {
 
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
+
+  //   ngOnInit() {
+  //   this.signInForm = this.formBuilder.group({
+  //     email: ['', [Validators.required, Validators.email]],
+  //     password: ['', [Validators.required, Validators.minLength(8)]]
+  //   });
+
+  //   this.store.pipe(select(selectSignInResponse)).subscribe(iSignInResponse => {
+  //     if (iSignInResponse) {
+  //       this.router.navigate(['/product-listing']);
+  //     }
+  //   });
+  // }
 
   get f() { return this.signInForm.controls; }
 
@@ -81,7 +96,25 @@ export class SignInComponent implements OnInit {
   }
 }
 
+  // ngOnInit() {
+  //   this.signInForm = this.formBuilder.group({
+  //     email: ['', [Validators.required, Validators.email]],
+  //     password: ['', [Validators.required, Validators.minLength(8)]]
+  //   });
 
+  //   this.store.pipe(select(selectSignInResponse)).subscribe(iSignInResponse => {
+  //     if (iSignInResponse) {
+  //       this.router.navigate(['/product-listing']);
+  //     }
+  //   });
+  // }
+
+
+  // onSubmit() {
+    // const iSignInRequest: iSignInRequest = {
+    // email: this.signInForm.value.email,
+    // password: this.signInForm.value.password
+    // }
 
 // export class SignInComponent implements OnInit {
 

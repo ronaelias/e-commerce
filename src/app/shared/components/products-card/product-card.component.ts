@@ -4,6 +4,7 @@ import { iProduct } from '../../models/product.model';
 import { Router } from '@angular/router';
 import { ProductService } from '../../../features/services/product.service';
 import { SearchService } from '../../../features/services/search.service';
+import { FavoriteService } from '../../services/favorite.service';
 
 @Component({
   selector: 'app-product-card',
@@ -11,32 +12,33 @@ import { SearchService } from '../../../features/services/search.service';
   styleUrls: ['./product-card.component.scss']
 })
 export class ProductCardComponent implements OnInit {
-  @Input() product: iProduct | undefined;
-  favoriteProducts: Set<number> = new Set<number>();
+  @Input() product!: iProduct;
+  //favoriteProducts: Set<number> = new Set<number>();
   cartProducts: Set<number> = new Set<number>();
 
   constructor(
-    private productService: ProductService, 
-    private searchService: SearchService,
-    private router: Router
+    // private productService: ProductService, 
+    // private searchService: SearchService,
+    private router: Router,
+    private favoriteService: FavoriteService
   ) {}
     
   ngOnInit() {}
 
   viewProductDetail(productId: number) {
-    this.router.navigate([`/product-detail-card/${productId}`]);
-  }
-
-  toggleFavorite(productId: number) {
-    if (this.favoriteProducts.has(productId)) {
-      this.favoriteProducts.delete(productId);
-    } else {
-      this.favoriteProducts.add(productId);
-    }
+    this.router.navigate([`/product-detail/${productId}`]);
   }
 
   isFavorite(productId: number): boolean {
-    return this.favoriteProducts.has(productId);
+    return this.favoriteService.isFavorite(productId);
+  }
+
+  onFavoriteToggled(productId: number) {
+    if (this.isFavorite(productId)) {
+      this.favoriteService.removeFavorite(productId);
+    } else {
+      this.favoriteService.addFavorite(this.product);
+    }
   }
 
   toggleCart(productId: number) {
@@ -51,7 +53,7 @@ export class ProductCardComponent implements OnInit {
     return this.cartProducts.has(productId);
   }
 
-  trackByProductId(index: number, product: iProduct): number {
-    return product.id;
-  }
+  // trackByProductId(index: number, product: iProduct): number {
+  //   return product.id;
+  // }
 }

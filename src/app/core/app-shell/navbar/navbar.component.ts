@@ -21,12 +21,15 @@ export class NavbarComponent implements OnInit, OnDestroy {
   constructor(private searchService: SearchService, private router: Router) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        // Hide search on 'Categories' and 'My Account' routes
-        const hiddenRoutes = ['/category', '/profile', '/sign-in', '/sign-in/sign-up'];
-        this.searchVisible = !hiddenRoutes.includes(event.url);
+        const hiddenRoutes = ['/category', '/profile', '/sign-in', '/sign-in/sign-up', '/favorite', '/cart'];
+        
+        const isHiddenRoute = hiddenRoutes.includes(event.url) || event.url.includes('/product-detail');
+  
+        this.searchVisible = !isHiddenRoute;
       }
     });
   }
+  
 
   ngOnInit() {
     this.searchSubscription = this.searchInput.valueChanges.pipe(
