@@ -10,21 +10,20 @@ import { AuthService } from '../services/auth.service'
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(private authService: AuthService) {}
+  constructor() {}
 
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    this.authService.currentUser.subscribe((currentUser) => {
-      if (currentUser && currentUser.token) {
-        req = req.clone({
-          setHeaders: {
-            Authorization: `Bearer ${currentUser.token}`,
-          },
-        })
-      }
-    })
+    const token = localStorage.getItem('token')
+    if (token) {
+      req = req.clone({
+        setHeaders: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+    }
     return next.handle(req)
   }
 }

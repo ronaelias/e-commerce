@@ -1,12 +1,17 @@
-import { createActionGroup, props } from '@ngrx/store'
+import { createAction, props } from '@ngrx/store'
 import { iSignUpRequest } from '../models/sign-up-request.model'
-import { iSignUpResponse } from '../models/sign-up-response.model'
 
-export const SignUpActions = createActionGroup({
-  source: 'Sign Up',
-  events: {
-    'Sign Up': props<{ request: iSignUpRequest }>(),
-    'Sign Up Success': props<{ response: iSignUpResponse }>(),
-    'Sign Up Failure': props<{ error: any }>(),
-  },
-})
+export const signUp = createAction(
+  'Sign Up',
+  props<{ signUpRequest: iSignUpRequest }>()
+)
+
+export const signUpSuccess = createAction(
+  'Sign Up Success',
+  props<{ user: any }>()
+)
+
+export const signUpFailure = createAction(
+  'Sign Up Failure',
+  props<{ error: any }>()
+)

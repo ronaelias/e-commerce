@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { ProductService } from '../../../services/product.service'
 import { iProduct } from '../../../../shared/models/product.model'
@@ -48,6 +48,19 @@ export class ProductDetailComponent implements OnInit {
       this.currentCategory = this.product.category
       this.loadProducts()
     })
+
+    this.route.paramMap.subscribe((params) => {
+      const productId = +params.get('id')!
+      this.loadProduct(productId)
+    })
+  }
+
+  loadProduct(productId: number): void {
+    this.productService.getProductById(productId).subscribe((product) => {
+      this.product = { ...product, quantity: product.quantity || 1 }
+      this.currentCategory = this.product.category
+      this.loadProducts() // Load similar products
+    })
   }
 
   loadProducts(): void {
@@ -84,10 +97,6 @@ export class ProductDetailComponent implements OnInit {
 
   isInCart(productId: number): boolean {
     return this.cartProducts.has(productId)
-  }
-
-  addToCart() {
-    // Implement add to cart logic
   }
 
   // trackByProductId(index: number, product: iProduct): number {

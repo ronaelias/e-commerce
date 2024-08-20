@@ -13,6 +13,7 @@ import { ProductCardComponent } from './shared/components/products-card/product-
 import { UserProfileComponent } from './features/user-profile/user-profile.component'
 import { FavoriteComponent } from './features/favorite/favorite.component'
 import { CartComponent } from './features/cart/cart.component'
+import { CheckoutComponent } from './features/checkout/checkout.component'
 
 const routes: Routes = [
   {
@@ -34,9 +35,14 @@ const routes: Routes = [
   },
   //{ path: 'product-detail', component: ProductDetailComponent },
   { path: 'product-card', component: ProductCardComponent },
-  { path: 'profile', component: UserProfileComponent },
+  {
+    path: 'profile',
+    component: UserProfileComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'favorite', component: FavoriteComponent },
   { path: 'cart', component: CartComponent },
+  { path: 'checkout', component: CheckoutComponent },
   {
     path: 'sign-in',
     loadChildren: () =>

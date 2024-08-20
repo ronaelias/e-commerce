@@ -1,60 +1,188 @@
-$text-color: hsl(267, 6%, 27%); // Grey
-$background-color: #f5f5f5; // Beige
-$background-color-bold: #504a58; // Darker Grey
-$forgot-password-color: #1e1e1e; // Black
-$padding: 8px;
-$border-radius: 8px;
-$margin: 8px;
-$width: 400px;
-$page-margin: 120px;
-$font-size-large: 18px;
-$font-size-medium: 16px;
+$color: #333;
+$background-color: #00a693; // Persian Green
+$background-color-dark: #007f6e; // Darker Persian Green
+$background-color-sub: #f9f9f9;
+$container-color: #fff; // White
+$error-color: #ff0000; // Red
+$button-bg-color: #ef98aa; // Mauvelous
+$shadow: rgba(0, 0, 0, 0.1);
+$font-family: Arial, sans-serif;
+$height: 100vh;
+$nav-height: 100px;
+$font-size: 14px;
+$error-font-size: 12px;
+$container-padding: 2rem;
+$padding-left: 50px;
+$container-border-radius: 8px;
+$input-padding: 10px;
+$input-margin-bottom: 15px;
+$button-padding: 12px;
+$margin-bottom: 5px;
+$max-width: 400px;
+$border-radius: 4px;
 
+// Styles
 .all {
   display: flex;
   justify-content: center;
-  margin-top: $page-margin;
+  align-items: center;
+  height: $height;
+  background-color: $background-color;
+  font-family: $font-family;
 }
 
-h2 {
-  color: $text-color;
-  text-align: center;
-  font-size: $font-size-large;
-  margin-bottom: $margin;
+.welcome-section {
+  flex: 1;
+  padding-left: $padding-left;
+  text-align: left;
+  color: $container-color;
+}
+
+.welcome-section h1 {
+  font-size: $error-font-size * 4;
+  margin-bottom: $margin-bottom * 4;
+}
+
+.welcome-section .welcome-message {
+  font-size: $error-font-size * 2;
+}
+
+.form-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
 }
 
 .sign-in-container {
-  color: $text-color;
-  width: $width;
-  border: 1px solid $text-color;
+  margin-top: $nav-height;
+  margin-bottom: $nav-height;
+  background-color: $container-color;
+  padding: $container-padding;
+  border-radius: $container-border-radius;
+  box-shadow: 0px 4px 15px $shadow;
+  width: 100%;
+  max-width: $max-width;
+  text-align: start;
+}
+
+.label {
+  display: block;
+  margin-bottom: $margin-bottom;
+  font-weight: bold;
+  color: $background-color;
+  border: none;
+}
+
+.input-field {
+  display: block;
+  width: 95%;
+  margin-bottom: $input-margin-bottom;
+  padding: $input-padding;
+  font-size: $font-size;
+  border: 1px solid $background-color;
   border-radius: $border-radius;
-  background-color: $background-color;
-  margin: $margin;
-  padding: $padding * 2;
+  background-color: $background-color-sub;
+}
+
+.input-field:focus {
+  border-color: $background-color-dark;
+  outline: none;
+  background-color: $container-color;
+}
+
+h2 {
+  text-align: center;
+  font-size: $error-font-size * 2;
+  margin-bottom: $margin-bottom * 4;
+  color: $color;
+}
+
+.error-message {
+  color: $error-color;
+  font-size: $error-font-size;
+  margin-bottom: $input-padding;
 }
 
 .button-container {
-  font-size: $font-size-large;
-  color: $background-color;
-  background-color: $text-color;
+  background-color: $background-color;
+  color: $container-color;
+  border: none;
+  padding: $button-padding;
+  font-size: $font-size;
   border-radius: $border-radius;
-  border-color: $text-color;
   width: 100%;
-  text-align: center;
-  margin: $margin 0;
-  padding: $padding;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
 
-  &:hover {
-    background-color: $background-color-bold;
-    cursor: pointer;
+.button-container:disabled {
+  background-color: $button-bg-color;
+  cursor: not-allowed;
+}
+
+.button-container:hover:not(:disabled) {
+  background-color: $background-color-dark;
+}
+
+.forgot-password {
+  display: inline-block;
+  margin-top: $input-padding;
+  color: $background-color;
+  text-decoration: none;
+  font-size: $font-size;
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
+  color: $button-bg-color;
+}
+
+@media (max-width: 480px) {
+  .sign-in-container {
+    padding: 1.5rem;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  .items-container,
+  .button-container {
+    font-size: 13px;
   }
 }
 
-.items-container {
-  margin: $margin;
-  padding: $padding;
-  width: 90%;
-}
-.forgot-password {
-  color: $forgot-password-color;
+.all {
+  .form-section {
+    .sign-in-container {
+      position: relative; /* Ensure the container is positioned relative for absolute positioning of the overlay */
+
+      .button-container-wrapper {
+        position: relative;
+
+        .button-container {
+          position: relative; /* Ensure the button is positioned relative for the overlay */
+        }
+
+        .error-overlay {
+          position: absolute;
+          top: -30px; /* Adjust as needed to position the error message correctly */
+          left: 0;
+          width: 100%;
+          background-color: rgba(
+            255,
+            0,
+            0,
+            0.7
+          ); /* Red background with opacity */
+          color: #fff; /* White text color */
+          padding: 8px;
+          text-align: center;
+          border-radius: 4px;
+          font-size: 14px;
+          z-index: 10; /* Ensure it's on top of other elements */
+        }
+      }
+    }
+  }
 }

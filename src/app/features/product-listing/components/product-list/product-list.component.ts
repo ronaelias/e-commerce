@@ -14,7 +14,7 @@ import { SortService } from '../../../services/sort.service'
   styleUrls: ['./product-list.component.scss'],
 })
 export class ProductListComponent implements OnInit {
-  userName: string | null = ''
+  Firstname: string | null = ''
   products$!: Observable<iProduct[]>
   filteredProducts$!: Observable<iProduct[]>
   searchQuery$: BehaviorSubject<string> = new BehaviorSubject<string>('')
@@ -123,7 +123,7 @@ export class ProductListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userName = localStorage.getItem('name')
+    this.Firstname = localStorage.getItem('Firstname')
     this.products$ = this.productService.getAllProducts()
     this.searchService.searchQuery$.subscribe((query) => {
       this.searchQuery$.next(query)

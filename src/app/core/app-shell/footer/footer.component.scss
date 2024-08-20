@@ -1,59 +1,71 @@
-$background-color: #ffffff;
-$text-color: #1e1e1e; // dark grey
-$text-color-sub: #45414a; // grey
-$padding: 20px;
-$padding-sub: 15px;
-$margin-bottom-h3: 15px;
-$margin-bottom: 10px;
-$width: 100%;
-$footer-padding: 40px 0;
-$font-size-h3: 16px;
-$font-size-link: 14px;
-$max-width: 1200px;
-$footer-column-min-width: 200px;
+$footer-background: #f9f9f9;
+$footer-text-color: #333;
+$footer-link-color: #00a693;
+$footer-link-hover-color: #007f6e;
+$padding: 0.5rem;
+$footer-column-width: 30%;
+$footer-heading-font-size: 16px;
+$footer-link-font-size: 14px;
+$footer-border-color: #ddd;
 
 .footer {
-  background-color: $background-color;
-  padding: $footer-padding;
-  color: $text-color;
+  background-color: $footer-background;
+  color: $footer-text-color;
+  padding: $padding * 4;
   text-align: center;
-  width: $width;
+  box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.1);
 
   .footer-container {
     display: flex;
-    justify-content: space-between;
-    max-width: $max-width;
-    margin: 0 auto;
-    padding: 0 $padding-sub;
+    justify-content: space-around;
+    flex-wrap: wrap;
 
     .footer-column {
-      flex: 1;
-      padding: 0 $padding;
-      min-width: $footer-column-min-width;
+      width: $footer-column-width;
 
       h3 {
-        font-size: $font-size-h3;
-        font-weight: bold;
-        color: $text-color;
-        margin-bottom: $margin-bottom-h3;
+        font-size: $footer-heading-font-size;
+        margin-bottom: $padding * 2;
+        color: $footer-text-color;
       }
 
       ul {
         list-style: none;
         padding: 0;
+        margin: 0;
 
         li {
-          margin-bottom: $margin-bottom;
+          margin-bottom: $padding;
 
           a {
-            color: $text-color-sub;
             text-decoration: none;
-            font-size: $font-size-link;
+            color: $footer-link-color;
+            font-size: $footer-link-font-size;
 
             &:hover {
-              text-decoration: underline;
+              color: $footer-link-hover-color;
             }
           }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    text-align: left;
+
+    .footer-container {
+      display: block;
+
+      .footer-column {
+        width: 100%;
+        margin-bottom: 2rem;
+        border-bottom: 1px solid $footer-border-color;
+
+        &:last-child {
+          border-bottom: none;
         }
       }
     }

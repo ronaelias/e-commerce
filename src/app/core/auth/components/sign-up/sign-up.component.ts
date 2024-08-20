@@ -1,6 +1,10 @@
 import { Component, ViewChild, ElementRef } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
+import { Store } from '@ngrx/store'
+import { iSignUpRequest } from '../../models/sign-up-request.model'
+import { signUp } from '../../sign-up-state/sign-up.action'
+import { IndexedDBService } from '../../../../shared/services/indexed-db.service'
 
 @Component({
   selector: 'app-sign-up',
@@ -8,66 +12,43 @@ import { Router } from '@angular/router'
   styleUrls: ['./sign-up.component.scss'],
 })
 export class SignUpComponent {
-  signUpForm: FormGroup
+  signUpForm!: FormGroup
 
-  @ViewChild('surnameInput') surnameInput!: ElementRef
-  @ViewChild('dobInput') dobInput!: ElementRef
+  @ViewChild('lastnameInput') lastnameInput!: ElementRef
   @ViewChild('emailInput') emailInput!: ElementRef
   @ViewChild('passwordInput') passwordInput!: ElementRef
-  @ViewChild('paymentMethodInput') paymentMethodInput!: ElementRef
-  @ViewChild('countryInput') countryInput!: ElementRef
-  @ViewChild('telephoneInput') telephoneInput!: ElementRef
-  @ViewChild('regionInput') regionInput!: ElementRef
-  @ViewChild('cityInput') cityInput!: ElementRef
-  @ViewChild('streetAndNumberInput') streetAndNumberInput!: ElementRef
-  @ViewChild('stairwayAndFloorInput') stairwayAndFloorInput!: ElementRef
   @ViewChild('signUpButton') signUpButton!: ElementRef
 
   constructor(
     private fb: FormBuilder,
-    private router: Router
-  ) {
+    private router: Router,
+    private store: Store,
+    private indexedDBService: IndexedDBService
+  ) {}
+
+  ngOnInit() {
     this.signUpForm = this.fb.group({
-      name: ['', Validators.required],
-      surname: ['', Validators.required],
-      dob: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
-      paymentMethod: ['', Validators.required],
-      country: ['', Validators.required],
-      telephone: ['', Validators.required],
-      streetAndNumber: ['', Validators.required],
-      stairwayAndFloor: [''],
-      region: ['', Validators.required],
-      city: ['', Validators.required],
+      Firstname: ['', Validators.required],
+      Lastname: ['', Validators.required],
+      Email: ['', [Validators.required, Validators.email]],
+      Password: ['', [Validators.required, Validators.minLength(8)]],
     })
   }
 
   onSubmit() {
-    if (this.signUpForm.invalid) {
-      return
+    if (this.signUpForm.valid) {
+      const signUpRequest: iSignUpRequest = {
+        Firstname: this.signUpForm.value.Firstname,
+        Lastname: this.signUpForm.value.Lastname,
+        Email: this.signUpForm.value.Email,
+        Password: this.signUpForm.value.Password,
+        Rolename: 'rolename',
+      }
+      this.store.dispatch(signUp({ signUpRequest }))
+    } else {
+      console.log('Email already used')
+      alert('Email already used')
     }
-
-    const user = this.signUpForm.value
-    localStorage.setItem('name', user.name)
-
-    // Retrieve users from localStorage
-    const users = JSON.parse(localStorage.getItem('users') || '[]')
-    users.push(user)
-
-    // Save users array in localStorage
-    localStorage.setItem('users', JSON.stringify(users))
-
-    // Save the last user's data as currentUser
-    localStorage.setItem('currentUser', JSON.stringify(user))
-
-    console.warn(this.signUpForm.value)
-    alert('Sign Up successful')
-    this.router.navigate(['/product-listing'])
-  }
-
-  get f() {
-    return this.signUpForm.controls
   }
 
   onKeydown(event: KeyboardEvent, nextInput: HTMLInputElement) {

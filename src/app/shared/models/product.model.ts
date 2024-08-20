@@ -4,7 +4,7 @@ export interface iProduct {
   price: number
   title: string
   color: string
-  size: number
+  size: string
   quantity: number
   category: string
   rating: number

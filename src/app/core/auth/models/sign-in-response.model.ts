@@ -1,5 +1,5 @@
 export interface iSignInResponse {
-  SignIn: {
+  Login: {
     AccessToken: string
     ExpiresIn: number
     RefreshExpiresIn: number

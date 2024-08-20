@@ -1,348 +1,185 @@
-$border-color: rgba(0, 0, 0, 0.2);
-$background-color: #ffffff;
-$title-color: #1e1e1e;
-$specs-color: #555;
-$text-color: #1e1e1e;
-$button-bg-color: #f0f0f0;
-$button-hover-bg-color: #ddd;
-$btn-text-color: #ffffff;
-$padding-small: 6px;
-$padding-medium: 12px;
-$padding-large: 16px;
-$margin-small: 6px;
-$margin-medium: 12px;
-$margin-large: 20px;
-$gap-small: 6px;
-$gap-medium: 10px;
-$gap-large: 12px;
-$font-size-small: 14px;
-$font-size-medium: 18px;
-$font-size-large: 22px;
-$font-size-xlarge: 26px;
-$border-radius: 8px;
-$image-width: 180px;
-$btn-width: 355px;
-$btn-height: 36px;
-$quantity-btn-size: 36px;
 $nav-height: 60px;
-$padding-navbar: 16px;
+$card-margin-top: $nav-height;
+$card-padding: 10px;
+$card-border-color: #ddd;
+$border-radius: 4px;
+$card-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+$img-size: 400px;
+$info-align: flex-start;
+$title-font-size: 2rem;
+$title-color: #007f6e;
+$price-font-size: 1.5rem;
+$error-color: #e60023;
+$price-color: #ef98aa;
+$description-font-size: 1rem;
+$description-color: #555;
+$options-gap: 10px;
+$btn-size: 40px;
+$size-btn-bg-color: #f9f9f9;
+$margin: 10px;
+$quantity-controls-gap: 10px;
+$quantity-btn-decrement-bg-color: #f0f0f0;
+$quantity-btn-increment-bg-color: #e0e0e0;
+$actions-gap: 20px;
+$cart-bg-color: #00a693;
+$cart-text-color: #fff;
+$cart-padding: 12px 320px;
+$cart-hover-bg-color: #ef98aa;
+$cart-added-bg-color: #007f6e;
+$error-font-size: 0.9rem;
+$no-product-font-size: 1.2rem;
+$no-product-color: #777;
 
 .product-detail-card {
+  margin-top: $card-margin-top;
   display: flex;
-  background-color: $background-color;
+  flex-direction: row;
+  max-width: $img-size * 3;
+  margin-left: auto;
+  margin-right: auto;
+  padding: $card-padding;
+  border: 1px solid $card-border-color;
+  border-radius: $border-radius * 2;
+  background-color: $cart-text-color;
+  box-shadow: $card-shadow;
+}
+
+/* Image section */
+.product-detail-img {
+  flex: 1;
+  padding-right: $card-padding * 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-img {
+  width: $img-size;
+  height: $img-size;
+  border-radius: $border-radius * 2;
+}
+
+.product-detail-info {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: $info-align;
+}
+
+.product-title {
+  font-size: $title-font-size;
+  font-weight: bold;
+  color: $title-color;
+}
+
+.product-price {
+  font-size: $price-font-size;
+  color: $price-color;
+}
+
+.product-description {
+  font-size: $description-font-size;
+  color: $description-color;
+}
+
+.color-options,
+.size-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $options-gap;
+}
+
+.color-btn,
+.size-btn {
+  border: 1px solid $card-border-color;
   border-radius: $border-radius;
-  border: 1px solid $border-color;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin: $margin-medium auto;
-  padding: $padding-small $padding-navbar;
-  max-width: 1100px;
-  margin-top: $nav-height;
-  height: auto;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
 
-  .product-detail-img {
-    flex: 0 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-right: $padding-small;
-    margin: 0 $margin-large;
-  }
+.color-btn {
+  width: $btn-size;
+  height: $btn-size;
+  background-color: $cart-text-color;
+}
 
-  .product-detail-info {
-    flex: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+.color-btn.active {
+  border: 4px solid $cart-bg-color;
+}
 
-    .product-title {
-      font-size: $font-size-large;
-      color: $title-color;
-      margin-bottom: $padding-small;
-    }
+.size-btn {
+  width: $btn-size;
+  height: $btn-size;
+  background-color: $size-btn-bg-color;
+}
 
-    .product-price {
-      font-size: $font-size-xlarge;
-      color: $text-color;
-      margin-bottom: $padding-medium;
-    }
+.size-btn.active {
+  background-color: $cart-bg-color;
+  color: $cart-text-color;
+}
 
-    .product-description {
-      font-size: $font-size-small;
-      color: $specs-color;
-      margin-bottom: $padding-medium;
-      text-align: left;
-    }
+.quantity-section {
+  margin-bottom: $margin;
+}
 
-    .color-options,
-    .size-options {
-      display: flex;
-      gap: $gap-medium;
-      margin-bottom: $padding-medium;
-    }
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: $quantity-controls-gap;
+}
 
-    .color-btn,
-    .size-btn {
-      width: $quantity-btn-size;
-      height: $quantity-btn-size;
-      border: 1px solid $border-color;
-      border-radius: $border-radius;
-      cursor: pointer;
-    }
+.quantity-btn {
+  width: $btn-size;
+  height: $btn-size;
+  border: 1px solid $card-border-color;
+  border-radius: $border-radius;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
 
-    .color-btn.black {
-      background-color: black;
-    }
+.quantity-btn.decrement {
+  background-color: $quantity-btn-decrement-bg-color;
+}
 
-    .color-btn.pink {
-      background-color: pink;
-    }
-
-    .color-btn.blue {
-      background-color: blue;
-    }
-
-    .color-btn.red {
-      background-color: red;
-    }
-
-    .color-btn.green {
-      background-color: green;
-    }
-
-    .color-btn.yellow {
-      background-color: yellow;
-    }
-
-    .size-btn {
-      width: $quantity-btn-size;
-      text-align: center;
-      background-color: $background-color;
-      color: $title-color;
-    }
-
-    .size-btn.active,
-    .color-btn.active {
-      border: 4px solid $title-color;
-    }
-  }
+.quantity-btn.increment {
+  background-color: $quantity-btn-increment-bg-color;
 }
 
 .product-actions {
   display: flex;
-  gap: $gap-large;
-  margin-bottom: $padding-medium;
-
-  .add-to-cart {
-    background-color: $text-color;
-    color: $btn-text-color;
-    border: none;
-    padding: $padding-small $btn-width;
-    border-radius: $border-radius;
-    cursor: pointer;
-    font-size: $font-size-small;
-    font-weight: bold;
-
-    &:hover {
-      background-color: darken($text-color, 10%);
-    }
-  }
+  gap: $actions-gap;
 }
 
-.quantity-section {
-  margin-bottom: $padding-medium;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-
-  p {
-    margin-bottom: $padding-small;
-  }
-
-  .quantity-controls {
-    display: flex;
-    align-items: center;
-    gap: $gap-small;
-
-    .quantity-btn {
-      width: $quantity-btn-size;
-      height: $quantity-btn-size;
-      background-color: $button-bg-color;
-      border: 1px solid $border-color;
-      border-radius: 5px;
-      font-size: $font-size-medium;
-      cursor: pointer;
-
-      &:hover {
-        background-color: $button-hover-bg-color;
-      }
-    }
-
-    .quantity {
-      font-size: $font-size-medium;
-      font-weight: bold;
-      margin-left: $gap-large;
-      margin-right: $gap-large;
-    }
-  }
+.add-to-cart {
+  background-color: $cart-bg-color;
+  color: $cart-text-color;
+  border: none;
+  border-radius: $border-radius;
+  padding: $cart-padding;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-// .product-detail-card {
-//   display: flex;
-//   background-color: $background-color;
-//   border-radius: $border-radius;
-//   border: 1px solid $border-color;
-//   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-//   margin: $margin-medium auto;
-//   padding: $padding-small $padding-navbar;
-//   max-width: 1100px;
-//   margin-top: $nav-height;
-//   height: auto;
-//   flex-wrap: wrap;
+.add-to-cart.added {
+  background-color: $cart-added-bg-color;
+}
 
-//   .product-detail-img {
-//     flex: 0 0 auto;
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     padding-right: $padding-small;
-//     margin: 0 $margin-large;
-//   }
+.add-to-cart:hover {
+  background-color: $cart-hover-bg-color;
+}
 
-//   .product-detail-info {
-//     flex: 2;
-//     display: flex;
-//     flex-direction: column;
-//     align-items: flex-start;
+.error-message {
+  color: $error-color;
+  font-size: $error-font-size;
+  margin-top: $margin;
+}
 
-//     .product-title {
-//       font-size: $font-size-large;
-//       color: $title-color;
-//       margin-bottom: $padding-small;
-//     }
+ng-template p {
+  text-align: center;
+  font-size: $no-product-font-size;
+  color: $no-product-color;
+}
 
-//     .product-price {
-//       font-size: $font-size-xlarge;
-//       color: $text-color;
-//       margin-bottom: $padding-medium;
-//     }
-
-//     .product-description {
-//       font-size: $font-size-small;
-//       color: $specs-color;
-//       margin-bottom: $padding-medium;
-//       text-align: left;
-//     }
-
-//     .color-options,
-//     .size-options {
-//       display: flex;
-//       flex-wrap: wrap;
-//       gap: $gap-medium;
-//       margin-bottom: $padding-medium;
-//     }
-
-//     .color-btn,
-//     .size-btn {
-//       width: $quantity-btn-size;
-//       height: $quantity-btn-size;
-//       border: 1px solid $border-color;
-//       border-radius: $border-radius;
-//       cursor: pointer;
-//       display: flex;
-//       align-items: center;
-//       justify-content: center;
-//       background-color: $background-color;
-//       color: $title-color;
-//       font-size: $font-size-small;
-//       margin-right: $gap-small; /* Add spacing between buttons */
-//     }
-
-//     .color-btn.black { background-color: black; }
-//     .color-btn.pink { background-color: pink; }
-//     .color-btn.blue { background-color: blue; }
-//     .color-btn.red { background-color: red; }
-//     .color-btn.green { background-color: green; }
-//     .color-btn.yellow { background-color: yellow; }
-
-//     .color-btn.active,
-//     .size-btn.active {
-//       border: 4px solid $title-color;
-//     }
-
-//     .error {
-//       color: red;
-//       font-size: $font-size-small;
-//     }
-//   }
-
-//   .product-actions {
-//     display: flex;
-//     gap: $gap-large;
-//     margin-top: $padding-medium;
-//     margin-bottom: $padding-medium;
-//     flex: 1;
-//     align-items: center; /* Center items vertically */
-//     flex-wrap: wrap; /* Allow wrapping if there's not enough space */
-//     max-width: 100%; /* Ensure it does not exceed the card width */
-//     width: 100%; /* Full width within the card */
-//     margin-left: auto; /* Align to the right of the card */
-//   }
-
-//   .add-to-cart {
-//     background-color: $text-color;
-//     color: $btn-text-color;
-//     border: none;
-//     padding: $padding-small $btn-width;
-//     border-radius: $border-radius;
-//     cursor: pointer;
-//     font-size: $font-size-small;
-//     font-weight: bold;
-//     width: 100%; /* Full width within the product-actions container */
-//     max-width: 200px; /* Set a max-width for the button */
-//     text-align: center; /* Center text inside the button */
-
-//     &:hover {
-//       background-color: darken($text-color, 10%);
-//     }
-//   }
-
-//   .quantity-section {
-//     margin-bottom: $padding-medium;
-//     width: 100%;
-//     display: flex;
-//     flex-direction: column;
-//     align-items: flex-start;
-
-//     p {
-//       margin-bottom: $padding-small;
-//     }
-
-//     .quantity-controls {
-//       display: flex;
-//       align-items: center;
-//       gap: $gap-small;
-
-//       .quantity-btn {
-//         width: $quantity-btn-size;
-//         height: $quantity-btn-size;
-//         background-color: $button-bg-color;
-//         border: 1px solid $border-color;
-//         border-radius: 5px;
-//         font-size: $font-size-medium;
-//         cursor: pointer;
-
-//         &:hover {
-//           background-color: $button-hover-bg-color;
-//         }
-//       }
-
-//       .quantity {
-//         font-size: $font-size-medium;
-//         font-weight: bold;
-//         margin-left: $gap-large;
-//         margin-right: $gap-large;
-//       }
-//     }
-//   }
-// }
+p {
+  text-align: start;
+}

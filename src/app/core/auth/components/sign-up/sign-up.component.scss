@@ -1,89 +1,149 @@
-$text-color: #45414a; //grey
-$background-color: #f3ede5; //beige
-$background-color-bold: #504a58;
-$background-color-light: #f0e8de;
-$padding: 4px;
-$border-radius: 8px;
-$margin: 8px;
-$width: 400px;
-$nav-height: 60px;
-$font-size-large: 18px;
-$font-size-medium: 16px;
+$color: #333;
+$background-color: #00a693; // Persian Green
+$background-color-dark: #007f6e; // Darker Persian Green
+$background-color-sub: #f9f9f9;
+$container-color: #fff; // White
+$error-color: #ff0000; // Red
+$button-bg-color: #ef98aa; // Mauvelous
+$shadow: rgba(0, 0, 0, 0.1);
+$font-family: Arial, sans-serif;
+$height: 100vh;
+$nav-height: 200px;
+$font-size: 14px;
+$error-font-size: 12px;
+$container-padding: 2rem;
+$padding-left: 50px;
+$container-border-radius: 8px;
+$input-padding: 10px;
+$input-margin-bottom: 15px;
+$button-padding: 12px;
+$margin-bottom: 5px;
+$max-width: 400px;
+$border-radius: 4px;
 
 .all {
   display: flex;
   justify-content: center;
-  margin-top: $nav-height;
+  align-items: center;
+  height: $height;
+  background-color: $background-color;
+  font-family: $font-family;
+  padding-top: $container-padding * 3;
+  padding-bottom: $container-padding;
 }
 
-.sign-up-container {
-  color: $text-color;
-  width: $width;
-  border: 1px solid $text-color;
+.welcome-section {
+  flex: 1;
+  padding-left: $padding-left;
+  text-align: left;
+  color: $container-color;
+}
+
+.welcome-section h1 {
+  font-size: $error-font-size * 4;
+  margin-bottom: $margin-bottom * 4;
+}
+
+.welcome-section .welcome-message {
+  font-size: $error-font-size * 2;
+}
+
+.form-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.sign-in-container {
+  margin-top: $nav-height;
+  margin-bottom: $nav-height;
+  background-color: $container-color;
+  padding: $container-padding;
+  border-radius: $container-border-radius;
+  box-shadow: 0px 4px 15px $shadow;
+  width: 100%;
+  max-width: $max-width;
+  text-align: start;
+}
+
+.label {
+  display: block;
+  margin-bottom: $margin-bottom;
+  font-weight: bold;
+  color: $background-color;
+  border: none;
+}
+
+.input-field {
+  display: block;
+  width: 95%;
+  margin-bottom: $input-margin-bottom;
+  padding: $input-padding;
+  font-size: $font-size;
+  border: 1px solid $background-color;
   border-radius: $border-radius;
-  background-color: $background-color;
-  margin: $margin;
-  padding: $padding * 2;
+  background-color: $background-color-sub;
+}
 
-  h2 {
-    color: $text-color;
-    text-align: center;
-    font-size: $font-size-large;
-    margin-bottom: $margin;
-  }
+.input-field:focus {
+  border-color: $background-color-dark;
+  outline: none;
+  background-color: $container-color;
+}
 
-  .section-container {
-    margin-bottom: $margin;
+h2 {
+  text-align: center;
+  font-size: $error-font-size * 2;
+  margin-bottom: $margin-bottom * 4;
+  color: $color;
+}
 
-    h3 {
-      color: $text-color;
-      font-size: $font-size-medium;
-      margin-bottom: $margin;
-      border-bottom: 1px solid $text-color;
-      padding-bottom: $padding;
-    }
-  }
+.error-message {
+  color: $error-color;
+  font-size: $error-font-size;
+  margin-bottom: $input-padding;
 }
 
 .button-container {
-  font-size: larger;
-  color: $background-color;
-  background-color: $text-color;
+  background-color: $background-color;
+  color: $container-color;
+  border: none;
+  padding: $button-padding;
+  font-size: $font-size;
   border-radius: $border-radius;
-  border-color: $text-color;
-  width: 93%;
-  text-align: center;
-  margin: $margin;
-  padding: $padding;
-
-  &:hover {
-    background-color: $background-color-bold;
-    cursor: pointer;
-  }
-
-  &.btn1 {
-    color: $text-color;
-    background-color: $background-color;
-    border-color: $background-color;
-  }
-
-  &.btn1:hover {
-    background-color: $background-color-light;
-  }
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.items-container {
-  margin: $margin;
-  padding: $padding;
-  width: 90%;
+.button-container:disabled {
+  background-color: $button-bg-color;
+  cursor: not-allowed;
 }
 
-.name-container {
-  display: flex;
-  width: 95%;
+.button-container:hover:not(:disabled) {
+  background-color: $background-color-dark;
 }
 
-.btn-container {
-  display: flex;
-  width: 97%;
+.account {
+  display: inline-block;
+  margin-top: $input-padding;
+  color: $background-color;
+  text-decoration: none;
+  font-size: $font-size;
+}
+
+@media (max-width: 480px) {
+  .sign-in-container {
+    padding: 1.5rem;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  .items-container,
+  .button-container {
+    font-size: 13px;
+  }
 }

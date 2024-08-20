@@ -1,168 +1,104 @@
-<h1 class="user">User Profile</h1>
-<form [formGroup]="userProfileForm" (ngSubmit)="saveChanges()">
-  <div class="form-container">
-    <div class="profile-section left-section">
-      <div class="icon-container">
-        <img src="assets/profile.png" alt="Profile Icon" class="profile-icon" />
-      </div>
-      <h3>Personal Details</h3>
-      <div class="profile-item">
-        <label for="name">Name:</label>
-        <input id="name" formControlName="name" placeholder="Enter name" />
-        <div *ngIf="f['name'].errors?.['required']" class="error-message">
-          This field is required!
-        </div>
-      </div>
-      <div class="profile-item">
-        <label for="surname">Surname:</label>
-        <input
-          id="surname"
-          formControlName="surname"
-          placeholder="Enter surname"
-        />
-        <div *ngIf="f['surname'].errors?.['required']" class="error-message">
-          This field is required!
-        </div>
-      </div>
-      <div class="profile-item">
-        <label for="telephone">Telephone:</label>
-        <input
-          id="telephone"
-          formControlName="telephone"
-          placeholder="Enter telephone"
-        />
-        <div *ngIf="f['telephone'].errors?.['required']" class="error-message">
-          This field is required!
-        </div>
-      </div>
-      <div class="profile-item">
-        <label for="dob">Date of Birth:</label>
-        <input
-          id="dob"
-          formControlName="dob"
-          placeholder="Enter date of birth"
-        />
-        <div *ngIf="f['dob'].errors?.['required']" class="error-message">
-          This field is required!
-        </div>
-      </div>
-
-      <div class="actions">
-        <button
-          type="submit"
-          class="save-changes"
-          [disabled]="userProfileForm.invalid"
-        >
-          Save Changes
-        </button>
-        <button type="button" class="sign-out" (click)="SignOut()">
-          Sign Out
-        </button>
-      </div>
+<div class="profile-container">
+  <div class="left-section">
+    <div class="icon-container">
+      <img src="assets/profile.png" alt="Profile Icon" class="profile-icon" />
     </div>
-
-    <div class="right-section">
-      <div class="profile-section">
-        <h3>Billing Address</h3>
+    <div class="user-profile">
+      <h3>User Profile</h3>
+    </div>
+  </div>
+  <form
+    [formGroup]="userProfileForm"
+    (ngSubmit)="onSaveChanges()"
+    class="right-container"
+  >
+    <div class="profile-content">
+      <div class="profile-section personal-details">
+        <h3>Personal Details</h3>
         <div class="profile-item">
-          <label for="country">Country:</label>
+          <label for="Firstname" class="label">Firstname:</label>
           <input
-            id="country"
-            formControlName="country"
-            placeholder="Enter country"
-          />
-          <div *ngIf="f['country'].errors?.['required']" class="error-message">
-            This field is required!
-          </div>
-        </div>
-        <div class="profile-item">
-          <label for="region">Region:</label>
-          <input
-            id="region"
-            formControlName="region"
-            placeholder="Enter region"
-          />
-          <div *ngIf="f['region'].errors?.['required']" class="error-message">
-            This field is required!
-          </div>
-        </div>
-        <div class="profile-item">
-          <label for="city">City:</label>
-          <input id="city" formControlName="city" placeholder="Enter city" />
-          <div *ngIf="f['city'].errors?.['required']" class="error-message">
-            This field is required!
-          </div>
-        </div>
-        <div class="profile-item">
-          <label for="streetAndNumber">Street and Number:</label>
-          <input
-            id="streetAndNumber"
-            formControlName="streetAndNumber"
-            placeholder="Enter street and number"
+            id="Firstname"
+            formControlName="Firstname"
+            class="input-field"
+            placeholder="Enter Firstname"
           />
           <div
-            *ngIf="f['streetAndNumber'].errors?.['required']"
+            *ngIf="f['Firstname'].errors?.['required']"
             class="error-message"
           >
             This field is required!
           </div>
         </div>
         <div class="profile-item">
-          <label for="stairwayAndFloor">Stairway and Floor:</label>
+          <label for="Lastname" class="label">Lastname:</label>
           <input
-            id="stairwayAndFloor"
-            formControlName="stairwayAndFloor"
-            placeholder="Enter stairway and floor"
+            id="Lastname"
+            formControlName="Lastname"
+            class="input-field"
+            placeholder="Enter Lastname"
           />
+          <div *ngIf="f['Lastname'].errors?.['required']" class="error-message">
+            This field is required!
+          </div>
         </div>
       </div>
 
-      <div class="profile-section">
+      <div class="profile-section account-info">
         <h3>Account Information</h3>
         <div class="profile-item">
-          <label for="email">Email:</label>
+          <label for="Email" class="label">Email:</label>
           <input
-            id="email"
-            formControlName="email"
+            id="Email"
+            formControlName="Email"
             type="email"
+            class="input-field"
             placeholder="Enter email"
           />
-          <div *ngIf="f['email'].errors?.['required']" class="error-message">
+          <div *ngIf="f['Email'].errors?.['required']" class="error-message">
             This field is required!
           </div>
-          <div *ngIf="f['email'].errors?.['email']" class="error-message">
+          <div *ngIf="f['Email'].errors?.['email']" class="error-message">
             Invalid email
           </div>
         </div>
         <div class="profile-item">
-          <label for="password">Password:</label>
+          <label for="Password" class="label">Password:</label>
           <input
-            id="password"
-            formControlName="password"
+            id="Password"
+            formControlName="Password"
             type="password"
+            class="input-field"
             placeholder="Enter password"
           />
-          <div *ngIf="f['password'].errors?.['required']" class="error-message">
+          <div *ngIf="f['Password'].errors?.['required']" class="error-message">
             This field is required!
           </div>
           <div
-            *ngIf="f['password'].errors?.['minlength']"
+            *ngIf="f['Password'].errors?.['minlength']"
             class="error-message"
           >
             Password must be at least 8 characters
           </div>
         </div>
-
-        <div class="actions">
-          <button
-            type="button"
-            class="delete-account"
-            (click)="deleteAccount()"
-          >
-            Delete Account
-          </button>
-        </div>
       </div>
     </div>
-  </div>
-</form>
+
+    <div class="actions">
+      <button
+        type="submit"
+        class="button-container save-changes"
+        [disabled]="userProfileForm.invalid"
+      >
+        Save Changes
+      </button>
+      <button
+        type="button"
+        class="button-container sign-out"
+        (click)="SignOut()"
+      >
+        Sign Out
+      </button>
+    </div>
+  </form>
+</div>

@@ -18,25 +18,41 @@
 import { Injectable } from '@angular/core'
 import { Actions, createEffect, ofType } from '@ngrx/effects'
 import { of } from 'rxjs'
-import { catchError, map, mergeMap } from 'rxjs/operators'
+import { catchError, map, mergeMap, tap } from 'rxjs/operators'
 import { AuthService } from '../services/auth.service'
-import { SignInActions } from './sign-in.action'
+import { signIn, signInFailure, signInSuccess } from './sign-in.action'
+import { Router } from '@angular/router'
 
 @Injectable()
 export class SignInEffects {
   constructor(
     private actions$: Actions,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
+
+  navigateToProductList$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(signInSuccess),
+        tap(() => this.router.navigate(['/product-listing']))
+      ),
+    { dispatch: false }
+  )
 
   //listens for actions
   signIn$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(SignInActions.signIn),
+      ofType(signIn),
       mergeMap((action) =>
-        this.authService.signIn(action.request).pipe(
-          map((response) => SignInActions.signInSuccess({ response })),
-          catchError((error) => of(SignInActions.signInFailure({ error })))
+        this.authService.signIn(action.signInRequest).pipe(
+          map((response) =>
+            signInSuccess({
+              response,
+              Username: action.signInRequest.Username,
+            })
+          ),
+          catchError((error) => of(signInFailure({ error })))
         )
       )
     )

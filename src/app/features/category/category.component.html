@@ -1,4 +1,4 @@
-<div class="container">
+<div class="categories-page">
   <div class="category-list">
     <h3>Categories</h3>
     <ul>
@@ -7,10 +7,16 @@
         [class.selected-category]="selectedCategory === category"
         (click)="scrollToCategory(category)"
       >
+        <img
+          [src]="'assets/' + category + '.png'"
+          alt="{{ category }}"
+          class="category-image"
+        />
         {{ category | titlecase }}
       </li>
     </ul>
   </div>
+
   <div class="product-listing-container">
     <div
       *ngFor="let category of categories"

@@ -1,7 +1,6 @@
-import { NgModule } from '@angular/core'
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
 import { NavbarComponent } from './core/app-shell/navbar/navbar.component'
@@ -18,14 +17,12 @@ import { AuthService } from './core/auth/services/auth.service'
 import { AuthGuard } from './core/auth/guards/auth.guard'
 import { HTTP_INTERCEPTORS } from '@angular/common/http'
 import { ErrorInterceptor } from './core/auth/interceptors/error.interceptor'
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async'
 import { MatButtonModule } from '@angular/material/button'
 import { MatIconModule } from '@angular/material/icon'
 import { NgxPermissionsModule } from 'ngx-permissions'
 import { AdminComponent } from './features/admin/admin.component'
 import { WelcomeMessagePipe } from './shared/pipes/welcome-message.pipe'
 import { MatInputModule } from '@angular/material/input'
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { AgGridModule } from 'ag-grid-angular'
 import { DeleteButtonRendererComponent } from './shared/components/delete-button-renderer/delete-button-renderer.component'
 import {
@@ -45,12 +42,39 @@ import { FeaturesModule } from './features/features.module'
 import { FavoriteComponent } from './features/favorite/favorite.component'
 import { FavoriteButtonComponent } from './shared/components/favorite-button/favorite-button.component'
 import { CartComponent } from './features/cart/cart.component'
+import { StoreModule } from '@ngrx/store'
+import { EffectsModule } from '@ngrx/effects'
+import { signInReducer } from './core/auth/sign-in-state/sign-in.reducer'
+import { SignInEffects } from './core/auth/sign-in-state/sign-in.effect'
+import { signUpReducer } from './core/auth/sign-up-state/sign-up.reducer'
+import { SignUpEffects } from './core/auth/sign-up-state/sign-up.effect'
+import { NgxIndexedDBModule, DBConfig } from 'ngx-indexed-db'
+import { CheckoutComponent } from './features/checkout/checkout.component'
 
 ModuleRegistry.registerModules([
   MenuModule,
   SetFilterModule,
   FiltersToolPanelModule,
 ])
+
+const dbConfig: DBConfig = {
+  name: 'myEcommerceApp',
+  version: 1,
+  objectStoresMeta: [
+    {
+      store: 'cart',
+      storeConfig: { keyPath: 'id', autoIncrement: true },
+      storeSchema: [
+        {
+          name: 'product_id',
+          keypath: 'product_id',
+          options: { unique: false },
+        },
+        { name: 'title', keypath: 'title', options: { unique: false } },
+      ],
+    },
+  ],
+}
 
 @NgModule({
   declarations: [
@@ -69,6 +93,7 @@ ModuleRegistry.registerModules([
     FavoriteComponent,
     FavoriteButtonComponent,
     CartComponent,
+    CheckoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -80,18 +105,19 @@ ModuleRegistry.registerModules([
     BrowserAnimationsModule,
     MatButtonModule,
     MatIconModule,
-    NgxPermissionsModule.forRoot(),
     MatInputModule,
-    SignInComponent,
-    BrowserModule,
-    AppRoutingModule,
+    MatDatepickerModule,
+    NgxPermissionsModule.forRoot(),
     AgGridModule,
     GridModule,
     PagerModule,
-    MatDatepickerModule,
     FeaturesModule,
+    StoreModule.forRoot({}, {}),
+    StoreModule.forFeature('signIn', signInReducer),
+    StoreModule.forFeature('signUp', signUpReducer),
+    EffectsModule.forRoot([SignInEffects, SignUpEffects]),
+    NgxIndexedDBModule.forRoot(dbConfig),
   ],
-  exports: [ProductCardComponent],
   providers: [
     FilterService,
     AuthService,
@@ -106,7 +132,6 @@ ModuleRegistry.registerModules([
       useClass: ErrorInterceptor,
       multi: true,
     },
-    provideAnimationsAsync(),
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

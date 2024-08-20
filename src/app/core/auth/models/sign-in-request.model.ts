@@ -1,4 +1,4 @@
 export interface iSignInRequest {
-  email: string
-  password: string
+  Username: string
+  Password: string
 }

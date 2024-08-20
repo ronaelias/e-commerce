@@ -1,118 +1,133 @@
-// import { Component, OnInit } from '@angular/core';
-// import { iProduct } from '../../models/product.model';
-// import { ProductService } from '../../../features/product-listing/services/product.service';
-// import { SearchService } from '../../../features/services/search.service';
-// import { ActivatedRoute, Router } from '@angular/router';
-// import { environment } from '../../../../environments/environment';
-// import { switchMap } from 'rxjs';
+// import { Component, Input, OnInit } from '@angular/core'
+// import { iProduct } from '../../models/product.model'
+// import { Router } from '@angular/router'
+// import { CartService } from '../../services/cart.service'
+// import { FavoriteService } from '../../services/favorite.service'
+// import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 
 // @Component({
 //   selector: 'app-product-detail-card',
 //   templateUrl: './product-detail-card.component.html',
-//   styleUrls: ['./product-detail-card.component.scss']
+//   styleUrls: ['./product-detail-card.component.scss'],
 // })
 // export class ProductDetailCardComponent implements OnInit {
-//   products: iProduct[] = [];
-//   filteredProducts: iProduct[] = [];
-//   favoriteProducts: Set<number> = new Set<number>();
-//   cartProducts: Set<number> = new Set<number>();
-//   private apiUrl = environment.apiUrl;
+//   @Input() product!: iProduct
+//   formSubmitted = false
+//   productForm: FormGroup
+//   selectedSize: string | null = null
+//   selectedColor: string | null = null
+//   isInCartFlag: boolean = false
+//   errorMessage: string | null = null
 
 //   constructor(
-//     private productService: ProductService,
-//     private searchService: SearchService,
+//     private fb: FormBuilder,
 //     private router: Router,
-//     private route: ActivatedRoute
-//   ) {}
-
-//   decrement(product: iProduct) {
-//     if (product.quantity > 0) {
-//       product.quantity -= 1;
-//     }
+//     private cartService: CartService,
+//     private favoriteService: FavoriteService
+//   ) {
+//     this.productForm = this.fb.group({
+//       size: [null, Validators.required],
+//       color: [null, Validators.required],
+//       quantity: [1, [Validators.min(1)]],
+//     })
 //   }
 
-//   increment(product: iProduct) {
-//     product.quantity += 1;
-//   }
-
-//   ngOnInit() {
-//     this.productService.getAllProducts().subscribe((products: iProduct[]) => {
-//       this.products = products.map(product => ({ ...product, quantity: 0 }));
-//       this.searchService.setProducts(this.products);
-//     });
-
-//     this.searchService.searchProducts('').subscribe((products: iProduct[]) => {
-//       this.filteredProducts = products;
-//     });
-
-//     this.searchService.searchQuery$.subscribe(query => {
-//       this.searchService.searchProducts(query).subscribe((products: iProduct[]) => {
-//         this.filteredProducts = products;
-//       });
-//     });
-//   }
-
-//   // ngOnInit() {
-//   //   this.productService.getAllProducts().pipe(
-//   //     switchMap((products: iProduct[]) => {
-//   //       this.products = products.map(product => ({ ...product, quantity: 0 }));
-//   //       this.searchService.setProducts(this.products);
-//   //       return this.route.paramMap; // Retrieve route parameters
-//   //     }),
-//   //     switchMap(params => {
-//   //       const productId = +params.get('id')!;
-//   //       if (productId) {
-//   //         this.filteredProducts = this.products.filter(product => product.id === productId);
-//   //       }
-//   //       return this.searchService.searchProducts(''); // Use an empty query to get all products
-//   //     })
-//   //   ).subscribe();
-//   // }
-
-//   viewProductDetail(productId: number) {
-//     this.router.navigate([`/products/${productId}`]);
-//   }
-
-//   toggleFavorite(productId: number) {
-//     if (this.favoriteProducts.has(productId)) {
-//       this.favoriteProducts.delete(productId);
-//     } else {
-//       this.favoriteProducts.add(productId);
+//   ngOnInit(): void {
+//     if (this.product) {
+//       this.productForm.patchValue({
+//         quantity: this.product.quantity || 1,
+//       })
+//       this.isInCartFlag = this.cartService.isInCart(
+//         this.product.id,
+//         this.selectedSize || '',
+//         this.selectedColor || ''
+//       )
 //     }
 //   }
 
 //   isFavorite(productId: number): boolean {
-//     return this.favoriteProducts.has(productId);
+//     return this.favoriteService.isFavorite(productId)
 //   }
 
-//   toggleCart(productId: number) {
-//     if (this.cartProducts.has(productId)) {
-//       this.cartProducts.delete(productId);
+//   onFavoriteToggled(productId: number) {
+//     if (this.isFavorite(productId)) {
+//       this.favoriteService.removeFavorite(productId)
 //     } else {
-//       this.cartProducts.add(productId);
+//       this.favoriteService.addFavorite(this.product)
 //     }
 //   }
 
 //   isInCart(productId: number): boolean {
-//     return this.cartProducts.has(productId);
+//     return this.cartService.isInCart(
+//       this.product.id,
+//       this.selectedSize || '',
+//       this.selectedColor || ''
+//     )
 //   }
 
-//   trackById(index: number, product: iProduct): number {
-//     return product.id;
+//   addToCart(productId: number) {
+//     this.formSubmitted = true
+//     this.errorMessage = null
+
+//     if (!this.selectedColor || !this.selectedSize) {
+//       this.errorMessage = 'Please choose both color and size.'
+//       return
+//     }
+
+//     const productWithSelection = {
+//       ...this.product,
+//       color: this.selectedColor,
+//       size: this.selectedSize,
+//       quantity: this.productForm.controls['quantity'].value,
+//     }
+
+//     if (this.isInCartFlag) {
+//       this.cartService.removeFromCart(
+//         this.product.id,
+//         this.product.size,
+//         this.product.color
+//       )
+//       this.isInCartFlag = false
+//     } else {
+//       this.cartService.addToCart(productWithSelection)
+//       this.isInCartFlag = true
+//     }
 //   }
 
-//   trackByProductId(index: number, product: iProduct): number {
-//     return product.id;
+//   get f() {
+//     return this.productForm.controls
+//   }
+
+//   selectSize(size: string) {
+//     this.selectedSize = size
+//     this.productForm.controls['size'].setValue(size)
+//   }
+
+//   selectColor(color: string) {
+//     this.selectedColor = color
+//     this.productForm.controls['color'].setValue(color)
+//   }
+
+//   updateQuantity(change: number) {
+//     const currentQuantity = this.productForm.controls['quantity'].value
+//     const newQuantity = Math.max(currentQuantity + change, 1) // Prevent quantity from going below 1
+//     this.productForm.controls['quantity'].setValue(newQuantity)
+//   }
+
+//   decrement() {
+//     this.updateQuantity(-1)
+//   }
+
+//   increment() {
+//     this.updateQuantity(1)
 //   }
 // }
 
 import { Component, Input, OnInit } from '@angular/core'
 import { iProduct } from '../../models/product.model'
-import { ActivatedRoute, Router } from '@angular/router'
-import { ProductService } from '../../../features/services/product.service'
-import { Observable, of, switchMap } from 'rxjs'
-import { FavoriteService } from '../../services/favorite.service'
+import { Router } from '@angular/router'
 import { CartService } from '../../services/cart.service'
+import { FavoriteService } from '../../services/favorite.service'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 
 @Component({
@@ -122,12 +137,15 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 })
 export class ProductDetailCardComponent implements OnInit {
   @Input() product!: iProduct
-  //cartProducts: Set<number> = new Set<number>();
-  quantity: number = 1
   formSubmitted = false
   productForm: FormGroup
   selectedSize: string | null = null
   selectedColor: string | null = null
+  isInCartFlag: boolean = false
+  isAddedFlag: boolean = false
+  errorMessage: string | null = null
+  availableColors: string[] = ['Black', 'White', 'Red', 'Green', 'Blue', 'Pink']
+  availableSizes: string[] = ['XS', 'S', 'M', 'L', 'XL']
 
   constructor(
     private fb: FormBuilder,
@@ -143,11 +161,15 @@ export class ProductDetailCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.quantity = this.product.quantity || 1
     if (this.product) {
       this.productForm.patchValue({
         quantity: this.product.quantity || 1,
       })
+      this.isInCartFlag = this.cartService.isInCart(
+        this.product.id,
+        this.selectedSize || '',
+        this.selectedColor || ''
+      )
     }
   }
 
@@ -163,42 +185,43 @@ export class ProductDetailCardComponent implements OnInit {
     }
   }
 
-  // toggleCart(productId: number): void {
-  //   if (this.cartProducts.has(productId)) {
-  //     this.cartProducts.delete(productId);
-  //   } else {
-  //     this.cartProducts.add(productId);
-  //   }
-  // }
+  isInCart(productId: number): boolean {
+    return this.cartService.isInCart(
+      this.product.id,
+      this.selectedSize || '',
+      this.selectedColor || ''
+    )
+  }
 
-  // isInCart(productId: number): boolean {
-  //   return this.cartProducts.has(productId);
-  // }
-
-  addToCart() {
+  addToCart(productId: number) {
     this.formSubmitted = true
-    if (this.productForm.valid) {
-      this.cartService.addToCart({
-        product: this.product,
-        color: this.productForm.value.color,
-        size: this.productForm.value.size,
-        quantity: this.productForm.value.quantity,
-      })
-      //this.router.navigate(['/cart']) // Navigate to the cart component
+    this.errorMessage = null
+
+    if (this.isClothingCategory()) {
+      if (!this.selectedColor || !this.selectedSize) {
+        this.errorMessage = 'Please choose both color and size.'
+        return
+      }
     }
+
+    const productWithSelection: iProduct = {
+      ...this.product,
+      color: this.selectedColor as string,
+      size: this.selectedSize as string,
+      quantity: this.productForm.controls['quantity'].value,
+    }
+
+    this.cartService.addToCart(productWithSelection)
+
+    this.isAddedFlag = true
+    setTimeout(() => {
+      this.isAddedFlag = false
+    }, 2000)
   }
 
   get f() {
     return this.productForm.controls
   }
-
-  // selectSize(size: string) {
-  //   this.selectedSize = size
-  // }
-
-  // selectColor(color: string) {
-  //   this.selectedColor = color
-  // }
 
   selectSize(size: string) {
     this.selectedSize = size
@@ -212,27 +235,22 @@ export class ProductDetailCardComponent implements OnInit {
 
   updateQuantity(change: number) {
     const currentQuantity = this.productForm.controls['quantity'].value
-    const newQuantity = currentQuantity + change
+    const newQuantity = Math.max(currentQuantity + change, 1) // Prevent quantity from going below 1
     this.productForm.controls['quantity'].setValue(newQuantity)
   }
 
   decrement() {
-    if (this.product.quantity > 1) {
-      this.product.quantity -= 1
-    }
+    this.updateQuantity(-1)
   }
 
   increment() {
-    this.product.quantity += 1
+    this.updateQuantity(1)
   }
 
-  // updateQuantity(change: number) {
-  //   const currentQuantity = this.productForm.controls['quantity'].value
-  //   const newQuantity = currentQuantity + change
-  //   this.productForm.controls['quantity'].setValue(newQuantity)
-  // }
-
-  // viewProductDetail(productId: number) {
-  //   this.router.navigate([`/product-detail-card/${productId}`]);
-  // }
+  isClothingCategory(): boolean {
+    return (
+      this.product.category === "men's clothing" ||
+      this.product.category === "women's clothing"
+    )
+  }
 }

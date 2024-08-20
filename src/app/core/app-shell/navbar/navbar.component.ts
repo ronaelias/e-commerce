@@ -30,6 +30,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
           '/sign-in/sign-up',
           '/favorite',
           '/cart',
+          'checkout',
         ]
 
         const isHiddenRoute =
@@ -48,7 +49,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
         this.searchService.setSearchQuery(query)
       })
 
-    this.userName = localStorage.getItem('name')
+    //this.userName = localStorage.getItem('name')
   }
 
   ngOnDestroy() {

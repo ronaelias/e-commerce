@@ -1,22 +1,22 @@
 export interface iSignUpResponse {
-  id: string
-  createdTimestamp: 1721034399725
-  username: string
-  enabled: true
-  totp: false
-  emailVerified: true
-  firstName: string
-  lastName: string
-  email: string
-  disableableCredentialTypes: []
-  requiredActions: []
-  notBefore: 0
-  access: {
-    manageGroupMembership: true
-    view: true
-    mapRoles: true
-    impersonate: true
-    manage: true
+  Id: string
+  CreatedTimestamp: 1721034399725
+  Username: string
+  Enabled: true
+  Totp: false
+  EmailVerified: true
+  Firstname: string
+  Lastname: string
+  Email: string
+  DisableableCredentialTypes: []
+  RequiredActions: []
+  NotBefore: 0
+  Access: {
+    ManageGroupMembership: true
+    View: true
+    MapRoles: true
+    Impersonate: true
+    Manage: true
   }
-  attributes: null
+  Attributes: null
 }

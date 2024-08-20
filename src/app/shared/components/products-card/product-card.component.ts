@@ -14,8 +14,7 @@ import { CartService } from '../../services/cart.service'
 })
 export class ProductCardComponent implements OnInit {
   @Input() product!: iProduct
-  //favoriteProducts: Set<number> = new Set<number>();
-  //cartProducts: Set<number> = new Set<number>();
+  isInCart: boolean = false
 
   constructor(
     private router: Router,
@@ -23,7 +22,15 @@ export class ProductCardComponent implements OnInit {
     private cartService: CartService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.cartService.cartProducts$.subscribe((cartProducts) => {
+      this.isInCart = this.cartService.isInCart(
+        this.product.id,
+        this.product.size,
+        this.product.color
+      )
+    })
+  }
 
   viewProductDetail(productId: number) {
     this.router.navigate([`/product-detail/${productId}`])
