@@ -3,10 +3,10 @@ import {
   loadProductsSuccess,
   loadProductsFailure,
 } from './product-listing.action'
-import { Product } from '../../../product.model'
+import { iProduct } from '../../../shared/models/product.model'
 
 export interface ProductListingState {
-  products: Product[]
+  products: iProduct[]
   error: any
 }
 

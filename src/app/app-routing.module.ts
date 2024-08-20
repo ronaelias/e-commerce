@@ -5,7 +5,7 @@ import { ProductDetailComponent } from './features/product-details/components/pr
 //import { SignInComponent } from './core/auth/components/sign-in/sign-in.component'
 import { SignUpComponent } from './core/auth/components/sign-up/sign-up.component'
 import { AuthGuard } from './core/auth/guards/auth.guard'
-import { AdminComponent } from './features/admin/admin.component'
+import { AdminComponent } from './admin/admin.component'
 import { NgxPermissionsGuard } from 'ngx-permissions'
 import { CategoryComponent } from './features/category/category.component'
 import { ProductCardComponent } from './shared/components/products-card/product-card.component'
@@ -14,6 +14,9 @@ import { UserProfileComponent } from './features/user-profile/user-profile.compo
 import { FavoriteComponent } from './features/favorite/favorite.component'
 import { CartComponent } from './features/cart/cart.component'
 import { CheckoutComponent } from './features/checkout/checkout.component'
+import { ProductsComponent } from './admin/products/products.component'
+import { OrdersComponent } from './admin/orders/orders.component'
+import { UsersComponent } from './admin/users/users.component'
 
 const routes: Routes = [
   {
@@ -63,8 +66,16 @@ const routes: Routes = [
       },
     },
   },
+  {
+    path: 'admin',
+    component: AdminComponent,
+    children: [
+      { path: 'products', component: ProductsComponent },
+      { path: 'orders', component: OrdersComponent },
+      { path: 'users', component: UsersComponent },
+    ],
+  },
 ]
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],

@@ -20,7 +20,7 @@ import { ErrorInterceptor } from './core/auth/interceptors/error.interceptor'
 import { MatButtonModule } from '@angular/material/button'
 import { MatIconModule } from '@angular/material/icon'
 import { NgxPermissionsModule } from 'ngx-permissions'
-import { AdminComponent } from './features/admin/admin.component'
+import { AdminComponent } from './admin/admin.component'
 import { WelcomeMessagePipe } from './shared/pipes/welcome-message.pipe'
 import { MatInputModule } from '@angular/material/input'
 import { AgGridModule } from 'ag-grid-angular'
@@ -49,6 +49,9 @@ import { signUpReducer } from './core/auth/states/sign-up-state/sign-up.reducer'
 import { SignUpEffects } from './core/auth/states/sign-up-state/sign-up.effect'
 import { NgxIndexedDBModule, DBConfig } from 'ngx-indexed-db'
 import { CheckoutComponent } from './features/checkout/checkout.component'
+import { ProductsComponent } from './admin/products/products.component'
+import { OrdersComponent } from './admin/orders/orders.component'
+import { UsersComponent } from './admin/users/users.component'
 
 ModuleRegistry.registerModules([
   MenuModule,
@@ -92,6 +95,9 @@ const dbConfig: DBConfig = {
     FavoriteButtonComponent,
     CartComponent,
     CheckoutComponent,
+    ProductsComponent,
+    OrdersComponent,
+    UsersComponent,
   ],
   imports: [
     BrowserModule,

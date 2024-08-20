@@ -2,7 +2,6 @@
   <h1 class="checkout-title">Checkout</h1>
 
   <div class="checkout-content">
-    <!-- Address Form Section -->
     <div class="address-form">
       <h2>Shipping Address</h2>
       <form [formGroup]="addressForm">
@@ -59,7 +58,6 @@
       </form>
     </div>
 
-    <!-- Checkout Cart Section -->
     <div class="checkout-cart">
       <div *ngIf="checkoutCart.length > 0">
         <div *ngFor="let product of checkoutCart" class="checkout-item">

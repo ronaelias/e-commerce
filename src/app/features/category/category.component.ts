@@ -12,17 +12,11 @@ import { SearchService } from '../services/search.service'
 })
 export class CategoryComponent implements OnInit {
   categories: string[] = []
-
   selectedCategory$: BehaviorSubject<string> = new BehaviorSubject<string>('')
   products$!: Observable<iProduct[]>
-  favoriteProducts: Set<number> = new Set<number>()
-  cartProducts: Set<number> = new Set<number>()
   selectedCategory: string | null = null
 
-  constructor(
-    private productService: ProductService,
-    private searchService: SearchService
-  ) {}
+  constructor(private productService: ProductService) {}
 
   ngOnInit() {
     this.products$ = this.selectedCategory$.pipe(
@@ -47,29 +41,5 @@ export class CategoryComponent implements OnInit {
     this.productService.getCategories().subscribe((categories: string[]) => {
       this.categories = categories
     })
-  }
-
-  toggleFavorite(productId: number) {
-    if (this.favoriteProducts.has(productId)) {
-      this.favoriteProducts.delete(productId)
-    } else {
-      this.favoriteProducts.add(productId)
-    }
-  }
-
-  isFavorite(productId: number): boolean {
-    return this.favoriteProducts.has(productId)
-  }
-
-  toggleCart(productId: number) {
-    if (this.cartProducts.has(productId)) {
-      this.cartProducts.delete(productId)
-    } else {
-      this.cartProducts.add(productId)
-    }
-  }
-
-  isInCart(productId: number): boolean {
-    return this.cartProducts.has(productId)
   }
 }

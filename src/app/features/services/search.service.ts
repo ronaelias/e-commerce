@@ -15,8 +15,6 @@ export class SearchService {
   private productsSubject = new BehaviorSubject<iProduct[]>([])
   products$ = this.productsSubject.asObservable()
 
-  private apiUrl = environment.apiUrl + '/products'
-
   constructor(private http: HttpClient) {}
 
   setSearchQuery(query: string) {

@@ -30,15 +30,13 @@ export class ProductListComponent implements OnInit {
     new BehaviorSubject(this.selectedFilters)
   @Output() sortOptionChanged = new EventEmitter<string>()
   private gridApis: { [key: string]: GridApi } = {}
-  showSort = false
   public themeClass: string = 'ag-theme-quartz'
   public rowSelection: 'multiple' | 'single' = 'multiple'
 
   constructor(
     private productService: ProductService,
     private searchService: SearchService,
-    private sortService: SortService,
-    private router: Router
+    private sortService: SortService
   ) {}
 
   fabricRowData = [
@@ -114,10 +112,6 @@ export class ProductListComponent implements OnInit {
     },
   ]
 
-  toggleSort() {
-    this.showSort = !this.showSort
-  }
-
   sort(option: string) {
     this.sortOption$.next(option)
   }
@@ -142,7 +136,9 @@ export class ProductListComponent implements OnInit {
           const search = searchQuery.toLowerCase()
 
           const matchesSearch = search
-            ? title.includes(search) || description.includes(search)
+            ? title.includes(search) ||
+              description.includes(search) ||
+              category.includes(search)
             : true
 
           const matchesFabric = selectedFilters['fabric'].length
@@ -214,8 +210,7 @@ export class ProductListComponent implements OnInit {
     description: string,
     category: string
   ): boolean {
-    // Use \b to define word boundaries
-    const regex = new RegExp(`\\b${filter.toLowerCase()}\\b`, 'i') // 'i' flag for case-insensitivity
+    const regex = new RegExp(`\\b${filter.toLowerCase()}\\b`, 'i')
     const matchInTitle = regex.test(title.toLowerCase())
     const matchInDescription = regex.test(description.toLowerCase())
     const matchInCategory = regex.test(category.toLowerCase())

@@ -1,328 +1,10 @@
-// $nav-height: 60px;
-// $main-background-color: #fff;
-// $box-shadow-light: 0 0 5px rgba(0, 0, 0, 0.1);
-// $box-shadow-dark: 0 0 8px rgba(0, 0, 0, 0.1);
-// $border-color-light: #ddd;
-// $border-radius: 5px;
-// $border-radius-small: 5px;
-// $primary-text-color: #333;
-// $secondary-text-color: #666;
-// $error-color: red;
-// $highlight-background-color: #ccc;
-// $highlight-background-hover: #bbb;
-// $danger-background-color: #ff4d4f;
-// $danger-background-hover: #ff7875;
-// $primary-font-size: 1em;
-// $secondary-font-size: 0.875em;
-// $error-font-size: 0.75em;
-// $gap-small: 5px;
-// $gap-medium: 8px;
-// $gap-large: 10px;
-// $gap-xlarge: 20px;
-// $padding-small: 4px;
-// $padding-medium: 5px;
-// $padding-large: 10px;
-// $margin-small: 5px;
-// $margin-medium: 10px;
-// $margin-large: 16px;
-// $container-max-width: 1000px;
-// $min-width-left-section: 180px;
-// $min-width-right-section: 300px;
-// $profile-icon-size: 230px;
-
-// .user {
-//   margin: $nav-height auto;
-//   margin-bottom: $margin-large;
-// }
-
-// .profile-container {
-//   max-width: $container-max-width;
-//   padding: $padding-medium;
-//   background-color: $main-background-color;
-//   box-shadow: $box-shadow-dark;
-//   display: flex;
-//   gap: $gap-large;
-// }
-
-// h2 {
-//   text-align: center;
-//   color: $primary-text-color;
-//   margin-bottom: $margin-medium;
-// }
-
-// .form-container {
-//   display: flex;
-//   justify-content: space-between;
-//   gap: $gap-xlarge;
-// }
-
-// .left-section {
-//   flex: 1;
-//   min-width: $min-width-left-section;
-//   border: 1px solid $border-color-light;
-//   padding: $padding-large;
-//   border-radius: $border-radius-small;
-//   box-shadow: $box-shadow-light;
-// }
-
-// .right-section {
-//   flex: 2;
-//   min-width: $min-width-right-section;
-//   box-shadow: $box-shadow-light;
-// }
-
-// .profile-section {
-//   margin-bottom: $margin-medium;
-//   border: 1px solid $border-color-light;
-//   padding: $padding-large;
-//   border-radius: $border-radius-small;
-// }
-
-// .profile-item {
-//   display: flex;
-//   flex-direction: column;
-//   margin-bottom: $margin-small;
-// }
-
-// label {
-//   font-weight: bold;
-//   color: $secondary-text-color;
-//   font-size: $secondary-font-size;
-// }
-
-// input {
-//   padding: $padding-small;
-//   border: 1px solid $border-color-light;
-//   border-radius: $border-radius-small;
-// }
-
-// .error-message {
-//   color: $error-color;
-//   font-size: $error-font-size;
-// }
-
-// .actions {
-//   display: flex;
-//   gap: $gap-medium;
-//   justify-content: flex-end;
-//   margin-top: $margin-medium;
-// }
-
-// button {
-//   padding: $padding-small $padding-large;
-//   border-radius: $border-radius-small;
-//   cursor: pointer;
-//   border: none;
-//   font-size: $secondary-font-size;
-// }
-
-// .save-changes {
-//   background-color: $highlight-background-color;
-//   color: $primary-text-color;
-// }
-
-// .save-changes:hover {
-//   background-color: $highlight-background-hover;
-// }
-
-// .log-out {
-//   background-color: $danger-background-color;
-//   color: $main-background-color;
-// }
-
-// .log-out:hover {
-//   background-color: $danger-background-hover;
-// }
-
-// .delete-account {
-//   background-color: $danger-background-color;
-//   color: $main-background-color;
-// }
-
-// .delete-account:hover {
-//   background-color: $danger-background-hover;
-// }
-
-// .icon-container {
-//   display: flex;
-//   justify-content: center;
-//   margin-bottom: $margin-medium;
-// }
-
-// .profile-icon {
-//   width: $profile-icon-size;
-//   height: $profile-icon-size;
-// }
-
-// $color: #333;
-// $background-color: #00a693; // Persian Green
-// $background-color-dark: #007f6e; // Darker Persian Green
-// $background-color-sub: #f9f9f9;
-// $container-color: #fff; // White
-// $error-color: #ff0000; // Red
-// $button-bg-color: #ef98aa; // Mauvelous
-// $shadow: rgba(0, 0, 0, 0.1);
-// $font-family: Arial, sans-serif;
-// $height: 100vh;
-// $font-size: 14px;
-// $error-font-size: 12px;
-// $container-padding: 2rem;
-// $padding-left: 50px;
-// $container-border-radius: 10px;
-// $input-padding: 12px;
-// $input-margin-bottom: 15px;
-// $button-padding: 12px;
-// $margin-bottom: 10px;
-// $max-width: 1200px; // Increased max width for better layout
-// $border-radius: 5px;
-
-// .profile-container {
-//   display: flex;
-//   align-items: flex-start; // Align items at the start for better vertical alignment
-//   height: $height;
-//   background-color: $background-color;
-//   font-family: $font-family;
-//   padding: $container-padding;
-
-//   .profile-info {
-//     flex: 1;
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-//     background-color: $container-color;
-//     border-radius: $container-border-radius;
-//     box-shadow: 0px 4px 15px $shadow;
-//     padding: $container-padding;
-//     margin-right: $margin-bottom * 2; // Space between the left and right sections
-
-//     .icon-container {
-//       display: flex;
-//       align-items: center;
-//       justify-content: center;
-//       margin-bottom: $margin-bottom;
-
-//       .profile-icon {
-//         width: 120px;
-//         height: 120px;
-//         border-radius: 50%;
-//         object-fit: cover;
-//         box-shadow: 0px 4px 10px $shadow;
-//       }
-//     }
-
-//     .user-profile {
-//       h3 {
-//         margin: 0;
-//         font-size: $font-size * 1.5;
-//         color: $button-bg-color; // Mauvelous color
-//         text-align: center;
-//       }
-//     }
-//   }
-
-//   .profile-form {
-//     flex: 3;
-//     display: flex;
-//     flex-direction: column;
-//     background-color: $container-color;
-//     border-radius: $container-border-radius;
-//     box-shadow: 0px 4px 15px $shadow;
-//     padding: $container-padding;
-//     box-sizing: border-box;
-
-//     .profile-content {
-//       display: flex;
-//       flex-direction: row;
-//       gap: $margin-bottom * 2;
-
-//       .right-container {
-//         flex: 1;
-//         display: flex;
-//         flex-direction: column;
-//         gap: $margin-bottom;
-
-//         .profile-section {
-//           background-color: $background-color-sub;
-//           padding: $container-padding;
-//           border-radius: $container-border-radius;
-//           box-shadow: 0px 4px 10px $shadow;
-//           margin-bottom: $margin-bottom;
-//           border: 1px solid $background-color-dark;
-
-//           h3 {
-//             margin: 0;
-//             margin-bottom: $margin-bottom;
-//             font-size: $font-size * 1.4;
-//             color: $color;
-//             border-bottom: 2px solid $background-color-dark;
-//             padding-bottom: 5px;
-//           }
-//         }
-//       }
-//     }
-
-//     .actions {
-//       display: flex;
-//       justify-content: space-between;
-//       margin-top: $margin-bottom * 2;
-
-//       .button-container {
-//         background-color: $background-color;
-//         color: $container-color;
-//         border: none;
-//         padding: $button-padding;
-//         font-size: $font-size;
-//         border-radius: $border-radius;
-//         cursor: pointer;
-//         transition: background-color 0.3s ease;
-//         width: 48%; // Ensure buttons fit side by side
-
-//         &:disabled {
-//           background-color: $button-bg-color;
-//           cursor: not-allowed;
-//         }
-
-//         &:hover:not(:disabled) {
-//           background-color: $background-color-dark;
-//         }
-//       }
-
-//       .save-changes {
-//         background-color: $button-bg-color; // Mauvelous color
-//         color: $container-color;
-//       }
-
-//       .sign-out {
-//         background-color: $background-color;
-//         color: $color;
-//       }
-//     }
-//   }
-
-//   @media (max-width: 768px) {
-//     .profile-content {
-//       flex-direction: column;
-//     }
-
-//     .actions {
-//       flex-direction: column;
-//       align-items: center;
-
-//       .button-container {
-//         width: 100%;
-//         margin-bottom: $margin-bottom;
-//       }
-//     }
-//   }
-// }
-
 $color: #333;
-$background-color: #00a693; // Persian Green
-$background-color-dark: #007f6e; // Darker Persian Green
+$background-color: #00a693;
+$background-color-dark: #007f6e;
 $background-color-sub: #f9f9f9;
-$container-color: #fff; // White
-$error-color: #ff0000; // Red
-$button-bg-color: #ef98aa; // Mauvelous
+$container-color: #fff;
+$error-color: #ff0000;
+$button-bg-color: #ef98aa;
 $shadow: rgba(0, 0, 0, 0.1);
 $font-family: Arial, sans-serif;
 $height: 100vh;
@@ -335,7 +17,7 @@ $input-padding: 10px;
 $input-margin-bottom: 15px;
 $button-padding: 12px;
 $margin-bottom: 5px;
-$max-width: 1000px; // Adjusted max width for better layout
+$max-width: 1000px;
 $border-radius: 4px;
 $nav-height: 50px;
 
@@ -348,12 +30,12 @@ $nav-height: 50px;
   box-shadow: 0px 4px 15px $shadow;
   width: 100%;
   max-width: $max-width;
-  margin: $nav-height auto; // Center container horizontally
+  margin: $nav-height auto;
 }
 
 .left-section {
   flex: 1;
-  margin-right: 2rem; // Adjust spacing between sections
+  margin-right: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -376,7 +58,7 @@ $nav-height: 50px;
     h3 {
       font-size: $font-size * 1.5;
       margin-bottom: $margin-bottom * 2;
-      color: $button-bg-color; // Mauvelous color
+      color: $button-bg-color;
     }
   }
 }
@@ -419,7 +101,7 @@ $nav-height: 50px;
       border-radius: $border-radius;
       cursor: pointer;
       transition: background-color 0.3s ease;
-      width: 48%; // Ensure buttons fit side by side
+      width: 48%;
 
       &:disabled {
         background-color: $button-bg-color;
@@ -432,7 +114,7 @@ $nav-height: 50px;
     }
 
     .save-changes {
-      background-color: $button-bg-color; // Mauvelous color
+      background-color: $button-bg-color;
       color: $container-color;
     }
 

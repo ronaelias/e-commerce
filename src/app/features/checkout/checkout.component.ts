@@ -16,7 +16,6 @@ export class CheckoutComponent implements OnInit {
 
   constructor(
     private checkoutService: CheckoutService,
-    private cartService: CartService,
     private router: Router,
     private fb: FormBuilder
   ) {
@@ -30,36 +29,16 @@ export class CheckoutComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.checkoutCart = await this.checkoutService.getCheckoutCart() // Fetch items from IndexedDB
+    this.checkoutCart = await this.checkoutService.getCheckoutCart()
   }
-
-  // async completeCheckout() {
-  //   if (this.addressForm.valid) {
-  //     try {
-  //       await this.checkoutService.completeCheckout(this.checkoutCart)
-  //       await this.checkoutService.clearCheckoutData()
-  //       alert('Your order is on the way!')
-  //       this.router.navigate(['/product-listing']) // Navigate to the product listing page
-  //     } catch (error) {
-  //       console.error('Checkout failed:', error)
-  //       alert('Checkout failed. Please try again.')
-  //     }
-  //   } else {
-  //     alert('Please fill in all the required fields.')
-  //   }
-  // }
 
   async completeCheckout() {
     if (this.addressForm.valid) {
       try {
-        // Complete checkout and clear data
         await this.checkoutService.completeCheckout(this.checkoutCart)
         await this.checkoutService.clearCheckoutData()
-
-        // Clear the cart in CartService as well
         await this.checkoutService.clearCartData()
 
-        // Notify user and navigate to product listing
         alert('Your order is on the way!')
         this.router.navigate(['/product-listing'])
       } catch (error) {
