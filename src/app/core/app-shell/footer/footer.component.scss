@@ -3,17 +3,20 @@ $footer-text-color: #333;
 $footer-link-color: #00a693;
 $footer-link-hover-color: #007f6e;
 $padding: 0.5rem;
+$margin: 140px;
 $footer-column-width: 30%;
 $footer-heading-font-size: 16px;
 $footer-link-font-size: 14px;
 $footer-border-color: #ddd;
+$footer-icon-color: #555;
+$box-shadow: rgba(0, 0, 0, 0.1);
 
 .footer {
   background-color: $footer-background;
   color: $footer-text-color;
   padding: $padding * 4;
   text-align: center;
-  box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px -2px 4px $box-shadow;
 
   .footer-container {
     display: flex;
@@ -22,11 +25,20 @@ $footer-border-color: #ddd;
 
     .footer-column {
       width: $footer-column-width;
+      margin-bottom: $padding * 2;
 
       h3 {
         font-size: $footer-heading-font-size;
         margin-bottom: $padding * 2;
         color: $footer-text-color;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        i {
+          margin-right: $padding;
+          color: $footer-icon-color;
+        }
       }
 
       ul {
@@ -36,11 +48,19 @@ $footer-border-color: #ddd;
 
         li {
           margin-bottom: $padding;
+          margin-left: $margin;
 
           a {
             text-decoration: none;
             color: $footer-link-color;
             font-size: $footer-link-font-size;
+            display: flex;
+            align-items: center;
+
+            i {
+              margin-right: $padding;
+              color: $footer-icon-color;
+            }
 
             &:hover {
               color: $footer-link-hover-color;
@@ -50,22 +70,19 @@ $footer-border-color: #ddd;
       }
     }
   }
-}
 
-@media (max-width: 768px) {
-  .footer {
-    text-align: left;
-
+  @media (max-width: 768px) {
     .footer-container {
-      display: block;
+      flex-direction: column;
+      align-items: center;
 
       .footer-column {
         width: 100%;
-        margin-bottom: 2rem;
-        border-bottom: 1px solid $footer-border-color;
+        text-align: left;
+        margin-bottom: $padding * 4;
 
-        &:last-child {
-          border-bottom: none;
+        h3 {
+          justify-content: flex-start;
         }
       }
     }

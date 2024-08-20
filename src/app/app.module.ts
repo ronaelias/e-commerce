@@ -24,7 +24,6 @@ import { AdminComponent } from './features/admin/admin.component'
 import { WelcomeMessagePipe } from './shared/pipes/welcome-message.pipe'
 import { MatInputModule } from '@angular/material/input'
 import { AgGridModule } from 'ag-grid-angular'
-import { DeleteButtonRendererComponent } from './shared/components/delete-button-renderer/delete-button-renderer.component'
 import {
   GridModule,
   PagerModule,
@@ -44,10 +43,10 @@ import { FavoriteButtonComponent } from './shared/components/favorite-button/fav
 import { CartComponent } from './features/cart/cart.component'
 import { StoreModule } from '@ngrx/store'
 import { EffectsModule } from '@ngrx/effects'
-import { signInReducer } from './core/auth/sign-in-state/sign-in.reducer'
-import { SignInEffects } from './core/auth/sign-in-state/sign-in.effect'
-import { signUpReducer } from './core/auth/sign-up-state/sign-up.reducer'
-import { SignUpEffects } from './core/auth/sign-up-state/sign-up.effect'
+import { signInReducer } from './core/auth/states/sign-in-state/sign-in.reducer'
+import { SignInEffects } from './core/auth/states/sign-in-state/sign-in.effect'
+import { signUpReducer } from './core/auth/states/sign-up-state/sign-up.reducer'
+import { SignUpEffects } from './core/auth/states/sign-up-state/sign-up.effect'
 import { NgxIndexedDBModule, DBConfig } from 'ngx-indexed-db'
 import { CheckoutComponent } from './features/checkout/checkout.component'
 
@@ -88,7 +87,6 @@ const dbConfig: DBConfig = {
     ProductListComponent,
     AdminComponent,
     WelcomeMessagePipe,
-    DeleteButtonRendererComponent,
     CategoryComponent,
     FavoriteComponent,
     FavoriteButtonComponent,

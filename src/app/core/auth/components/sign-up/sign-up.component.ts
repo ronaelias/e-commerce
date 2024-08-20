@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 import { Store } from '@ngrx/store'
 import { iSignUpRequest } from '../../models/sign-up-request.model'
-import { signUp } from '../../sign-up-state/sign-up.action'
+import { signUp } from '../../states/sign-up-state/sign-up.action'
 import { IndexedDBService } from '../../../../shared/services/indexed-db.service'
 
 @Component({
@@ -22,8 +22,7 @@ export class SignUpComponent {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private store: Store,
-    private indexedDBService: IndexedDBService
+    private store: Store
   ) {}
 
   ngOnInit() {
@@ -45,9 +44,6 @@ export class SignUpComponent {
         Rolename: 'rolename',
       }
       this.store.dispatch(signUp({ signUpRequest }))
-    } else {
-      console.log('Email already used')
-      alert('Email already used')
     }
   }
 

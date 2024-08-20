@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store'
 import { signUp, signUpFailure, signUpSuccess } from './sign-up.action'
-import { iSignUpResponse } from '../models/sign-up-response.model'
+import { iSignUpResponse } from '../../models/sign-up-response.model'
 
 export interface SignUpState {
   user: iSignUpResponse | null
@@ -18,7 +18,6 @@ export const signUpReducer = createReducer(
   on(signUpSuccess, (state, { user }) => ({
     ...state,
     user,
-    //error: null,
   })),
   on(signUpFailure, (state, { error }) => ({
     ...state,

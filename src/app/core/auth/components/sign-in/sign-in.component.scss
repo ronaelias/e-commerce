@@ -1,10 +1,10 @@
 $color: #333;
-$background-color: #00a693; // Persian Green
-$background-color-dark: #007f6e; // Darker Persian Green
+$background-color: #00a693;
+$background-color-dark: #007f6e;
 $background-color-sub: #f9f9f9;
-$container-color: #fff; // White
-$error-color: #ff0000; // Red
-$button-bg-color: #ef98aa; // Mauvelous
+$container-color: #fff;
+$error-color: #ff0000;
+$button-bg-color: #ef98aa;
 $shadow: rgba(0, 0, 0, 0.1);
 $font-family: Arial, sans-serif;
 $height: 100vh;
@@ -21,7 +21,6 @@ $margin-bottom: 5px;
 $max-width: 400px;
 $border-radius: 4px;
 
-// Styles
 .all {
   display: flex;
   justify-content: center;
@@ -155,32 +154,27 @@ h2 {
 .all {
   .form-section {
     .sign-in-container {
-      position: relative; /* Ensure the container is positioned relative for absolute positioning of the overlay */
+      position: relative;
 
       .button-container-wrapper {
         position: relative;
 
         .button-container {
-          position: relative; /* Ensure the button is positioned relative for the overlay */
+          position: relative;
         }
 
         .error-overlay {
           position: absolute;
-          top: -30px; /* Adjust as needed to position the error message correctly */
+          top: -30px;
           left: 0;
           width: 100%;
-          background-color: rgba(
-            255,
-            0,
-            0,
-            0.7
-          ); /* Red background with opacity */
-          color: #fff; /* White text color */
+          background-color: rgba(255, 0, 0, 0.7);
+          color: #fff;
           padding: 8px;
           text-align: center;
           border-radius: 4px;
           font-size: 14px;
-          z-index: 10; /* Ensure it's on top of other elements */
+          z-index: 10;
         }
       }
     }

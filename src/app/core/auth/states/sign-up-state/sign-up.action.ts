@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store'
-import { iSignUpRequest } from '../models/sign-up-request.model'
+import { iSignUpRequest } from '../../models/sign-up-request.model'
 
 export const signUp = createAction(
   'Sign Up',

@@ -323,6 +323,7 @@ import { IndexedDBService } from '../../shared/services/indexed-db.service'
 export class UserProfileComponent implements OnInit {
   userProfileForm!: FormGroup
   userProfile: any = {}
+  profileImageUrl: string = 'assets/profile.png'
 
   constructor(
     private fb: FormBuilder,
@@ -344,6 +345,17 @@ export class UserProfileComponent implements OnInit {
         [Validators.required, Validators.minLength(8)],
       ],
     })
+  }
+
+  onFileSelected(event: any): void {
+    const file: File = event.target.files[0]
+    if (file) {
+      const reader = new FileReader()
+      reader.onload = (e: any) => {
+        this.profileImageUrl = e.target.result // Update the profile image URL
+      }
+      reader.readAsDataURL(file) // Read the file as a data URL
+    }
   }
 
   //Save changes and update local storage

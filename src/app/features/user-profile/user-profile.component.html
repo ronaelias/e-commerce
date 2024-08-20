@@ -1,12 +1,19 @@
 <div class="profile-container">
   <div class="left-section">
     <div class="icon-container">
-      <img src="assets/profile.png" alt="Profile Icon" class="profile-icon" />
+      <img [src]="profileImageUrl" alt="Profile Icon" class="profile-icon" />
+      <input
+        type="file"
+        accept="image/*"
+        (change)="onFileSelected($event)"
+        class="file-input"
+      />
     </div>
     <div class="user-profile">
       <h3>User Profile</h3>
     </div>
   </div>
+
   <form
     [formGroup]="userProfileForm"
     (ngSubmit)="onSaveChanges()"
@@ -54,6 +61,7 @@
             type="email"
             class="input-field"
             placeholder="Enter email"
+            readonly
           />
           <div *ngIf="f['Email'].errors?.['required']" class="error-message">
             This field is required!

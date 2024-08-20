@@ -10,11 +10,11 @@ export class FooterComponent {
   footerVisible: boolean = true
 
   constructor(private router: Router) {
-    // this.router.events.subscribe(event => {
-    //   if (event instanceof NavigationEnd) {
-    //     const hiddenRoutes = ['/favorite'];
-    //     this.footerVisible = !hiddenRoutes.includes(event.url);
-    //   }
-    // });
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        const hiddenRoutes = ['/category']
+        this.footerVisible = !hiddenRoutes.includes(this.router.url)
+      }
+    })
   }
 }

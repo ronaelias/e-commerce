@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store'
 import { signIn, signInFailure, signInSuccess } from './sign-in.action'
-import { iSignInResponse } from '../models/sign-in-response.model'
+import { iSignInResponse } from '../../models/sign-in-response.model'
 
 export interface SignInState {
   response: iSignInResponse | null
@@ -18,7 +18,6 @@ export const signInReducer = createReducer(
   initialState,
   on(signIn, (state) => ({ ...state })),
   on(signInSuccess, (state, { response, Username }) => ({
-    //copy current state
     ...state,
     response,
     Username,

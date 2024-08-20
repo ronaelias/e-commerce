@@ -2,8 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core'
 import { FormControl } from '@angular/forms'
 import { SearchService } from '../../../features/services/search.service'
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
-import { Observable, Subscription } from 'rxjs'
-import { iProduct } from '../../../shared/models/product.model'
+import { Subscription } from 'rxjs'
 import { NavigationEnd, Router } from '@angular/router'
 
 @Component({
@@ -14,7 +13,6 @@ import { NavigationEnd, Router } from '@angular/router'
 export class NavbarComponent implements OnInit, OnDestroy {
   searchInput = new FormControl()
   private searchSubscription!: Subscription
-  userName: string | null = ''
   searchVisible: boolean = true
 
   constructor(
@@ -48,8 +46,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
       .subscribe((query) => {
         this.searchService.setSearchQuery(query)
       })
-
-    //this.userName = localStorage.getItem('name')
   }
 
   ngOnDestroy() {

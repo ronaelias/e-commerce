@@ -21,13 +21,11 @@ export class ErrorInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === 401) {
-          alert('Incorrect email or password!')
-          //this.authService.signOut()
+          alert('Incorrect email or password, please try again.')
         }
 
         if (error.status === 500) {
-          alert('Email already used, Try another one')
-          //this.authService.signOut()
+          alert('Email already used, Try another one.')
         }
 
         const errorMessage = error.error.message || error.statusText
