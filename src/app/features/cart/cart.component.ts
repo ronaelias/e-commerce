@@ -34,11 +34,12 @@ export class CartComponent implements OnInit {
     this.router.navigate([`/product-detail/${product.id}`])
   }
 
-  getTotalPrice(cart: iProduct[]): number {
-    return cart.reduce(
+  getTotalPrice(cart: iProduct[]): string {
+    const total = cart.reduce(
       (total, product) => total + product.price * product.quantity,
       0
     )
+    return total.toFixed(2)
   }
 
   getTotalItems(cart: iProduct[]): number {

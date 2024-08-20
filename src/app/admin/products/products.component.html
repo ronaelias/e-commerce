@@ -15,7 +15,14 @@
       <tr *ngFor="let product of products">
         <td>{{ product.id }}</td>
         <td>{{ product.name }}</td>
-        <td>${{ product.price.toFixed(2) }}</td>
+        <td>
+          <input
+            type="number"
+            [(ngModel)]="product.price"
+            (change)="updateProductPrice(product)"
+            class="price-input"
+          />
+        </td>
         <td>{{ product.category }}</td>
         <td>{{ product.stock }}</td>
         <td>{{ product.rating }}</td>

@@ -13,5 +13,16 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  // You can add methods to handle adding, editing, or deleting products
+  updateProductPrice(product: any): void {
+    // This method is triggered when the price input changes.
+    // You can add custom logic here if needed.
+  }
+
+  saveProductPrice(product: any): void {
+    // This method is triggered when the "Save" button is clicked.
+    console.log(
+      `Product ID: ${product.id}, New Price: $${product.price.toFixed(2)}`
+    )
+    // You can add logic to save the updated price to a server or other storage here.
+  }
 }

@@ -1,11 +1,5 @@
 import { Injectable } from '@angular/core'
-import {
-  openDB,
-  DBSchema,
-  IDBPDatabase,
-  IDBPObjectStore,
-  IDBPTransaction,
-} from 'idb'
+import { openDB, DBSchema, IDBPDatabase } from 'idb'
 
 interface CartSchema extends DBSchema {
   cart: {
@@ -40,9 +34,4 @@ export class IndexedDBService {
     const db = await this.dbPromise
     return db.getAll('cart')
   }
-
-  // async deleteItem(id: string): Promise<void> {
-  //   const db = await this.dbPromise
-  //   await db.delete('cart', id)
-  // }
 }

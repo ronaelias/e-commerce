@@ -13,7 +13,6 @@ export class CartService {
   cartProducts$ = this.cartProductsSubject.asObservable()
 
   addToCart(product: iProduct) {
-    // Check if the product with the same id, size, and color exists in the cart
     const existingProductIndex = this.cartProducts.findIndex(
       (p) =>
         p.id === product.id &&
@@ -22,14 +21,11 @@ export class CartService {
     )
 
     if (existingProductIndex > -1) {
-      // Update quantity if found
       this.cartProducts[existingProductIndex].quantity += product.quantity
     } else {
-      // Add new product
       this.cartProducts.push(product)
     }
 
-    // Update the observable
     this.cartProductsSubject.next([...this.cartProducts])
   }
 
@@ -51,14 +47,11 @@ export class CartService {
   }
 
   updateProduct(updatedProduct: iProduct) {
-    // Remove the old product if it exists
     this.removeFromCart(
       updatedProduct.id,
       updatedProduct.size,
       updatedProduct.color
     )
-
-    // Add the updated product
     this.addToCart(updatedProduct)
   }
 
