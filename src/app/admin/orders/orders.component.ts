@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { orders } from '../dummy-orders'
+import { orders } from './dummy-orders'
 
 @Component({
   selector: 'app-orders',
@@ -12,6 +12,4 @@ export class OrdersComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
-
-  // You can add methods to handle managing orders
 }

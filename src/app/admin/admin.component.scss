@@ -1,7 +1,9 @@
 $color: #ef98aa;
 $bg-color: #00a693;
+$nav-height: 60px;
 
 .admin-container {
+  margin-top: $nav-height;
   display: flex;
   flex-direction: column;
   height: 100vh;

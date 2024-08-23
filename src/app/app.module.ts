@@ -32,14 +32,14 @@ import { ModuleRegistry } from '@ag-grid-community/core'
 import { MenuModule } from '@ag-grid-enterprise/menu'
 import { SetFilterModule } from '@ag-grid-enterprise/set-filter'
 import { FiltersToolPanelModule } from '@ag-grid-enterprise/filter-tool-panel'
-import { CategoryComponent } from './features/category/category.component'
+import { CategoryComponent } from './features/components/category/category.component'
 import { ProductCardComponent } from './shared/components/products-card/product-card.component'
 import { MatDatepickerModule } from '@angular/material/datepicker'
 import { ProductDetailCardComponent } from './shared/components/product-detail-card/product-detail-card.component'
 import { FeaturesModule } from './features/features.module'
-import { FavoriteComponent } from './features/favorite/favorite.component'
+import { FavoriteComponent } from './features/components/favorite/favorite.component'
 import { FavoriteButtonComponent } from './shared/components/favorite-button/favorite-button.component'
-import { CartComponent } from './features/cart/cart.component'
+import { CartComponent } from './features/components/cart/cart.component'
 import { StoreModule } from '@ngrx/store'
 import { EffectsModule } from '@ngrx/effects'
 import { signInReducer } from './core/auth/states/sign-in-state/sign-in.reducer'
@@ -47,7 +47,7 @@ import { SignInEffects } from './core/auth/states/sign-in-state/sign-in.effect'
 import { signUpReducer } from './core/auth/states/sign-up-state/sign-up.reducer'
 import { SignUpEffects } from './core/auth/states/sign-up-state/sign-up.effect'
 import { NgxIndexedDBModule, DBConfig } from 'ngx-indexed-db'
-import { CheckoutComponent } from './features/checkout/checkout.component'
+import { CheckoutComponent } from './features/components/checkout/checkout.component'
 import { ProductsComponent } from './admin/products/products.component'
 import { OrdersComponent } from './admin/orders/orders.component'
 import { UsersComponent } from './admin/users/users.component'
@@ -119,7 +119,6 @@ const dbConfig: DBConfig = {
     StoreModule.forFeature('signIn', signInReducer),
     StoreModule.forFeature('signUp', signUpReducer),
     EffectsModule.forRoot([SignInEffects, SignUpEffects]),
-    NgxIndexedDBModule.forRoot(dbConfig),
   ],
   providers: [
     FilterService,

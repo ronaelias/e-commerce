@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core'
-import { CartService } from '../../shared/services/cart.service'
+import { CartService } from '../../../shared/services/cart.service'
 import { Observable } from 'rxjs'
-import { iProduct } from '../../shared/models/product.model'
+import { iProduct } from '../../../shared/models/product.model'
 import { Router } from '@angular/router'
-import { CheckoutService } from '../../shared/services/checkout.service'
+import { CheckoutService } from '../../../shared/services/checkout.service'
 
 @Component({
   selector: 'app-cart',

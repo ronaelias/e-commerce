@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { CheckoutService } from '../../shared/services/checkout.service'
-import { iProduct } from '../../shared/models/product.model'
+import { CheckoutService } from '../../../shared/services/checkout.service'
+import { iProduct } from '../../../shared/models/product.model'
 import { Router } from '@angular/router'
-import { CartService } from '../../shared/services/cart.service'
+import { CartService } from '../../../shared/services/cart.service'
 
 @Component({
   selector: 'app-checkout',
@@ -51,9 +51,11 @@ export class CheckoutComponent implements OnInit {
   }
 
   getTotalPrice(): number {
-    return this.checkoutCart.reduce(
+    const total = this.checkoutCart.reduce(
       (total, product) => total + product.price * product.quantity,
       0
     )
+
+    return parseFloat(total.toFixed(2))
   }
 }

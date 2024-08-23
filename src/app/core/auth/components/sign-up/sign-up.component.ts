@@ -21,7 +21,6 @@ export class SignUpComponent {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router,
     private store: Store
   ) {}
 

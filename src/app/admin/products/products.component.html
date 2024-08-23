@@ -19,12 +19,17 @@
           <input
             type="number"
             [(ngModel)]="product.price"
-            (change)="updateProductPrice(product)"
             class="price-input"
           />
         </td>
         <td>{{ product.category }}</td>
-        <td>{{ product.stock }}</td>
+        <td>
+          <input
+            type="number"
+            [(ngModel)]="product.stock"
+            class="stock-input"
+          />
+        </td>
         <td>{{ product.rating }}</td>
       </tr>
     </tbody>

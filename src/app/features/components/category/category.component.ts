@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core'
-import { ProductService } from '../services/product.service'
-import { iProduct } from '../../shared/models/product.model'
+import { ProductService } from '../../services/product.service'
+import { iProduct } from '../../../shared/models/product.model'
 import { Observable, BehaviorSubject } from 'rxjs'
 import { switchMap } from 'rxjs/operators'
-import { SearchService } from '../services/search.service'
+import { SearchService } from '../../services/search.service'
 
 @Component({
   selector: 'app-category',

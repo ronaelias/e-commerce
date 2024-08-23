@@ -4,7 +4,6 @@ import { ColDef, GridReadyEvent, GridApi } from 'ag-grid-community'
 import { map } from 'rxjs/operators'
 import { ProductService } from '../../../services/product.service'
 import { iProduct } from '../../../../shared/models/product.model'
-import { Router } from '@angular/router'
 import { SearchService } from '../../../services/search.service'
 import { SortService } from '../../../services/sort.service'
 

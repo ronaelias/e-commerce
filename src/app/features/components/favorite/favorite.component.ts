@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { Observable, of } from 'rxjs'
-import { FavoriteService } from '../../shared/services/favorite.service'
-import { iProduct } from '../../shared/models/product.model'
+import { FavoriteService } from '../../../shared/services/favorite.service'
+import { iProduct } from '../../../shared/models/product.model'
 
 @Component({
   selector: 'app-favorite',

@@ -8,8 +8,6 @@ import { select, Store } from '@ngrx/store'
 import { iSignInRequest } from '../../models/sign-in-request.model'
 import { selectSignInResponse } from '../../states/sign-in-state/sign-in.selectors'
 import { signIn } from '../../states/sign-in-state/sign-in.action'
-import { AuthService } from '../../services/auth.service'
-import { IndexedDBService } from '../../../../shared/services/indexed-db.service'
 
 @Component({
   selector: 'app-sign-in',
@@ -52,6 +50,18 @@ export class SignInComponent implements OnInit {
       this.store.dispatch(signIn({ signInRequest }))
     } else {
       alert('Incorrect email or password')
+    }
+  }
+
+  askForAdminCode(event: Event): void {
+    event.preventDefault()
+
+    const code = prompt('Enter admin code:')
+
+    if (code === 'secretcode') {
+      this.router.navigate(['/admin'])
+    } else {
+      alert('Incorrect code.')
     }
   }
 
