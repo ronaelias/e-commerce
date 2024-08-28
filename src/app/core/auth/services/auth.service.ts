@@ -65,7 +65,7 @@ export class AuthService {
 
   isSignedIn(): boolean {
     // when i sign-up there is no AccessToken in local storage
-    return localStorage.getItem('Email') !== null
+    return localStorage.getItem('AccessToken') !== null
   }
 
   // setPermissions() {

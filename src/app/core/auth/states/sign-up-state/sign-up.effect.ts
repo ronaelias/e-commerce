@@ -18,7 +18,7 @@ export class SignUpEffects {
     () =>
       this.actions$.pipe(
         ofType(signUpSuccess),
-        tap(() => this.router.navigate(['/product-listing']))
+        tap(() => this.router.navigate(['/sign-in']))
       ),
     { dispatch: false }
   )

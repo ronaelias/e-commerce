@@ -36,7 +36,7 @@ export class SignInComponent implements OnInit {
     })
     this.store.pipe(select(selectSignInResponse)).subscribe((signInRequest) => {
       if (signInRequest) {
-        this.router.navigate(['product-listing'])
+        //this.router.navigate(['product-listing'])
       }
     })
   }
